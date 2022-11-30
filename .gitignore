@@ -1,0 +1,9 @@
+.*
+!.gitignore
+!.nvmrc
+!.prettierignore
+
+!.github
+
+node_modules/
+coverage/

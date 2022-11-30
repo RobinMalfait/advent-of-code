@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Part 1 should produce the correct value for the input data 1`] = `23057`;
+
+exports[`Part 2 should produce the correct value for the input data 1`] = `15156`;
