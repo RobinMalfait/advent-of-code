@@ -17,13 +17,7 @@ fn main() {
 pub fn part_1(data: &str) -> i32 {
     data.trim()
         .split("\n\n")
-        .into_iter()
-        .map(|x| {
-            x.split('\n')
-                .into_iter()
-                .map(|x| x.trim().parse().unwrap_or(0))
-                .sum()
-        })
+        .map(|x| x.split('\n').map(|x| x.trim().parse().unwrap_or(0)).sum())
         .max()
         .unwrap_or_default()
 }
@@ -32,13 +26,7 @@ pub fn part_2(data: &str) -> i32 {
     let mut groups: Vec<i32> = data
         .trim()
         .split("\n\n")
-        .into_iter()
-        .map(|x| {
-            x.split('\n')
-                .into_iter()
-                .map(|x| x.trim().parse().unwrap_or(0))
-                .sum()
-        })
+        .map(|x| x.split('\n').map(|x| x.trim().parse().unwrap_or(0)).sum())
         .collect();
 
     groups.sort_by(|a, z| z.cmp(a));
