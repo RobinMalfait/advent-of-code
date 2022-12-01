@@ -26,15 +26,26 @@ if (fs.existsSync(destDay())) {
 
 await fs.promises.mkdir(destDay(), { recursive: true })
 
+async function copy(src, dst) {
+  let stat = await fs.promises.stat(src)
+
+  if (stat.isDirectory()) {
+    await fs.promises.mkdir(dst, { recursive: true })
+  }
+
+  if (stat.isDirectory()) {
+    let files = await fs.promises.readdir(src, { withFileTypes: true })
+    await Promise.all(files.map((dirent) => copy(path.resolve(src, dirent.name), path.resolve(dst, dirent.name))))
+  }
+
+  if (stat.isFile()) {
+    await fs.promises.copyFile(src, dst)
+  }
+}
+
 // Copy the files from the year template
 if (!fs.existsSync(destYear('package.json'))) {
-  await Promise.all(
-    (
-      await fs.promises.readdir(template('year'))
-    ).map((file) => {
-      return fs.promises.copyFile(template('year', file), destYear(file))
-    })
-  )
+  await copy(template('year'), destYear())
 
   let replacements = {
     'package.json': {
@@ -55,13 +66,7 @@ if (!fs.existsSync(destYear('package.json'))) {
 }
 
 // Copy the files from the day template
-await Promise.all(
-  (
-    await fs.promises.readdir(template('day'))
-  ).map((file) => {
-    return fs.promises.copyFile(template('day', file), destDay(file))
-  })
-)
+await copy(template('day'), destDay())
 
 // Replace the constants
 let replacements = {
