@@ -2,6 +2,7 @@
 
 :wave: Here are my solutions for the yearly Advent of Code[^aoc] challenges.
 
+- [Advent of Code 2022](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2022)
 - [Advent of Code 2021](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2021)
 - [Advent of Code 2020](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2020)
 - [Advent of Code 2019](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2019)
