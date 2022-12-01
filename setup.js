@@ -46,7 +46,7 @@ if (!fs.existsSync(destYear('package.json'))) {
   }
 
   for (let file in replacements) {
-    let contents = await fs.promises.readFile(destYear(file), 'utf8')
+    let contents = await fs.promises.readFile(destYear(...file.split('/')), 'utf8')
     for (let [key, value] of Object.entries(replacements[file])) {
       contents = contents.replace(new RegExp(`{{${key}}}`, 'g'), value)
     }
@@ -69,10 +69,22 @@ let replacements = {
     DAY: day,
     YEAR: year,
   },
+  'rust/src/main.rs': {
+    DAY: day,
+    YEAR: year,
+  },
+  'rust/Cargo.toml': {
+    DAY: day,
+    YEAR: year,
+  },
+  'rust/Cargo.lock': {
+    DAY: day,
+    YEAR: year,
+  },
 }
 
 for (let file in replacements) {
-  let contents = await fs.promises.readFile(destDay(file), 'utf8')
+  let contents = await fs.promises.readFile(destDay(...file.split('/')), 'utf8')
   for (let [key, value] of Object.entries(replacements[file])) {
     contents = contents.replace(new RegExp(`{{${key}}}`, 'g'), value)
   }
