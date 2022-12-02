@@ -125,9 +125,7 @@ pub fn part_1(data: &str) -> i32 {
                 .map(|(a, b)| (a.parse().unwrap(), b.parse().unwrap()))
                 .unwrap()
         })
-        .map(|(opponent, mine): (Shape, Shape)| {
-            mine.points() + State::from_shapes(&mine, &opponent).points()
-        })
+        .map(|(opponent, mine)| State::from_shapes(&mine, &opponent).points() + mine.points())
         .sum()
 }
 
@@ -140,13 +138,11 @@ pub fn part_2(data: &str) -> i32 {
                 .map(|(a, b)| (a.parse().unwrap(), b.parse().unwrap()))
                 .unwrap()
         })
-        .map(|(opponent, state): (Shape, State)| {
+        .map(|(opponent, state)| {
             let mine = Shape::from_state(&state, &opponent);
             (opponent, mine)
         })
-        .map(|(opponent, mine): (Shape, Shape)| {
-            mine.points() + State::from_shapes(&mine, &opponent).points()
-        })
+        .map(|(opponent, mine)| mine.points() + State::from_shapes(&mine, &opponent).points())
         .sum()
 }
 
