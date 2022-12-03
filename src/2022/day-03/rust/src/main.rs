@@ -35,8 +35,8 @@ pub fn part_1(data: &str) -> i32 {
                 .find(|&value| others.iter().all(|x| x.contains(value)))
         })
         .map(|value| match value {
-            value @ 'a'..='z' => (*value as i32) - 96,
-            value @ 'A'..='Z' => (*value as i32) - 38,
+            'a'..='z' => (*value as i32) - 96,
+            'A'..='Z' => (*value as i32) - 38,
             _ => 0,
         })
         .sum()
@@ -57,8 +57,8 @@ pub fn part_2(data: &str) -> i32 {
                 .find(|&value| others.iter().all(|x| x.contains(value)))
         })
         .map(|value| match value {
-            value @ 'a'..='z' => (*value as i32) - 96,
-            value @ 'A'..='Z' => (*value as i32) - 38,
+            'a'..='z' => (*value as i32) - 96,
+            'A'..='Z' => (*value as i32) - 38,
             _ => 0,
         })
         .sum()
