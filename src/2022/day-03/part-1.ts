@@ -9,11 +9,7 @@ export default function (blob: string) {
     2
   )
     .map((sets) => Array.from(sets.pop()!).find((value) => sets.every((set) => set.has(value))))
-    .map((letter = '') => {
-      if (/[a-z]/g.test(letter)) return letter.charCodeAt(0) - 96
-      if (/[A-Z]/g.test(letter)) return letter.charCodeAt(0) - 38
-      return 0
-    })
+    .map((letter = '') => (letter.charCodeAt(0) & 31) + 26 * Number(/[A-Z]/.test(letter)))
     .reduce((total, current) => total + current)
 }
 
