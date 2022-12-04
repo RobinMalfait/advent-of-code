@@ -1,5 +1,4 @@
-use std::ops::RangeInclusive;
-use std::time::Instant;
+use std::{cmp::PartialOrd, ops::RangeInclusive, time::Instant};
 
 const INPUT: &str = include_str!("../../../../../data/2022-04.txt");
 
@@ -22,19 +21,24 @@ fn parse_range(input: &str) -> RangeInclusive<i32> {
         .unwrap()
 }
 
+fn partial_overlap<T: PartialOrd>((lhs, rhs): &(RangeInclusive<T>, RangeInclusive<T>)) -> bool {
+    lhs.start() <= rhs.end() && rhs.start() <= lhs.end()
+}
+
+fn full_overlap<T: PartialOrd>((lhs, rhs): &(RangeInclusive<T>, RangeInclusive<T>)) -> bool {
+    lhs.start() >= rhs.start() && lhs.end() <= rhs.end()
+        || rhs.start() >= lhs.start() && rhs.end() <= lhs.end()
+}
+
 pub fn part_1(data: &str) -> i32 {
     data.trim()
         .lines()
         .map(|line| line.trim())
-        .filter(|line| {
-            let (lhs, rhs) = line
-                .split_once(',')
+        .filter_map(|line| {
+            line.split_once(',')
                 .map(|(lhs, rhs)| (parse_range(lhs), parse_range(rhs)))
-                .unwrap();
-
-            lhs.start() >= rhs.start() && lhs.end() <= rhs.end()
-                || rhs.start() >= lhs.start() && rhs.end() <= lhs.end()
         })
+        .filter(full_overlap)
         .count()
         .try_into()
         .unwrap()
@@ -44,14 +48,11 @@ pub fn part_2(data: &str) -> i32 {
     data.trim()
         .lines()
         .map(|line| line.trim())
-        .filter(|line| {
-            let (lhs, rhs) = line
-                .split_once(',')
+        .filter_map(|line| {
+            line.split_once(',')
                 .map(|(lhs, rhs)| (parse_range(lhs), parse_range(rhs)))
-                .unwrap();
-
-            lhs.start() <= rhs.end() && rhs.start() <= lhs.end()
         })
+        .filter(partial_overlap)
         .count()
         .try_into()
         .unwrap()
