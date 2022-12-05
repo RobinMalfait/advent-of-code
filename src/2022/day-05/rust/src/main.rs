@@ -14,13 +14,6 @@ fn main() {
     println!("Part 2: {}\t\t(took: {:?})", part_2_result, duration);
 }
 
-#[derive(Debug)]
-struct Instruction {
-    amount: usize,
-    from: usize,
-    to: usize,
-}
-
 pub fn part_1(data: &str) -> String {
     let (stacks, instructions) = data.split_once("\n\n").expect("Valid input");
 
@@ -28,10 +21,10 @@ pub fn part_1(data: &str) -> String {
     let mut stacks = parse_crate_stacks(stacks);
 
     // Move crates around
-    for instruction in instructions {
-        for _ in 0..instruction.amount {
-            let value = stacks[instruction.from].pop().expect("Crate exists");
-            stacks[instruction.to].push(value);
+    for (amount, from, to) in instructions {
+        for _ in 0..amount {
+            let value = stacks[from].pop().expect("Crate exists");
+            stacks[to].push(value);
         }
     }
 
@@ -45,36 +38,28 @@ pub fn part_2(data: &str) -> String {
     let mut stacks = parse_crate_stacks(stacks);
 
     // Move crates around
-    for instruction in instructions {
+    for (amount, from, to) in instructions {
         let mut values_to_move: Vec<char> = vec![];
 
-        for _ in 0..instruction.amount {
-            let value = stacks[instruction.from].pop().expect("Crate exists");
+        for _ in 0..amount {
+            let value = stacks[from].pop().expect("Crate exists");
             values_to_move.insert(0, value);
         }
 
         for value in values_to_move {
-            stacks[instruction.to].push(value);
+            stacks[to].push(value);
         }
     }
 
     get_word_from_stacks(&stacks)
 }
 
-fn parse_instructions(input: &str) -> Vec<Instruction> {
+fn parse_instructions(input: &str) -> Vec<(usize, usize, usize)> {
     input
         .lines()
-        .flat_map(|x| {
+        .map(|x| {
             let parts: Vec<usize> = x.split_whitespace().flat_map(|x| x.parse()).collect();
-            if parts.len() == 3 {
-                Some(Instruction {
-                    amount: parts[0],
-                    from: parts[1] - 1,
-                    to: parts[2] - 1,
-                })
-            } else {
-                None
-            }
+            (parts[0], parts[1] - 1, parts[2] - 1)
         })
         .collect()
 }
