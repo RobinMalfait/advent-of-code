@@ -8,7 +8,7 @@ export default function (blob: string) {
     stacks[to].push(...stacks[from].splice(-amount))
   }
 
-  return stacks.map((x) => x[x.length - 1]).join('')
+  return stacks.map((x) => x.at(-1)).join('')
 }
 
 function parseStacks(input: string): string[][] {
