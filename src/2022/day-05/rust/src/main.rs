@@ -46,7 +46,7 @@ pub fn part_2(data: &str) -> String {
 
     // Move crates around
     for instruction in instructions {
-        let mut values_to_move: Vec<String> = vec![];
+        let mut values_to_move: Vec<char> = vec![];
 
         for _ in 0..instruction.amount {
             let value = stacks[instruction.from].pop().expect("Crate exists");
@@ -65,14 +65,7 @@ fn parse_instructions(input: &str) -> Vec<Instruction> {
     input
         .lines()
         .flat_map(|x| {
-            let parts: Vec<usize> = x
-                .replace("move", "")
-                .replace("from", ",")
-                .replace("to", ",")
-                .split(',')
-                .flat_map(|x| x.trim().parse())
-                .collect();
-
+            let parts: Vec<usize> = x.split_whitespace().flat_map(|x| x.parse()).collect();
             if parts.len() == 3 {
                 Some(Instruction {
                     amount: parts[0],
@@ -86,29 +79,21 @@ fn parse_instructions(input: &str) -> Vec<Instruction> {
         .collect()
 }
 
-fn parse_crate_stacks(input: &str) -> Vec<Vec<String>> {
-    let stacks = input.replace("    ", "[_]").replace(['[', ']'], " ");
-    let mut stacks = stacks
-        .lines()
-        .map(|line| line.split(' ').filter(|x| !x.is_empty()).collect())
-        .collect::<Vec<_>>();
-
-    stacks.pop(); // Ignore the numbers
-
-    transpose(stacks)
-        .into_iter()
-        .map(|stack| {
-            stack
-                .into_iter()
-                .filter(|x| *x != "_")
-                .rev()
-                .map(|x| x.to_string())
-                .collect()
-        })
-        .collect()
+fn parse_crate_stacks(input: &str) -> Vec<Vec<char>> {
+    transpose(
+        input
+            .lines()
+            .rev()
+            .skip(1)
+            .map(|line| line.chars().skip(1).step_by(4).collect())
+            .collect(),
+    )
+    .into_iter()
+    .map(|row| row.into_iter().filter(|x| *x != ' ').collect())
+    .collect()
 }
 
-fn get_word_from_stacks(stacks: &[Vec<String>]) -> String {
+fn get_word_from_stacks(stacks: &[Vec<char>]) -> String {
     stacks
         .iter()
         .flat_map(|stack| stack.last())

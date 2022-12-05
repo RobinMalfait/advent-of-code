@@ -14,20 +14,18 @@ export default function (blob: string) {
 function parseStacks(input: string): string[][] {
   return transpose(
     input
-      .replaceAll('    ', '[_]') // Fill in the blanks
-      .replaceAll('[', ' ') // Make it splitable #1
-      .replaceAll(']', ' ') // Make it splitable #2
       .split('\n')
-      .slice(0, -1) // Ignore the line with crate numbers
-      .map((line: string) => line.split(' ').filter((x) => x.trim().length !== 0))
-  ).map((stack) => stack.filter((x) => x !== '_').reverse())
+      .reverse()
+      .slice(1)
+      .map((line) => line.split('').filter((_, i) => (i - 1) % 4 === 0))
+  ).map((row) => row.filter((x) => Boolean(x.trim())))
 }
 
 function parseInstructions(input: string) {
   return input
     .trim()
     .split('\n')
-    .map((x) => x.replace('move', '').replace('from', ',').replace('to', ',').split(',').map(Number))
+    .map((x) => x.split(' ').map(Number).filter(Boolean))
     .map(([amount, from, to]) => ({ amount, from: from - 1, to: to - 1 }))
 }
 
