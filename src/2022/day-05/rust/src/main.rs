@@ -15,30 +15,16 @@ fn main() {
 }
 
 pub fn part_1(data: &str) -> String {
-    let (stacks, instructions) = data.split_once("\n\n").expect("Valid input");
-
-    let instructions = parse_instructions(instructions);
-    let mut stacks = parse_crate_stacks(stacks);
-
-    // Move crates around
-    for (amount, from, to) in instructions {
+    data.solve(|stacks, (amount, from, to)| {
         for _ in 0..amount {
             let value = stacks[from].pop().expect("Crate exists");
             stacks[to].push(value);
         }
-    }
-
-    get_word_from_stacks(&stacks)
+    })
 }
 
 pub fn part_2(data: &str) -> String {
-    let (stacks, instructions) = data.split_once("\n\n").expect("Valid input");
-
-    let instructions = parse_instructions(instructions);
-    let mut stacks = parse_crate_stacks(stacks);
-
-    // Move crates around
-    for (amount, from, to) in instructions {
+    data.solve(|stacks, (amount, from, to)| {
         let mut values_to_move: Vec<char> = vec![];
 
         for _ in 0..amount {
@@ -49,9 +35,24 @@ pub fn part_2(data: &str) -> String {
         for value in values_to_move {
             stacks[to].push(value);
         }
-    }
+    })
+}
 
-    get_word_from_stacks(&stacks)
+trait Solver {
+    fn solve(&self, r#move: impl FnMut(&mut Vec<Vec<char>>, (usize, usize, usize))) -> String;
+}
+
+impl Solver for &str {
+    fn solve(&self, mut r#move: impl FnMut(&mut Vec<Vec<char>>, (usize, usize, usize))) -> String {
+        let (stacks, instructions) = self.split_once("\n\n").expect("Valid input");
+        let mut stacks = parse_crate_stacks(stacks);
+
+        parse_instructions(instructions)
+            .into_iter()
+            .for_each(|instruction| r#move(&mut stacks, instruction));
+
+        get_word_from_stacks(&stacks)
+    }
 }
 
 fn parse_instructions(input: &str) -> Vec<(usize, usize, usize)> {
