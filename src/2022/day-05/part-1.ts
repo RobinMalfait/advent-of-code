@@ -5,7 +5,7 @@ export default function (blob: string) {
   let instructions = parseInstructions(raw_instructions)
 
   for (let { amount, from, to } of instructions) {
-    stacks[to].push(...stacks[from].splice(stacks[from].length - amount).reverse())
+    stacks[to].push(...stacks[from].splice(-amount).reverse())
   }
 
   return stacks.map((x) => x[x.length - 1]).join('')
