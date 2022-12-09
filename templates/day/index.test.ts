@@ -16,7 +16,7 @@ describe('Part 1', () => {
   })
 })
 
-describe('Part 2', () => {
+describe.skip('Part 2', () => {
   it.each([['TODO', 'TODO']])('should produce the correct value for example %#', (input, expected) => {
     expect(part2(input)).toBe(expected)
   })

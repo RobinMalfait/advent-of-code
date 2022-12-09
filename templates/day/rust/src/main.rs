@@ -35,11 +35,13 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn part_1_real() {
         assert_eq!(part_1(INPUT), 0);
     }
 
     #[test]
+    #[ignore]
     fn part_2_sample() {
         let data = r#"
         "#;
@@ -48,6 +50,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn part_2_real() {
         assert_eq!(part_2(INPUT), 0);
     }
