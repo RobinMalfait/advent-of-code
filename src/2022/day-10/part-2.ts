@@ -15,7 +15,7 @@ export default function (blob: string) {
     })
 
   for (let instruction of instructions) {
-    crt[cycle - 1] = Math.abs(sprite - ((cycle - 1) % 40)) <= 1 ? '█' : '░'
+    crt[cycle - 1] = Math.abs(sprite - ((cycle - 1) % 40)) <= 1 ? '█' : ' '
 
     if (instruction.type === 'addx') {
       register_x += instruction.value

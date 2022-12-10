@@ -7,7 +7,7 @@ import part2 from './part-2'
 let sample = promises.readFile(resolve(process.cwd(), 'data', '2022-10.sample.txt'), 'utf8')
 let data = promises.readFile(resolve(process.cwd(), 'data', '2022-10.txt'), 'utf8')
 
-function dedent([input]: TemplateStringsArray) {
+function dedent(input: string) {
   return input
     .trim()
     .split('\n')
@@ -29,29 +29,29 @@ describe('Part 2', () => {
   it.each([
     [
       sample,
-      dedent`
-        ██░░██░░██░░██░░██░░██░░██░░██░░██░░██░░
-        ███░░░███░░░███░░░███░░░███░░░███░░░███░
-        ████░░░░████░░░░████░░░░████░░░░████░░░░
-        █████░░░░░█████░░░░░█████░░░░░█████░░░░░
-        ██████░░░░░░██████░░░░░░██████░░░░░░████
-        ███████░░░░░░░███████░░░░░░░███████░░░░░
-      `,
+      dedent(`
+        ██  ██  ██  ██  ██  ██  ██  ██  ██  ██
+        ███   ███   ███   ███   ███   ███   ███
+        ████    ████    ████    ████    ████
+        █████     █████     █████     █████
+        ██████      ██████      ██████      ████
+        ███████       ███████       ███████
+      `),
     ],
   ])('should produce the correct value for example %#', async (input, expected) => {
-    expect(part2(await input)).toBe(expected)
+    expect(dedent(part2(await input))).toBe(expected)
   })
 
   it('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toEqual(
-      dedent`
-        ███░░███░░░░██░░██░░████░░██░░░██░░███░░
-        █░░█░█░░█░░░░█░█░░█░░░░█░█░░█░█░░█░█░░█░
-        ███░░█░░█░░░░█░█░░█░░░█░░█░░░░█░░█░█░░█░
-        █░░█░███░░░░░█░████░░█░░░█░██░████░███░░
-        █░░█░█░░░░█░░█░█░░█░█░░░░█░░█░█░░█░█░░░░
-        ███░░█░░░░░██░░█░░█░████░░███░█░░█░█░░░░
-      `
+    expect(dedent(part2(await data))).toEqual(
+      dedent(`
+        ███  ███    ██  ██  ████  ██   ██  ███
+        █  █ █  █    █ █  █    █ █  █ █  █ █  █
+        ███  █  █    █ █  █   █  █    █  █ █  █
+        █  █ ███     █ ████  █   █ ██ ████ ███
+        █  █ █    █  █ █  █ █    █  █ █  █ █
+        ███  █     ██  █  █ ████  ███ █  █ █
+      `)
     )
   })
 })
