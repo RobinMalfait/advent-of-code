@@ -18,15 +18,15 @@ fn main() {
     println!("Part 2: {}\t\t(took: {:?})", part_2_result, duration);
 }
 
-pub fn part_1(data: &str) -> u128 {
+pub fn part_1(data: &str) -> usize {
     solve(data, 20, 3).unwrap()
 }
 
-pub fn part_2(data: &str) -> u128 {
+pub fn part_2(data: &str) -> usize {
     solve(data, 10000, 1).unwrap()
 }
 
-fn solve(data: &str, rounds: usize, stress_reducer: u128) -> Option<u128> {
+fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
     use Op::*;
     use Value::*;
 
@@ -92,15 +92,15 @@ fn solve(data: &str, rounds: usize, stress_reducer: u128) -> Option<u128> {
         .into_iter()
         .take(2)
         .reduce(|a, b| a * b)
-        .map(|x| x as u128)
+        .map(|x| x as usize)
 }
 
 #[derive(Debug)]
 struct Monkey {
     id: i32,
-    items: VecDeque<u128>,
+    items: VecDeque<usize>,
     operation: Op,
-    divisible_by: u128,
+    divisible_by: usize,
     goto_true: i32,
     goto_false: i32,
 }
@@ -144,15 +144,15 @@ enum Op {
 
 #[derive(Debug)]
 enum Value {
-    Constant(u128),
+    Constant(usize),
     Old,
 }
 
-fn lcm(x: u128, y: u128) -> u128 {
+fn lcm(x: usize, y: usize) -> usize {
     x * y / gcd(x, y)
 }
 
-fn gcd(x: u128, y: u128) -> u128 {
+fn gcd(x: usize, y: usize) -> usize {
     let mut max = x;
     let mut min = y;
     if min > max {
