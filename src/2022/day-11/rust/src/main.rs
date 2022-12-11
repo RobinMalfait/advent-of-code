@@ -19,27 +19,37 @@ fn main() {
 }
 
 pub fn part_1(data: &str) -> usize {
-    solve(data, 20, 3).unwrap()
+    solve(data, 20, |value| value / 3).unwrap()
 }
 
 pub fn part_2(data: &str) -> usize {
-    solve(data, 10000, 1).unwrap()
+    let common: usize = data
+        .lines()
+        .filter(|line| line.contains("Test: divisible by"))
+        .flat_map(|line| {
+            line.trim()
+                .replace("Test: divisible by ", "")
+                .parse::<usize>()
+        })
+        .product();
+    solve(data, 10000, |value| value % common).unwrap()
 }
 
-fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
+fn solve<T>(data: &str, rounds: usize, stress_reducer: T) -> Option<usize>
+where
+    T: Fn(usize) -> usize,
+{
     use Op::*;
     use Value::*;
 
     let mut monkeys: HashMap<i32, Monkey> = Default::default();
     let mut activity_monitor = vec![];
-    let mut common = 1;
     for monkey in data
         .split("\n\n")
         .flat_map(|block| block.parse())
         .collect::<Vec<Monkey>>()
     {
         activity_monitor.push(0);
-        common *= monkey.divisible_by;
         monkeys.insert(monkey.id, monkey);
     }
 
@@ -64,10 +74,7 @@ fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
                     _ => unreachable!(),
                 };
 
-                new_worry_level /= stress_reducer;
-                if stress_reducer <= 1 {
-                    new_worry_level %= common;
-                }
+                new_worry_level = stress_reducer(new_worry_level);
 
                 if new_worry_level % monkey.divisible_by == 0 {
                     monkey_true_values.push(new_worry_level);
@@ -89,12 +96,7 @@ fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
     }
 
     activity_monitor.sort_by(|a, z| z.cmp(a));
-
-    activity_monitor
-        .into_iter()
-        .take(2)
-        .reduce(|a, b| a * b)
-        .map(|x| x as usize)
+    activity_monitor.into_iter().take(2).reduce(|a, b| a * b)
 }
 
 #[derive(Debug)]

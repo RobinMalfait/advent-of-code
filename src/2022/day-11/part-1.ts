@@ -1,7 +1,6 @@
-export default function (blob: string, rounds: number = 20, stress_reducer: number = 3) {
+export default function (blob: string, rounds: number = 20, stressReducer = (value: number) => Math.floor(value / 3)) {
   let monkeys = blob.trim().split('\n\n').map(parseMonkey)
   let activity_monitor = Array(monkeys.length).fill(0)
-  let common = monkeys.reduce((total, current) => total * current.divisible_by, 1)
 
   for (let current_monkey of Array(rounds * monkeys.length).keys()) {
     current_monkey %= monkeys.length
@@ -13,11 +12,7 @@ export default function (blob: string, rounds: number = 20, stress_reducer: numb
       let item = monkey.items.shift()
 
       let new_worry_level = monkey.operation(item)
-      new_worry_level /= stress_reducer
-      new_worry_level = Math.floor(new_worry_level)
-      if (stress_reducer <= 1) {
-        new_worry_level %= common
-      }
+      new_worry_level = stressReducer(new_worry_level)
 
       if (new_worry_level % monkey.divisible_by === 0) {
         monkeys[monkey.goto_true].items.push(new_worry_level)
