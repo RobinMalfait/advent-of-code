@@ -39,7 +39,7 @@ fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
         .collect::<Vec<Monkey>>()
     {
         activity_monitor.push(0);
-        common = lcm(common, monkey.divisible_by);
+        common *= monkey.divisible_by;
         monkeys.insert(monkey.id, monkey);
     }
 
@@ -65,7 +65,9 @@ fn solve(data: &str, rounds: usize, stress_reducer: usize) -> Option<usize> {
                 };
 
                 new_worry_level /= stress_reducer;
-                new_worry_level %= common;
+                if stress_reducer <= 1 {
+                    new_worry_level %= common;
+                }
 
                 if new_worry_level % monkey.divisible_by == 0 {
                     monkey_true_values.push(new_worry_level);
@@ -146,28 +148,6 @@ enum Op {
 enum Value {
     Constant(usize),
     Old,
-}
-
-fn lcm(x: usize, y: usize) -> usize {
-    x * y / gcd(x, y)
-}
-
-fn gcd(x: usize, y: usize) -> usize {
-    let mut max = x;
-    let mut min = y;
-    if min > max {
-        std::mem::swap(&mut max, &mut min);
-    }
-
-    loop {
-        let res = max % min;
-        if res == 0 {
-            return min;
-        }
-
-        max = min;
-        min = res;
-    }
 }
 
 #[cfg(test)]

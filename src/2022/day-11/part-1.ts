@@ -1,7 +1,7 @@
 export default function (blob: string, rounds: number = 20, stress_reducer: number = 3) {
   let monkeys = blob.trim().split('\n\n').map(parseMonkey)
   let activity_monitor = Array(monkeys.length).fill(0)
-  let common = monkeys.reduce((common, current) => lcm(common, current.divisible_by), 1)
+  let common = monkeys.reduce((total, current) => total * current.divisible_by, 1)
 
   for (let current_monkey of Array(rounds * monkeys.length).keys()) {
     current_monkey %= monkeys.length
@@ -15,7 +15,9 @@ export default function (blob: string, rounds: number = 20, stress_reducer: numb
       let new_worry_level = monkey.operation(item)
       new_worry_level /= stress_reducer
       new_worry_level = Math.floor(new_worry_level)
-      new_worry_level %= common
+      if (stress_reducer <= 1) {
+        new_worry_level %= common
+      }
 
       if (new_worry_level % monkey.divisible_by === 0) {
         monkeys[monkey.goto_true].items.push(new_worry_level)
@@ -58,25 +60,5 @@ function parseMonkey(block: string): Monkey {
     divisible_by: Number(lines[3].replace('Test: divisible by ', '')),
     goto_true: Number(lines[4].replace('If true: throw to monkey ', '')),
     goto_false: Number(lines[5].replace('If false: throw to monkey ', '')),
-  }
-}
-
-function lcm(x: number, y: number): number {
-  return (x * y) / gcd(x, y)
-}
-
-function gcd(x: number, y: number): number {
-  let max = x
-  let min = y
-  if (min > max) {
-    ;[min, max] = [max, min]
-  }
-
-  while (true) {
-    let res = max % min
-    if (res == 0) return min
-
-    max = min
-    min = res
   }
 }
