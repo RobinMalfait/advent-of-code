@@ -1,7 +1,8 @@
-use std::collections::hash_map::HashMap;
-use std::collections::VecDeque;
-use std::hash::Hash;
-use std::time::Instant;
+use std::{
+    collections::{HashMap, VecDeque},
+    hash::Hash,
+    time::Instant,
+};
 
 const INPUT: &str = include_str!("../../../../../data/2022-12.txt");
 
@@ -17,21 +18,15 @@ fn main() {
     println!("Part 2: {:<20}(took: {:?})", part_2_result, duration);
 }
 
-const START: u8 = b'S';
-const END: u8 = b'E';
-
 pub fn part_1(data: &str) -> i32 {
-    solve(data, |value| value == START)
+    solve(data, b'S', b'E')
 }
 
 pub fn part_2(data: &str) -> i32 {
-    solve(data, |value| value == START || value == b'a')
+    solve(data, b'E', b'a')
 }
 
-fn solve<T>(data: &str, is_valid_starting_position: T) -> i32
-where
-    T: Fn(u8) -> bool,
-{
+fn solve(data: &str, start: u8, target: u8) -> i32 {
     let grid: Vec<&[u8]> = data
         .trim()
         .lines()
@@ -42,20 +37,19 @@ where
     let grid_height = grid.len();
     let grid_width = grid[0].len();
 
-    let mut end_point: Option<Point> = None;
-
-    let mut starting_positions = vec![];
+    let mut start_point: Option<Point> = None;
+    let mut possible_targets = vec![];
 
     for (row_idx, row) in grid.iter().enumerate() {
         for (col_idx, value) in row.iter().enumerate() {
             let point = Point::new(col_idx, row_idx);
 
-            if is_valid_starting_position(*value) {
-                starting_positions.push(point);
+            if value == &start {
+                start_point = Some(point);
             }
 
-            if value == &END {
-                end_point = Some(point)
+            if value == &target {
+                possible_targets.push(point);
             }
 
             graph.insert(point, vec![]);
@@ -75,37 +69,36 @@ where
                 let n_value = grid[n_row_idx][n_col_idx];
                 let neighbour = Point::new(n_col_idx, n_row_idx);
 
-                if val(n_value) <= val(*value) || val(n_value) - val(*value) == 1 {
-                    graph.entry(point).and_modify(|neighbours| {
-                        neighbours.push(neighbour);
-                        neighbours.sort_by(|a, z| val(grid[a.y][a.x]).cmp(&val(grid[z.y][z.x])));
-                    });
+                if match start > target {
+                    true => val(n_value) <= val(*value) || val(n_value) - val(*value) == 1,
+                    false => val(*value) <= val(n_value) || val(*value) - val(n_value) == 1,
+                } {
+                    graph
+                        .entry(point)
+                        .and_modify(|neighbours| neighbours.push(neighbour));
                 }
             }
         }
     }
 
-    let end_point = end_point.expect("There should be an ending point.");
-
-    starting_positions
-        .iter()
-        .filter_map(|start_point| bfs(&graph, *start_point, end_point))
-        .map(|path| path.len() as i32 - 1)
-        .min()
-        .unwrap()
+    let start_point = start_point.expect("There should be a starting point.");
+    bfs(&graph, start_point, possible_targets)
+        .expect("A path should exist.")
+        .len() as i32
+        - 1
 }
 
 fn val(input: u8) -> u8 {
     match input {
-        START => b'a',
-        END => b'z',
+        b'S' => b'a',
+        b'E' => b'z',
         _ => input,
     }
 }
 
-fn bfs<T>(graph: &HashMap<T, Vec<T>>, start: T, target: T) -> Option<Vec<T>>
+fn bfs<T>(graph: &HashMap<T, Vec<T>>, start: T, targets: Vec<T>) -> Option<Vec<T>>
 where
-    T: Hash + PartialEq + Eq + Copy,
+    T: Hash + PartialEq + Eq + Copy + std::cmp::Ord,
 {
     let mut parent: HashMap<T, T> = Default::default();
     let mut visited: Vec<T> = vec![];
@@ -115,7 +108,7 @@ where
     queue.push_back(start);
 
     while let Some(node) = queue.pop_front() {
-        if node == target {
+        if targets.contains(&node) {
             let mut path_vec = vec![node];
 
             let mut current = node;
