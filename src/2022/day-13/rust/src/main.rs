@@ -84,23 +84,7 @@ impl FromStr for Packet {
 impl Ord for Packet {
     fn cmp(&self, other: &Self) -> cmp::Ordering {
         match (self, other) {
-            (Packet::Nested(lhs), Packet::Nested(rhs)) => {
-                let mut lhs: Vec<_> = lhs.iter().rev().collect();
-                let mut rhs: Vec<_> = rhs.iter().rev().collect();
-
-                loop {
-                    match (lhs.len(), rhs.len()) {
-                        (0, 0) => return cmp::Ordering::Equal,
-                        (0, x) if x > 0 => return cmp::Ordering::Less,
-                        (x, 0) if x > 0 => return cmp::Ordering::Greater,
-                        _ => match lhs.pop().unwrap().cmp(rhs.pop().unwrap()) {
-                            r @ cmp::Ordering::Less => return r,
-                            r @ cmp::Ordering::Greater => return r,
-                            _ => {}
-                        },
-                    }
-                }
-            }
+            (Packet::Nested(lhs), Packet::Nested(rhs)) => lhs.cmp(rhs),
             (Packet::Value(lhs), Packet::Value(rhs)) => lhs.cmp(rhs),
             (lhs @ Packet::Nested(_), rhs @ Packet::Value(_)) => lhs.cmp(&rhs.wrap()),
             (lhs @ Packet::Value(_), rhs @ Packet::Nested(_)) => lhs.wrap().cmp(rhs),
