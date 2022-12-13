@@ -69,7 +69,8 @@ impl FromStr for Packet {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         if s.starts_with('[') && s.ends_with(']') {
             Ok(Packet::Nested(
-                split_top_level(&s[1..s.len() - 1], ',')
+                s[1..s.len() - 1]
+                    .split_top_level(',')
                     .iter()
                     .filter_map(|section| section.parse::<Packet>().ok())
                     .collect(),
@@ -113,11 +114,15 @@ impl PartialOrd for Packet {
     }
 }
 
-fn split_top_level(input: &str, delim: char) -> Vec<&str> {
-    let mut nested = 0;
+trait SplitTopLevelExt {
+    fn split_top_level(&self, delim: char) -> Vec<&str>;
+}
 
-    input
-        .split_terminator(|x| match x {
+impl SplitTopLevelExt for str {
+    fn split_top_level(&self, delim: char) -> Vec<&str> {
+        let mut nested = 0;
+
+        self.split_terminator(|x| match x {
             '[' => {
                 nested += 1;
                 false
@@ -130,6 +135,7 @@ fn split_top_level(input: &str, delim: char) -> Vec<&str> {
             _ => false,
         })
         .collect()
+    }
 }
 
 #[cfg(test)]
