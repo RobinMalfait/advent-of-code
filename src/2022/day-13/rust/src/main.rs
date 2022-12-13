@@ -21,7 +21,7 @@ pub fn part_1(data: &str) -> i32 {
             let (lhs, rhs) = block.split_once('\n').expect("Valid packet pair");
             (lhs.parse().unwrap(), rhs.parse().unwrap())
         })
-        .map(|(lhs, rhs)| compare(&lhs, &rhs))
+        .map(|(lhs, rhs): (Packet, Packet)| lhs.cmp(&rhs))
         .enumerate()
         .map(|(idx, ord)| match ord {
             cmp::Ordering::Less => idx + 1,
@@ -43,7 +43,7 @@ pub fn part_2(data: &str) -> i32 {
     packets.push(a.clone());
     packets.push(b.clone());
 
-    packets.sort_by(compare);
+    packets.sort();
 
     let a = packets.iter().position(|other| *other == a).unwrap() + 1;
     let b = packets.iter().position(|other| *other == b).unwrap() + 1;
@@ -51,7 +51,7 @@ pub fn part_2(data: &str) -> i32 {
     (a * b) as i32
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 enum Packet {
     Nested(Vec<Packet>),
     Value(i32),
@@ -80,28 +80,36 @@ impl FromStr for Packet {
     }
 }
 
-fn compare(lhs: &Packet, rhs: &Packet) -> cmp::Ordering {
-    match (lhs, rhs) {
-        (Packet::Nested(lhs), Packet::Nested(rhs)) => {
-            let mut lhs: Vec<_> = lhs.iter().rev().collect();
-            let mut rhs: Vec<_> = rhs.iter().rev().collect();
+impl Ord for Packet {
+    fn cmp(&self, other: &Self) -> cmp::Ordering {
+        match (self, other) {
+            (Packet::Nested(lhs), Packet::Nested(rhs)) => {
+                let mut lhs: Vec<_> = lhs.iter().rev().collect();
+                let mut rhs: Vec<_> = rhs.iter().rev().collect();
 
-            loop {
-                match (lhs.len(), rhs.len()) {
-                    (0, 0) => return cmp::Ordering::Equal,
-                    (0, x) if x > 0 => return cmp::Ordering::Less,
-                    (x, 0) if x > 0 => return cmp::Ordering::Greater,
-                    _ => match compare(lhs.pop().unwrap(), rhs.pop().unwrap()) {
-                        r @ cmp::Ordering::Less => return r,
-                        r @ cmp::Ordering::Greater => return r,
-                        _ => {}
-                    },
+                loop {
+                    match (lhs.len(), rhs.len()) {
+                        (0, 0) => return cmp::Ordering::Equal,
+                        (0, x) if x > 0 => return cmp::Ordering::Less,
+                        (x, 0) if x > 0 => return cmp::Ordering::Greater,
+                        _ => match lhs.pop().unwrap().cmp(rhs.pop().unwrap()) {
+                            r @ cmp::Ordering::Less => return r,
+                            r @ cmp::Ordering::Greater => return r,
+                            _ => {}
+                        },
+                    }
                 }
             }
+            (Packet::Value(lhs), Packet::Value(rhs)) => lhs.cmp(rhs),
+            (lhs @ Packet::Nested(_), rhs @ Packet::Value(_)) => lhs.cmp(&rhs.wrap()),
+            (lhs @ Packet::Value(_), rhs @ Packet::Nested(_)) => lhs.wrap().cmp(rhs),
         }
-        (Packet::Value(lhs), Packet::Value(rhs)) => lhs.cmp(rhs),
-        (lhs @ Packet::Nested(_), rhs @ Packet::Value(_)) => compare(lhs, &rhs.wrap()),
-        (lhs @ Packet::Value(_), rhs @ Packet::Nested(_)) => compare(&lhs.wrap(), rhs),
+    }
+}
+
+impl PartialOrd for Packet {
+    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
+        Some(self.cmp(other))
     }
 }
 
