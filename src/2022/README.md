@@ -32,6 +32,7 @@ Results for the Rust version.
 |  20 |    5.93625ms |   67.202875ms |
 |  21 |    451.666µs |    2.757583ms |
 |  22 |   5.192333ms |    1.163791ms |
+|  23 |      8.391ms |  785.897416ms |
 
 <!-- /BENCH TABLE -->
 
