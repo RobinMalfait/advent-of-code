@@ -1,5 +1,7 @@
-use std::collections::BTreeSet;
-use std::time::Instant;
+use std::{
+    collections::{HashSet, VecDeque},
+    time::Instant,
+};
 
 const INPUT: &str = include_str!("../../../../../data/2022-24.txt");
 
@@ -71,46 +73,62 @@ pub fn part_1(data: &str) -> i32 {
     let start = start.expect("A starting point should be known at this time.");
     let end = end.expect("A ending point should be known at this time.");
 
-    let mut valid_locations: BTreeSet<(Point, i32)> = Default::default();
-    valid_locations.insert((start, 0));
+    // Pre-compute blizzard locations
+    let mut blizzard_locations: Vec<HashSet<Point>> = Default::default();
+    for _ in 0..width * height {
+        let mut state: HashSet<Point> = Default::default();
 
-    loop {
         // Move all blizzards
         for blizzard in &mut blizzards {
             blizzard.step();
+            state.insert(blizzard.position);
         }
 
-        let mut new_valid_locations: BTreeSet<(Point, i32)> = Default::default();
-        for (current, steps) in &valid_locations {
-            // End? Winning!
-            if *current == end {
-                return *steps + 1;
-            }
-
-            // In a blizzard
-            if blizzards.iter().any(|b| b.position == *current) {
-                continue;
-            }
-
-            // A wall
-            if *current != start
-                && (current.row == 0
-                    || current.row == height - 1
-                    || current.col == 0
-                    || current.col == width - 1)
-            {
-                continue;
-            }
-
-            new_valid_locations.insert((current.north(), steps + 1));
-            new_valid_locations.insert((current.south(), steps + 1));
-            new_valid_locations.insert((current.west(), steps + 1));
-            new_valid_locations.insert((current.east(), steps + 1));
-            new_valid_locations.insert((*current, steps + 1));
-        }
-
-        valid_locations = new_valid_locations;
+        blizzard_locations.push(state);
     }
+
+    type Time = usize;
+    let mut q: VecDeque<(Point, Time)> = [(start, 0)].into();
+    let mut seen: HashSet<(Point, Time)> = Default::default();
+
+    while let Some(state) = q.pop_front() {
+        if seen.contains(&state) {
+            continue;
+        }
+
+        let (point, time) = state;
+
+        // End? Winning!
+        if point == end {
+            return time as i32 + 1;
+        }
+
+        // A wall
+        if point != start
+            && (point.row <= 0
+                || point.row >= height - 1
+                || point.col <= 0
+                || point.col >= width - 1)
+        {
+            continue;
+        }
+
+        // In a blizzard
+        let blizzards = &blizzard_locations[time % blizzard_locations.len()];
+        if blizzards.contains(&point) {
+            continue;
+        }
+
+        seen.insert(state);
+
+        q.push_back((point.north(), time + 1));
+        q.push_back((point.south(), time + 1));
+        q.push_back((point.west(), time + 1));
+        q.push_back((point.east(), time + 1));
+        q.push_back((point, time + 1));
+    }
+
+    unreachable!();
 }
 
 pub fn part_2(data: &str) -> i32 {
@@ -120,8 +138,6 @@ pub fn part_2(data: &str) -> i32 {
     let mut blizzards = vec![];
     let mut start: Option<Point> = None;
     let mut end: Option<Point> = None;
-
-    let mut routes_todo = 3;
 
     for (row_idx, row) in data.lines().enumerate() {
         for (col_idx, value) in row.chars().enumerate() {
@@ -171,74 +187,84 @@ pub fn part_2(data: &str) -> i32 {
     let start = start.expect("A starting point should be known at this time.");
     let end = end.expect("A ending point should be known at this time.");
 
-    let mut from = start;
-    let mut to = end;
+    // Pre-compute blizzard locations
+    let mut blizzard_locations: Vec<HashSet<Point>> = Default::default();
+    for _ in 0..width * height {
+        let mut state: HashSet<Point> = Default::default();
 
-    let mut valid_locations: BTreeSet<(Point, i32)> = Default::default();
-    valid_locations.insert((from, 0));
-
-    loop {
         // Move all blizzards
         for blizzard in &mut blizzards {
             blizzard.step();
+            state.insert(blizzard.position);
         }
 
-        let mut new_valid_locations: BTreeSet<(Point, i32)> = Default::default();
-        for (current, steps) in &valid_locations {
-            // Shoot... forgot my snacks!
-            if *current == to && routes_todo == 3 {
-                to = start;
-                from = end;
-                routes_todo -= 1;
-
-                new_valid_locations.clear();
-                new_valid_locations.insert((*current, steps + 1));
-                break;
-            }
-
-            // Ah, found my snacks, time to go!
-            if *current == to && routes_todo == 2 {
-                to = end;
-                from = start;
-                routes_todo -= 1;
-
-                new_valid_locations.clear();
-                new_valid_locations.insert((*current, steps + 1));
-                break;
-            }
-
-            // We arrived!
-            if *current == to && routes_todo == 1 {
-                return *steps + 1;
-            }
-
-            // In a blizzard
-            if blizzards.iter().any(|b| b.position == *current) {
-                continue;
-            }
-
-            // A wall
-            if *current != from
-                && (current.row == 0
-                    || current.row == height - 1
-                    || current.col == 0
-                    || current.col == width - 1)
-            {
-                continue;
-            }
-
-            new_valid_locations.insert((current.east(), steps + 1));
-            new_valid_locations.insert((current.north(), steps + 1));
-            new_valid_locations.insert((current.south(), steps + 1));
-            new_valid_locations.insert((current.west(), steps + 1));
-            new_valid_locations.insert((*current, steps + 1));
-        }
-
-        valid_locations = new_valid_locations;
+        blizzard_locations.push(state);
     }
+
+    type Time = usize;
+    type Rounds = usize;
+
+    let mut q: VecDeque<(Point, Time, Rounds)> = [(start, 0, 3)].into();
+    let mut seen: HashSet<(Point, Time, Rounds)> = Default::default();
+
+    while let Some(state) = q.pop_front() {
+        if seen.contains(&state) {
+            continue;
+        }
+
+        let (point, time, rounds) = state;
+
+        // We arrived!
+        if rounds == 1 && point == end {
+            return time as i32 + 1;
+        }
+
+        // Ah, found my snacks, time to go!
+        if rounds == 2 && point == start {
+            seen.clear();
+            q.push_back((point, time + 1, rounds - 1));
+            continue;
+        }
+
+        // Shoot... forgot my snacks!
+        if rounds == 3 && point == end {
+            seen.clear();
+            q.push_back((point, time + 1, rounds - 1));
+            continue;
+        }
+
+        // A wall
+        if match rounds {
+            1 | 3 => point != start,
+            2 => point != end,
+            _ => unreachable!(),
+        } && (point.row <= 0
+            || point.row >= height - 1
+            || point.col <= 0
+            || point.col >= width - 1)
+        {
+            continue;
+        }
+
+        // In a blizzard
+        let blizzards = &blizzard_locations[time % blizzard_locations.len()];
+        if blizzards.contains(&point) {
+            continue;
+        }
+
+        seen.insert(state);
+
+        q.push_back((point.east(), time + 1, rounds));
+        q.push_back((point.north(), time + 1, rounds));
+        q.push_back((point.south(), time + 1, rounds));
+        q.push_back((point.west(), time + 1, rounds));
+        q.push_back((point, time + 1, rounds));
+    }
+
+    unreachable!();
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Blizzard {
     area_width: i32,
     area_height: i32,
