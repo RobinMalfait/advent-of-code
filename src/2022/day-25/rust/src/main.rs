@@ -6,7 +6,7 @@ fn main() {
     let now = Instant::now();
     let part_1_result = part_1(INPUT);
     let duration = now.elapsed();
-    println!("Part 1: {:<20}(took: {:?})", part_1_result, duration);
+    println!("Part 1: {:<20}(took: {:>12?})", part_1_result, duration);
 }
 
 pub fn part_1(data: &str) -> String {

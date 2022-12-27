@@ -11,12 +11,12 @@ fn main() {
     let now = Instant::now();
     let part_1_result = part_1(INPUT, 2_000_000);
     let duration = now.elapsed();
-    println!("Part 1: {:<20}(took: {:?})", part_1_result, duration);
+    println!("Part 1: {:<20}(took: {:>12?})", part_1_result, duration);
 
     let now = Instant::now();
     let part_2_result = part_2(INPUT, 0, 4_000_000);
     let duration = now.elapsed();
-    println!("Part 2: {:<20}(took: {:?})", part_2_result, duration);
+    println!("Part 2: {:<20}(took: {:>12?})", part_2_result, duration);
 }
 
 pub fn part_1(data: &str, y: i32) -> i32 {
