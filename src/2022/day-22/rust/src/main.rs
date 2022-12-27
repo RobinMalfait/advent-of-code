@@ -262,26 +262,21 @@ pub fn part_2(data: &str) -> i32 {
                             Tile::Wall => break, // A wall, now stop..., hammer time
                         },
                         None => {
-                            match fold_projections.get(&ProjectionInfo {
+                            if let Some(ProjectionInfo {
+                                position: new_position,
+                                direction: new_direction,
+                            }) = fold_projections.get(&ProjectionInfo {
                                 position,
                                 direction,
                             }) {
-                                Some(ProjectionInfo {
-                                    position: new_position,
-                                    direction: new_direction,
-                                }) => match board.get(new_position) {
-                                    Some(tile) => match tile {
+                                if let Some(tile) = board.get(new_position) {
+                                    match tile {
                                         Tile::Open => {
                                             position = *new_position;
                                             direction = *new_direction;
                                         }
                                         Tile::Wall => break,
-                                    },
-                                    None => unreachable!(),
-                                },
-                                None => {
-                                    dbg!(position, direction);
-                                    unreachable!()
+                                    }
                                 }
                             }
                         }
