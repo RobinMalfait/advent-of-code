@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code",
+  "private": true,
+  "author": "Robin Malfait <malfait.robin@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "tdd": "jest --watchAll",
+    "bench": "node ../../bench.js",
+    "format": "prettier . --write --ignore-unknown"
+  },
+  "jest": {
+    "displayName": "2016",
+    "transform": {
+      "\\.(t|j)sx?$": "@swc/jest"
+    }
+  }
+}
