@@ -7,21 +7,35 @@ import part2 from './part-2'
 let data = promises.readFile(resolve(process.cwd(), 'data', '2015-09.txt'), 'utf8')
 
 describe('Part 1', () => {
-  it.each([['TODO', 'TODO']])('should produce the correct value for example %#', (input, expected) => {
+  it.each([
+    [
+      `London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141`,
+      605,
+    ],
+  ])('should produce the correct value for example %#', (input, expected) => {
     expect(part1(input)).toBe(expected)
   })
 
-  it.skip('should produce the correct value for the input data', async () => {
-    expect(part1(await data)).toMatchInlineSnapshot()
+  it('should produce the correct value for the input data', async () => {
+    expect(part1(await data)).toMatchInlineSnapshot(`207`)
   })
 })
 
-describe.skip('Part 2', () => {
-  it.each([['TODO', 'TODO']])('should produce the correct value for example %#', (input, expected) => {
+describe('Part 2', () => {
+  it.each([
+    [
+      `London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141`,
+      982,
+    ],
+  ])('should produce the correct value for example %#', (input, expected) => {
     expect(part2(input)).toBe(expected)
   })
 
-  it.skip('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot()
+  it('should produce the correct value for the input data', async () => {
+    expect(part2(await data)).toMatchInlineSnapshot(`804`)
   })
 })
