@@ -8,7 +8,7 @@ let data = promises.readFile(resolve(process.cwd(), 'data', '2016-05.txt'), 'utf
 
 // Skipped because it takes too long
 describe.skip('Part 1', () => {
-  it.skip('should produce the correct value for the input data', async () => {
+  it('should produce the correct value for the input data', async () => {
     expect(part1(await data)).toMatchInlineSnapshot(`"d4cd2ee1"`)
   })
 })

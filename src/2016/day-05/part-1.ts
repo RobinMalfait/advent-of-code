@@ -5,26 +5,21 @@ export default function (blob: string) {
   let idx = 0
 
   let password = ''
+  let length = 0
   let doorId = blob.trim()
 
-  while (true) {
-    let hash = md5(doorId + idx)
+  while (length < DIGITS) {
+    let hash = md5(doorId + idx++)
 
     if (hash.startsWith('00000')) {
       password += hash[5]
-      if (password.length === DIGITS) {
-        break
-      }
+      length += 1
     }
-
-    idx++
   }
 
   return password
 }
 
 function md5(input: string) {
-  let hasher = createHash('md5')
-  hasher.update(input)
-  return hasher.digest('hex')
+  return createHash('md5').update(input).digest('hex')
 }
