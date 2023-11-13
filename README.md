@@ -11,8 +11,8 @@
 | [Advent of Code 2018](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2018) |       6        |
 | [Advent of Code 2017](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2017) |       16       |
 | [Advent of Code 2016](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2016) |       22       |
-| [Advent of Code 2015](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2015) |       28       |
-| **Total stars:**                                                                         |    **250**     |
+| [Advent of Code 2015](https://github.com/RobinMalfait/advent-of-code/tree/main/src/2015) |       30       |
+| **Total stars:**                                                                         |    **252**     |
 
 [^aoc]: [Advent of Code][aoc] – is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.
 
