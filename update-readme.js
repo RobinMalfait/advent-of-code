@@ -1,0 +1,85 @@
+import fs from 'fs/promises'
+import path from 'path'
+
+import prettier from 'prettier'
+import cheerio from 'cheerio'
+
+async function get(url) {
+  let response = await fetch(`https://adventofcode.com${url}`, {
+    headers: {
+      cookie: process.env.AOC_COOKIE,
+    },
+  })
+  return response.text()
+}
+
+async function getStars(year) {
+  let contents = await get(`/${year}`)
+
+  let starsByDay = new Map(Array.from({ length: 25 }, (_, i) => [i + 1, 0]))
+  let $ = cheerio.load(contents)
+  for (let el of $('[aria-label^="Day "]')) {
+    let label = el.attribs['aria-label']
+    let { groups } = /Day (?<day>\d+)(?:, (?<stars>one|two) stars?)?/g.exec(label)
+    starsByDay.set(Number(groups.day), groups.stars === 'two' ? 2 : groups.stars === 'one' ? 1 : 0)
+  }
+
+  return Array.from(starsByDay.values())
+}
+
+function transpose(grid) {
+  return grid[0].map((_, i) => grid.map((row) => row[i]))
+}
+
+// --
+
+let contents = await get(`/${new Date().getFullYear()}/events`)
+let $ = cheerio.load(contents)
+
+let totals = []
+for await (let event of $('.eventlist-event')) {
+  let year = Number($(event).find('a:first-of-type').text().trim().slice(1, -1))
+  totals.push([year, ...(await getStars(year))])
+}
+
+let data = transpose(totals.reverse())
+
+let output = [['Day', ...data[0].map((year) => `[${year}][link-${year}]`)]]
+output.push([':---:', ...data[0].map(() => ':---')])
+
+for (let [idx, row] of data.slice(1).entries()) {
+  output.push([`**${idx + 1}**`, ...row.map((stars) => (stars === 2 ? '⭐⭐' : stars === 1 ? '⭐' : ' '))])
+}
+
+output.push([
+  '**Total:**',
+  ...data.slice(1).reduce(
+    (acc, row) =>
+      acc.map((v, i) => {
+        let total = v + row[i]
+        if (total === 50) {
+          return '**50**'
+        }
+        return total
+      }),
+    Array(data[0].length).fill(0)
+  ),
+])
+
+let allStars = data.slice(1).reduce((acc, row) => acc + row.reduce((acc, v) => acc + v, 0), 0)
+
+let markdown =
+  `Total stars: **${allStars}**` +
+  '\n\n' +
+  output.map((row) => `|${row.join(' | ')}|`).join('\n') +
+  '\n\n' +
+  data[0].map((year) => `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`).join('\n')
+
+{
+  let readme = path.join(process.cwd(), 'README.md')
+  let contents = await fs.readFile(readme, 'utf8')
+  await fs.writeFile(
+    readme,
+    prettier.format(contents.replace(/<\!-- start -->([\s\S]*)<\!-- end -->/g, `<!-- start -->\n${markdown}\n<!-- end -->`), { parser: 'markdown' })
+  )
+}
