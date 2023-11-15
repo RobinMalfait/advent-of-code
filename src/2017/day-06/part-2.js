@@ -6,16 +6,9 @@ function findIndexOfLargestNumber(data) {
 export default function (blob) {
   let memoryBanks = blob.trim().split('\t').map(Number)
   let seen = new Set([])
-  let twice = new Set([])
-  let abc = null
-  let cycles = 0
 
   let next = memoryBanks.slice()
-  while (!seen.has(next.join(',')) && abc === null) {
-    if (seen.has(next.join(','))) {
-      seen = new Set([])
-      cycles++
-    }
+  while (!seen.has(next.join(','))) {
     seen.add(next.join(','))
 
     next = next.slice()
@@ -29,5 +22,5 @@ export default function (blob) {
     }
   }
 
-  return cycles
+  return seen.size
 }

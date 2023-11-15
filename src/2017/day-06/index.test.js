@@ -19,8 +19,13 @@ describe('Part 1', () => {
 })
 
 describe('Part 2', () => {
+  // Part 2
+  it.each([[[0, 2, 7, 0].join('\t'), 4]])('%s should result in "%s"', (input, expected) => {
+    expect(part2(input)).toBe(expected)
+  })
+
   // Actual test, Part 2
-  it.skip('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot(`7864`)
+  it('should produce the correct value for the input data', async () => {
+    expect(part2(await data)).toMatchInlineSnapshot(`1695`)
   })
 })
