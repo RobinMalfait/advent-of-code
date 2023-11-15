@@ -65,6 +65,6 @@ describe('Part 2', () => {
 
   // Actual test, Part 2
   it('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot(`5`)
+    expect(part2(await data)).toMatchInlineSnapshot(`1152`)
   })
 })
