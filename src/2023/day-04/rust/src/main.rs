@@ -33,11 +33,9 @@ pub fn part_2(data: &str) -> i32 {
         .map(|intersection| intersection.len())
         .collect::<Vec<_>>();
 
-    let mut counter = vec![0; cards.len()];
+    let mut counter = vec![1; cards.len()];
 
     for (idx, points) in cards.iter().enumerate() {
-        counter[idx] += 1;
-
         for offset in 1..=*points {
             counter[idx + offset] += counter[idx];
         }

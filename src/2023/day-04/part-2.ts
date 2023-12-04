@@ -5,11 +5,9 @@ export default function (blob: string) {
     .map((line) => parse(line.trim()))
     .map((card) => intersection(card.winning, card.hand).size)
 
-  let counter: number[] = Array(cards.length).fill(0)
+  let counter: number[] = Array(cards.length).fill(1)
 
   for (let [idx, points] of cards.entries()) {
-    counter[idx] += 1
-
     for (let offset = 1; offset <= points; offset++) {
       counter[idx + offset] += counter[idx]
     }
