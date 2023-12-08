@@ -25,13 +25,11 @@ pub fn part_2(data: &str) -> i32 {
 
 fn play(data: &str, part: Part) -> i32 {
     let order = match part {
-        Part::One => [
-            'A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2',
-        ],
-        Part::Two => [
-            'A', 'K', 'Q', 'T', '9', '8', '7', '6', '5', '4', '3', '2', 'J',
-        ],
-    };
+        Part::One => "AKQJT98765432",
+        Part::Two => "AKQT98765432J",
+    }
+    .chars()
+    .collect::<Vec<_>>();
 
     let mut hands: Vec<Hand> = data
         .trim()
@@ -53,7 +51,7 @@ fn play(data: &str, part: Part) -> i32 {
         .sum()
 }
 
-fn rank(a: &Hand, z: &Hand, order: &[char; 13]) -> cmp::Ordering {
+fn rank(a: &Hand, z: &Hand, order: &[char]) -> cmp::Ordering {
     for i in 0..5 {
         let a = order.iter().position(|&x| x == a.cards[i]).unwrap();
         let z = order.iter().position(|&x| x == z.cards[i]).unwrap();
