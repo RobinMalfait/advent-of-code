@@ -21,39 +21,19 @@ function type(cards: string[]) {
   ).sort((a, z) => z - a)
 
   // Five of a kind
-  if (counts[0] === 5) {
-    seen.set(key, 1)
-  }
-
+  if (counts[0] === 5) seen.set(key, 1)
   // Four of kind
-  else if (counts[0] === 4) {
-    seen.set(key, 2)
-  }
-
+  else if (counts[0] === 4) seen.set(key, 2)
   // Full house
-  else if (counts[0] === 3 && counts[1] === 2) {
-    seen.set(key, 3)
-  }
-
+  else if (counts[0] === 3 && counts[1] === 2) seen.set(key, 3)
   // Three of a kind
-  else if (counts[0] === 3) {
-    seen.set(key, 4)
-  }
-
+  else if (counts[0] === 3) seen.set(key, 4)
   // Two pair
-  else if (counts[0] === 2 && counts[1] === 2) {
-    seen.set(key, 5)
-  }
-
+  else if (counts[0] === 2 && counts[1] === 2) seen.set(key, 5)
   // One pair
-  else if (counts[0] === 2) {
-    seen.set(key, 6)
-  }
-
+  else if (counts[0] === 2) seen.set(key, 6)
   // High card
-  else {
-    seen.set(key, 7)
-  }
+  else seen.set(key, 7)
 
   return seen.get(key)
 }
