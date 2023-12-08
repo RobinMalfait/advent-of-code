@@ -78,6 +78,10 @@ let replacements = {
     DAY: day,
     YEAR: year,
   },
+  'bench.ts': {
+    DAY: day,
+    YEAR: year,
+  },
   'rust/src/main.rs': {
     DAY: day,
     YEAR: year,

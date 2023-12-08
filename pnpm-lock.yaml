@@ -33,6 +33,9 @@ importers:
       jest:
         specifier: ^29.3.1
         version: 29.3.1(@types/node@18.11.9)
+      mitata:
+        specifier: ^0.1.6
+        version: 0.1.6
       prettier:
         specifier: ^2.8.0
         version: 2.8.0
@@ -62,6 +65,8 @@ importers:
   src/2021: {}
 
   src/2022: {}
+
+  src/2023: {}
 
 packages:
 
@@ -2107,6 +2112,10 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
+
+  /mitata@0.1.6:
+    resolution: {integrity: sha512-VKQ0r3jriTOU9E2Z+mwbZrUmbg4Li4QyFfi7kfHKl6reZhGzL0AYlu3wE0VPXzIwA5xnFzmEQoBwCcNT8stUkA==}
     dev: true
 
   /ms@2.1.2:

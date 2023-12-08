@@ -5,7 +5,7 @@ import part1 from './part-1'
 import part2 from './part-2'
 
 async function main() {
-  let data = await readFile(resolve('../../..', 'data', '{{YEAR}}-{{DAY}}.txt'), 'utf8')
+  let data = await readFile(resolve('..', '..', '..', 'data', '{{YEAR}}-{{DAY}}.txt'), 'utf8')
 
   // Part 1
   {
