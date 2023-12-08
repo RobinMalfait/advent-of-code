@@ -1,13 +1,12 @@
 export default function (blob: string) {
   let { instructions, map } = parse(blob.trim())
 
-  let dirIdx = 0
   let steps = 0
   let total = 1
   let todo = Object.keys(map).filter((x) => x[x.length - 1] === 'A')
 
   while (todo.length > 0) {
-    let dir = instructions[dirIdx++ % instructions.length]
+    let dir = instructions[steps % instructions.length]
 
     for (let i = todo.length - 1; i >= 0; --i) {
       let current = todo[i]

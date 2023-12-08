@@ -4,12 +4,11 @@ export default function (blob: string) {
   let start = 'AAA'
   let end = 'ZZZ'
 
-  let dirIdx = 0
   let steps = 0
   let current = start
 
   while (current !== end) {
-    let dir = instructions[dirIdx++ % instructions.length]
+    let dir = instructions[steps % instructions.length]
     current = map[current][dir]
     steps++
   }

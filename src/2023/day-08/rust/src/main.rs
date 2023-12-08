@@ -26,33 +26,27 @@ pub fn part_1(data: &str) -> i32 {
     let start = "AAA";
     let end = "ZZZ";
 
-    let mut dir_idx = 0;
     let mut steps = 0;
     let mut current = start;
 
     while current != end {
-        let idx = dir_idx % instructions.len();
-        dir_idx += 1;
-        let dir = instructions[idx];
+        let dir = instructions[steps % instructions.len()];
         current = map.get(current).unwrap()[dir];
         steps += 1;
     }
 
-    steps
+    steps as i32
 }
 
 pub fn part_2(data: &str) -> i64 {
     let (instructions, map) = parse(data.trim());
 
-    let mut dir_idx = 0;
     let mut steps = 0_i64;
     let mut total = 1_i64;
     let mut todo = map.keys().filter(|k| k.ends_with('A')).collect::<Vec<_>>();
 
     while !todo.is_empty() {
-        let idx = dir_idx % instructions.len();
-        dir_idx += 1;
-        let dir = instructions[idx];
+        let dir = instructions[steps as usize % instructions.len()];
 
         for i in (0..todo.len()).rev() {
             let current = todo[i];
@@ -126,9 +120,12 @@ mod tests {
           EEE = (EEE, EEE)
           GGG = (GGG, GGG)
           ZZZ = (ZZZ, ZZZ)
-        "#;
+        "#
+        .replace(" = ", " ")
+        .replace(['(', ')'], "")
+        .replace(", ", " ");
 
-        assert_eq!(part_1(data), 2);
+        assert_eq!(part_1(&data), 2);
     }
 
     #[test]
@@ -154,9 +151,12 @@ mod tests {
             22C = (22Z, 22Z)
             22Z = (22B, 22B)
             XXX = (XXX, XXX)
-        "#;
+        "#
+        .replace(" = ", " ")
+        .replace(['(', ')'], "")
+        .replace(", ", " ");
 
-        assert_eq!(part_2(data), 6);
+        assert_eq!(part_2(&data), 6);
     }
 
     #[test]
