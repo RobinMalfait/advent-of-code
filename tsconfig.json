@@ -1,24 +1,20 @@
 // https://bun.sh/docs/typescript
 {
   "compilerOptions": {
-    // Add Bun type definitions
     "types": ["bun-types", "node", "jest"],
 
-    // Enable latest features
     "lib": ["ESNext"],
     "module": "esnext",
     "target": "esnext",
 
-    // If TS 5.x+
     "moduleResolution": "node",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "moduleDetection": "force",
 
-    "allowJs": true, // allow importing `.js` from `.ts`
+    "allowJs": true,
 
-    // Best practices
-    "strict": true,
+    "strict": false, // Should be true, but don't care much in AoC
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "composite": true,
