@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1.js'
 import part2 from './part-2.js'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2021-17.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-17.txt'), 'utf8')
 let test = `target area: x=20..30, y=-10..-5`
 
 describe('Part 1', () => {

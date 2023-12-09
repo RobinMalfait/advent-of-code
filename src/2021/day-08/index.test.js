@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1.js'
 import part2 from './part-2.js'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2021-08.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-08.txt'), 'utf8')
 let test = `
 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc

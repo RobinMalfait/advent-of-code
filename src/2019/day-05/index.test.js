@@ -1,7 +1,7 @@
 import { promises } from 'fs'
 import { resolve } from 'path'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2019-05.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-05.txt'), 'utf8')
 
 const { createIntcodeComputer, PROGRAM_MODES } = require('../intcode/computer')
 

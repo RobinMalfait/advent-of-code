@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2016-05.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2016-05.txt'), 'utf8')
 
 // Skipped because it takes too long
 describe.skip('Part 1', () => {

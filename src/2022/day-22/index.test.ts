@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2022-22.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2022-22.txt'), 'utf8')
 
 describe('Part 1', () => {
   it.each([['TODO', 'TODO']])('should produce the correct value for example %#', (input, expected) => {

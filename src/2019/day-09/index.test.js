@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 import part1 from './part-1.js'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2019-09.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-09.txt'), 'utf8')
 
 describe('Part 1', () => {
   it.each([

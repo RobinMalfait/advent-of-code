@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1.js'
 import part2 from './part-2.js'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2021-22.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-22.txt'), 'utf8')
 let test = `on x=10..12,y=10..12,z=10..12
 on x=11..13,y=11..13,z=11..13
 off x=9..11,y=9..11,z=9..11

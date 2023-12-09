@@ -4,8 +4,8 @@ import { resolve } from 'path'
 import part1 from './part-1.js'
 import part2 from './part-2.js'
 
-let sample = promises.readFile(resolve(process.cwd(), 'data', '2020-24.sample.txt'), 'utf8')
-let data = promises.readFile(resolve(process.cwd(), 'data', '2020-24.txt'), 'utf8')
+let sample = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2020-24.sample.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2020-24.txt'), 'utf8')
 
 describe('Part 1', () => {
   it.each([[sample, 10]])('should produce the correct value for example %#', async (input, expected) => {

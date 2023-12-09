@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import part1 from './part-1.js'
 import part2 from './part-2.js'
 
-let data = promises.readFile(resolve(process.cwd(), 'data', '2020-13.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2020-13.txt'), 'utf8')
 
 describe('Part 1', () => {
   it.each([[['939', '7,13,x,x,59,x,31,19'].join('\n'), (944 - 939) * 59]])('should produce the correct value for example %#', (input, expected) => {
