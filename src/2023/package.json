@@ -15,5 +15,8 @@
     "transform": {
       "\\.(t|j)sx?$": "@swc/jest"
     }
+  },
+  "dependencies": {
+    "aoc-utils": "workspace:*"
   }
 }

@@ -1,3 +1,5 @@
+import { windows } from 'aoc-utils'
+
 export default function (blob: string) {
   return blob
     .trim()
@@ -14,12 +16,6 @@ function previous(history: number[]) {
     sum += previous(diffs)
   }
   return history[0] - sum
-}
-
-function* windows<T>(input: T[], size: number) {
-  for (let i = 0; i <= input.length - size; i++) {
-    yield input.slice(i, i + size)
-  }
 }
 
 function parse(input: string) {
