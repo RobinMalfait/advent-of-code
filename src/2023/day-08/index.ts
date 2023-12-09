@@ -1,11 +1,10 @@
 import { resolve } from 'node:path'
-import { readFile } from 'node:fs/promises'
 
 import part1 from './part-1'
 import part2 from './part-2'
 
 async function main() {
-  let data = await readFile(resolve('../../..', 'data', '2023-08.txt'), 'utf8')
+  let data = await Bun.file(resolve(__dirname, '..', '..', '..', 'data', '2023-08.txt')).text()
 
   // Part 1
   {

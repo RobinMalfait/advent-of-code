@@ -1,7 +1,28 @@
+// https://bun.sh/docs/typescript
 {
   "compilerOptions": {
-    "target": "ESNext",
+    // Add Bun type definitions
+    "types": ["bun-types", "node", "jest"],
+
+    // Enable latest features
+    "lib": ["ESNext"],
+    "module": "esnext",
+    "target": "esnext",
+
+    // If TS 5.x+
     "moduleResolution": "node",
-    "types": ["bun-types"]
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
+
+    "allowJs": true, // allow importing `.js` from `.ts`
+
+    // Best practices
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "composite": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true
   }
 }
