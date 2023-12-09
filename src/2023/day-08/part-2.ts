@@ -1,3 +1,5 @@
+import { lcm } from 'aoc-utils'
+
 export default function (blob: string) {
   let { instructions, map } = parse(blob.trim())
 
@@ -36,12 +38,4 @@ function parse(input: string) {
         .map(({ label, L, R }) => [label, { L, R }])
     ),
   }
-}
-
-function lcm(x: number, y: number) {
-  return x === 0 || y === 0 ? 0 : Math.abs((x * y) / gcd(x, y))
-}
-
-function gcd(x: number, y: number) {
-  return y === 0 ? x : gcd(y, x % y)
 }

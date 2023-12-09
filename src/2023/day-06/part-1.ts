@@ -1,3 +1,5 @@
+import { transpose } from 'aoc-utils'
+
 export default function (blob: string) {
   let total = 1
 
@@ -16,9 +18,5 @@ export default function (blob: string) {
 }
 
 function parse(input: string) {
-  return zip(input.split('\n').map((line) => line.trim().split(':').slice(1)[0].trim().split(/\s+/g).map(Number)))
-}
-
-function zip<T>(input: T[][]) {
-  return input[0].map((_, i) => input.map((array) => array[i]))
+  return transpose(input.split('\n').map((line) => line.trim().split(':').slice(1)[0].trim().split(/\s+/g).map(Number)))
 }

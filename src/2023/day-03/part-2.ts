@@ -1,3 +1,5 @@
+import { DefaultMap, Point } from 'aoc-utils'
+
 export default function (blob: string) {
   let grid = blob
     .trim()
@@ -56,30 +58,4 @@ export default function (blob: string) {
   }
 
   return result
-}
-
-class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
-    super()
-  }
-
-  get(key: TKey) {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
-    }
-
-    return super.get(key)
-  }
-}
-
-class Point {
-  private static points = new DefaultMap<number, DefaultMap<number, Point>>((x) => new DefaultMap((y) => new Point(x, y)))
-  private constructor(
-    public x: number = 0,
-    public y: number = 0
-  ) {}
-
-  static new(x: number, y: number) {
-    return Point.points.get(x).get(y)
-  }
 }

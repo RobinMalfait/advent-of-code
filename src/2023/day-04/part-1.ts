@@ -1,3 +1,5 @@
+import { intersection } from 'aoc-utils'
+
 export default function (blob: string) {
   return blob
     .trim()
@@ -7,10 +9,6 @@ export default function (blob: string) {
     .filter((intersection) => intersection.size > 0)
     .map((intersection) => 2 ** (intersection.size - 1))
     .reduce((total, points) => total + points, 0)
-}
-
-function intersection<T>(a: T[], b: T[]) {
-  return new Set(a.filter((x) => b.includes(x)))
 }
 
 function parse(input: string) {

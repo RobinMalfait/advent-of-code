@@ -1,3 +1,5 @@
+import { chunk } from 'aoc-utils'
+
 export default function (blob: string) {
   let { seeds, maps } = parse(blob.trim())
 
@@ -104,14 +106,6 @@ function locateRange(seedRanges: [start: number, end: number][], mapRanges: [dst
   }
 
   return done.concat(seedRanges)
-}
-
-function chunk<T>(input: T[], size: number): T[][] {
-  let output: T[][] = []
-  for (let i = 0; i < input.length; i += size) {
-    output.push(input.slice(i, i + size))
-  }
-  return output
 }
 
 function parse(input: string) {
