@@ -80,6 +80,6 @@ let markdown =
   let contents = await fs.readFile(readme, 'utf8')
   await fs.writeFile(
     readme,
-    prettier.format(contents.replace(/<\!-- start -->([\s\S]*)<\!-- end -->/g, `<!-- start -->\n${markdown}\n<!-- end -->`), { parser: 'markdown' })
+    await prettier.format(contents.replace(/<\!-- start -->([\s\S]*)<\!-- end -->/g, `<!-- start -->\n${markdown}\n<!-- end -->`), { parser: 'markdown' })
   )
 }
