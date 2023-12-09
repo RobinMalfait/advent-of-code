@@ -12,11 +12,14 @@ function type(cards: string[]) {
   let key = cards.join('')
   if (seen.has(key)) return seen.get(key)
 
-  let countsObj = cards.reduce((acc, card) => {
-    acc[card] ??= 0
-    acc[card] += 1
-    return acc
-  }, {} as Record<string, number>)
+  let countsObj = cards.reduce(
+    (acc, card) => {
+      acc[card] ??= 0
+      acc[card] += 1
+      return acc
+    },
+    {} as Record<string, number>
+  )
 
   // Move joker counts to the highest card
   if (countsObj['J']) {

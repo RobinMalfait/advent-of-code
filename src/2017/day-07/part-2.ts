@@ -11,7 +11,7 @@ export default function (blob: string) {
     return node.weight + node.dependencies.reduce((total, child) => total + weight(child), 0)
   }
 
-  function* traverse(name: string): Generator<typeof nodes[number]> {
+  function* traverse(name: string): Generator<(typeof nodes)[number]> {
     let node = nodes.find((node) => node.name === name)
     yield node
 

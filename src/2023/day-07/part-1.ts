@@ -13,11 +13,14 @@ function type(cards: string[]) {
   if (seen.has(key)) return seen.get(key)
 
   let counts = Object.values(
-    cards.reduce((acc, card) => {
-      acc[card] ??= 0
-      acc[card] += 1
-      return acc
-    }, {} as Record<string, number>)
+    cards.reduce(
+      (acc, card) => {
+        acc[card] ??= 0
+        acc[card] += 1
+        return acc
+      },
+      {} as Record<string, number>
+    )
   ).sort((a, z) => z - a)
 
   // Five of a kind

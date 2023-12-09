@@ -33,7 +33,12 @@ class Reindeer {
 
   private state: { name: 'flying'; left: number } | { name: 'resting'; left: number } | null = null
 
-  constructor(public name: string, public speed: number, public fly_duration: number, public rest_duration: number) {}
+  constructor(
+    public name: string,
+    public speed: number,
+    public fly_duration: number,
+    public rest_duration: number
+  ) {}
 
   tick() {
     if (this.state === null) {

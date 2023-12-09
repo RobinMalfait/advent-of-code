@@ -37,7 +37,12 @@ function parse(input: string) {
 }
 
 class Point {
-  constructor(public x: number, public y: number, private velocityX: number, private velocityY: number) {}
+  constructor(
+    public x: number,
+    public y: number,
+    private velocityX: number,
+    private velocityY: number
+  ) {}
   tick() {
     this.x += this.velocityX
     this.y += this.velocityY

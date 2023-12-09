@@ -14,16 +14,19 @@ function flatten() {
   return ({ data, width, height }) => {
     const layers = chunk(data, width * height)
 
-    const flattened = layers.reduce((final_layer, layer) => {
-      if (!final_layer.includes(TRANSPARENT)) {
-        return final_layer
-      }
+    const flattened = layers.reduce(
+      (final_layer, layer) => {
+        if (!final_layer.includes(TRANSPARENT)) {
+          return final_layer
+        }
 
-      return final_layer
-        .split('')
-        .map((value, index) => (value === TRANSPARENT ? layer[index] : value))
-        .join('')
-    }, TRANSPARENT.repeat(width * height))
+        return final_layer
+          .split('')
+          .map((value, index) => (value === TRANSPARENT ? layer[index] : value))
+          .join('')
+      },
+      TRANSPARENT.repeat(width * height)
+    )
 
     return { data: flattened, width, height }
   }

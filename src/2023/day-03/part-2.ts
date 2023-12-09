@@ -74,7 +74,10 @@ class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
 
 class Point {
   private static points = new DefaultMap<number, DefaultMap<number, Point>>((x) => new DefaultMap((y) => new Point(x, y)))
-  private constructor(public x: number = 0, public y: number = 0) {}
+  private constructor(
+    public x: number = 0,
+    public y: number = 0
+  ) {}
 
   static new(x: number, y: number) {
     return Point.points.get(x).get(y)
