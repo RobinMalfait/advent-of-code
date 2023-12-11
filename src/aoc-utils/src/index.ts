@@ -162,6 +162,10 @@ export class Point {
   right() {
     return Point.new(this.x + 1, this.y)
   }
+
+  neighbours() {
+    return [this.up(), this.down(), this.left(), this.right()]
+  }
 }
 
 // Iterator helpers
