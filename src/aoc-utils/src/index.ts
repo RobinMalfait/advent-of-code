@@ -139,8 +139,8 @@ export class Point {
   private static points = new DefaultMap<number, DefaultMap<number, Point>>((x) => new DefaultMap((y) => new Point(x, y)))
 
   private constructor(
-    public x: number = 0,
-    public y: number = 0
+    public readonly x: number = 0,
+    public readonly y: number = 0
   ) {}
 
   static new(x: number, y: number) {
