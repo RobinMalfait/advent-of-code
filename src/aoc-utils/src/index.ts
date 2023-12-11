@@ -104,6 +104,22 @@ export function intersection<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
 }
 
+// Flow control
+export function match<T extends string | number = string, R = unknown>(value: T, lookup: Record<T, R | ((...args: any[]) => R)>, ...args: any[]): R {
+  if (value in lookup) {
+    let returnValue = lookup[value]
+    return typeof returnValue === 'function' ? returnValue(...args) : returnValue
+  }
+
+  let error = new Error(
+    `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${Object.keys(lookup)
+      .map((key) => `"${key}"`)
+      .join(', ')}.`
+  )
+  if (Error.captureStackTrace) Error.captureStackTrace(error, match)
+  throw error
+}
+
 // Class
 export class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
   constructor(private factory: (key: TKey) => TValue) {
