@@ -91,6 +91,14 @@ export function chunk<T>(input: T[], size: number): T[][] {
   return output
 }
 
+export function* pairs<T>(input: T[]) {
+  for (let a = 0; a < input.length; ++a) {
+    for (let b = a + 1; b < input.length; ++b) {
+      yield [input[a], input[b]] as const
+    }
+  }
+}
+
 // Set
 export function intersection<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
