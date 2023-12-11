@@ -121,17 +121,17 @@ export function match<T extends string | number = string, R = unknown>(value: T,
 }
 
 // Class
-export class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
+export class DefaultMap<K = string, V = any> extends Map<K, V> {
+  constructor(private factory: (key: K) => V) {
     super()
   }
 
-  get(key: TKey) {
+  get(key: K): V {
     if (!this.has(key)) {
       this.set(key, this.factory(key))
     }
 
-    return super.get(key)
+    return super.get(key)!
   }
 }
 
