@@ -170,6 +170,10 @@ export class Point {
   manhattanDistanceTo(other: Point) {
     return Math.abs(this.x - other.x) + Math.abs(this.y - other.y)
   }
+
+  tuple() {
+    return [this.x, this.y] as const
+  }
 }
 
 // Iterator helpers
