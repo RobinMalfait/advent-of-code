@@ -166,6 +166,10 @@ export class Point {
   neighbours() {
     return [this.up(), this.down(), this.left(), this.right()]
   }
+
+  manhattanDistanceTo(other: Point) {
+    return Math.abs(this.x - other.x) + Math.abs(this.y - other.y)
+  }
 }
 
 // Iterator helpers
