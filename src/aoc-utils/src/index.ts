@@ -174,6 +174,10 @@ export class Point {
   tuple() {
     return [this.x, this.y] as const
   }
+
+  toString() {
+    return `Point(${this.x}, ${this.y})`
+  }
 }
 
 // Iterator helpers
