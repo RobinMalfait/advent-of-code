@@ -146,6 +146,22 @@ export class Point {
   static new(x: number, y: number) {
     return Point.points.get(x).get(y)
   }
+
+  up() {
+    return Point.new(this.x, this.y - 1)
+  }
+
+  down() {
+    return Point.new(this.x, this.y + 1)
+  }
+
+  left() {
+    return Point.new(this.x - 1, this.y)
+  }
+
+  right() {
+    return Point.new(this.x + 1, this.y)
+  }
 }
 
 // Iterator helpers
