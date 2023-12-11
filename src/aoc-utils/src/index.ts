@@ -180,6 +180,20 @@ export class Point {
   }
 }
 
+export enum Direction {
+  /** `↑` */
+  North,
+
+  /** `→` */
+  East,
+
+  /** `↓` */
+  South,
+
+  /** `←` */
+  West,
+}
+
 // Iterator helpers
 export function h<T>(it: Iterable<T>) {
   return new IteratorHelpers(it)
