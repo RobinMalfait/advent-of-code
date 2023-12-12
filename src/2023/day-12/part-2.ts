@@ -5,8 +5,8 @@ export default function (blob: string) {
     .map((line) => parse(line.trim()))
 
   let total = 0
-  for (let [springs, info] of records) {
-    total += combinations(springs, info)
+  for (let [springs, groups] of records) {
+    total += combinations(springs, groups)
   }
 
   return total
@@ -73,11 +73,11 @@ function combinations(springs: string, groups: number[]) {
 }
 
 function parse(input: string) {
-  let [springs, info] = input.split(' ')
+  let [springs, groups] = input.split(' ')
 
   // Is this horrible? Yes.
   springs = `${springs}?`.repeat(5).slice(0, -1)
-  info = `${info},`.repeat(5).slice(0, -1)
+  groups = `${groups},`.repeat(5).slice(0, -1)
 
-  return [springs, info.split(',').map(Number)] as const
+  return [springs, groups.split(',').map(Number)] as const
 }

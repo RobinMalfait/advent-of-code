@@ -7,30 +7,30 @@ export default function (blob: string) {
     .map((line) => parse(line.trim()))
 
   let total = 0
-  for (let [springs, info] of records) {
-    total += combinations(springs, info)
+  for (let [springs, groups] of records) {
+    total += combinations(springs, groups)
   }
 
   return total
 }
 
-function combinations(springs: string, info: string, idx = 0) {
+function combinations(springs: string, groups: string, idx = 0) {
   // We are done, count it if it's valid
   if (idx === springs.length) {
-    return checks.get(info).test(springs) ? 1 : 0
+    return checks.get(groups).test(springs) ? 1 : 0
   }
 
   if (springs[idx] === '?') {
     return (
       // Try to replace the `?` with `#`
-      combinations(`${springs.slice(0, idx)}#${springs.slice(idx + 1)}`, info, idx + 1) +
+      combinations(`${springs.slice(0, idx)}#${springs.slice(idx + 1)}`, groups, idx + 1) +
       // Try to replace the `?` with `.`
-      combinations(`${springs.slice(0, idx)}.${springs.slice(idx + 1)}`, info, idx + 1)
+      combinations(`${springs.slice(0, idx)}.${springs.slice(idx + 1)}`, groups, idx + 1)
     )
   }
 
   // 🎶 Don't stop me now 🎶
-  return combinations(springs, info, idx + 1)
+  return combinations(springs, groups, idx + 1)
 }
 
 // I built a regex to check if a group is valid. I am sorry.
