@@ -292,6 +292,14 @@ export function transposePointMap<T>(input: Map<Point, T>) {
   return transposed
 }
 
+export function transposePointSet(input: Set<Point>) {
+  let transposed = new Set<Point>()
+  for (let point of input) {
+    transposed.add(Point.new(point.y, point.x))
+  }
+  return transposed
+}
+
 export enum Direction {
   /** `↑` */
   North,
