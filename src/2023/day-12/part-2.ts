@@ -1,3 +1,5 @@
+import { memoize } from 'aoc-utils'
+
 export default function (blob: string) {
   let records = blob
     .trim()
@@ -12,22 +14,15 @@ export default function (blob: string) {
   return total
 }
 
-let cache = new Map<string, number>()
-function combinations(springs: string, groups: number[]) {
-  let cacheKey = `${springs};${groups.join(',')}`
-
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey)
-  }
-
+let combinations = memoize((springs: string, groups: number[]) => {
   // No more springs available, it's valid if no more broken groups are left
   if (springs.length === 0) {
-    return cache.set(cacheKey, groups.length === 0 ? 1 : 0).get(cacheKey)
+    return groups.length === 0 ? 1 : 0
   }
 
   // No more groups, it's valid if we don't have any more broken springs
   if (groups.length === 0) {
-    return cache.set(cacheKey, springs.includes('#') ? 0 : 1).get(cacheKey)
+    return springs.includes('#') ? 0 : 1
   }
 
   let result = 0
@@ -67,10 +62,8 @@ function combinations(springs: string, groups: number[]) {
     }
   }
 
-  cache.set(cacheKey, result)
-
   return result
-}
+})
 
 function parse(input: string) {
   let [springs, groups] = input.split(' ')
