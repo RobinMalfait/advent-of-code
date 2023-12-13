@@ -99,6 +99,12 @@ export function* pairs<T>(input: T[]) {
   }
 }
 
+export function* range(start: number, end: number, step = 1) {
+  for (let i = start; i < end; i += step) {
+    yield i
+  }
+}
+
 // Set
 export function intersection<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
