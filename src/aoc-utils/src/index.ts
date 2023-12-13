@@ -240,6 +240,31 @@ export class Point {
   }
 }
 
+export function pointsToGrid(it: Iterable<Point>) {
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+
+  for (let point of it) {
+    minX = Math.min(minX, point.x)
+    minY = Math.min(minY, point.y)
+    maxX = Math.max(maxX, point.x)
+    maxY = Math.max(maxY, point.y)
+  }
+
+  let width = maxX - minX + 1
+  let height = maxY - minY + 1
+
+  let grid: boolean[][] = new Array(height).fill(0).map(() => new Array(width).fill(false))
+
+  for (let point of it) {
+    grid[point.y - minY][point.x - minX] = true
+  }
+
+  return grid
+}
+
 export enum Direction {
   /** `↑` */
   North,
