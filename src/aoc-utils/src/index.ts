@@ -120,6 +120,24 @@ export function match<T extends string | number = string, R = unknown>(value: T,
   throw error
 }
 
+// Performance
+export function memoize<T extends (...args: any[]) => any>(fn: T, cacheKey: (...args: Parameters<T>) => string = (...args) => JSON.stringify(args)): T {
+  let cache = new Map<string, ReturnType<T>>()
+
+  return ((...args: Parameters<T>) => {
+    let key = cacheKey(...args)
+
+    if (cache.has(key)) {
+      return cache.get(key)
+    }
+
+    let result = fn(...args)
+    cache.set(key, result)
+
+    return result
+  }) as T
+}
+
 // Class
 export class DefaultMap<K = string, V = any> extends Map<K, V> {
   constructor(private factory: (key: K) => V) {
