@@ -126,6 +126,17 @@ export function match<T extends string | number = string, R = unknown>(value: T,
   throw error
 }
 
+// `throw` is not an expression, so you can't use it like:
+// foo || throw new Error('...')
+//
+// But you can use this instead:
+// foo || bail('...')
+export function bail(message: string): never {
+  let error = new Error(message)
+  if (Error.captureStackTrace) Error.captureStackTrace(error, bail)
+  throw error
+}
+
 let EMPTY = Symbol('EMPTY')
 function defaultCacheKey(...args: any[]) {
   if (args.length === 0) {
