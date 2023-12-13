@@ -265,6 +265,24 @@ export function pointsToGrid(it: Iterable<Point>) {
   return grid
 }
 
+export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+
+  for (let point of it.keys()) {
+    minX = Math.min(minX, point.x)
+    minY = Math.min(minY, point.y)
+    maxX = Math.max(maxX, point.x)
+    maxY = Math.max(maxY, point.y)
+  }
+
+  let width = maxX - minX + 1
+  let height = maxY - minY + 1
+
+  return [width, height] as const
+}
 export enum Direction {
   /** `↑` */
   North,
