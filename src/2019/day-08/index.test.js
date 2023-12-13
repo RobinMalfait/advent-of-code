@@ -2,7 +2,7 @@ import { promises } from 'fs'
 import { resolve } from 'path'
 
 import part1 from './part-1.js'
-import { process, flatten, render, scale, border, raw } from './part-2.js'
+import { border, flatten, process, raw, render, scale } from './part-2.js'
 
 let data = promises.readFile(resolve(globalThis.process.cwd(), 'data', '2019-08.txt'), 'utf8')
 

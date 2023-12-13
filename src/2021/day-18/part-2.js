@@ -1,4 +1,4 @@
-import { parse, addition, reduce, magnitude, debug } from './solve.js'
+import { addition, magnitude, parse, reduce } from './solve.js'
 
 export default function (blob) {
   let assignments = blob

@@ -1,8 +1,8 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import prettier from 'prettier'
 import cheerio from 'cheerio'
+import prettier from 'prettier'
 
 async function get(url) {
   let response = await fetch(`https://adventofcode.com${url}`, {

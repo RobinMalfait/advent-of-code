@@ -1,4 +1,4 @@
-import { bail, match, range, sum, transposePointMap, Point } from 'aoc-utils'
+import { Point, bail, match, range, sum, transposePointMap } from 'aoc-utils'
 
 export default function (blob: string) {
   return sum(
