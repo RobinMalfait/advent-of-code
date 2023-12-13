@@ -300,6 +300,26 @@ export function transposePointSet(input: Set<Point>) {
   return transposed
 }
 
+export function visualizePointMap<T>(map: Map<Point, T>, valueFn: (value: T) => string = (x) => x.toString()) {
+  let [width, height] = pointsToSize(map)
+  let grid: string[][] = []
+
+  for (let x = 0; x < width; x++) {
+    let row = []
+    for (let y = 0; y < height; y++) {
+      let p = Point.new(x, y)
+      if (map.has(p)) {
+        row.push(valueFn(map.get(p)!))
+      } else {
+        row.push(valueFn(null))
+      }
+    }
+    grid.push(row)
+  }
+
+  return grid.map((row) => row.join('')).join('\n')
+}
+
 export enum Direction {
   /** `↑` */
   North,
