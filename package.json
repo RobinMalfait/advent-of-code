@@ -20,7 +20,10 @@
     "tabWidth": 2,
     "useTabs": false,
     "quoteProps": "as-needed",
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
   },
   "keywords": [],
   "author": "Robin Malfait <malfait.robin@gmail.com>",
@@ -48,6 +51,7 @@
     "jest": "30.0.0-alpha.2",
     "mitata": "^0.1.6",
     "prettier": "^3.1.0",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "pretty-ms": "^8.0.0",
     "typescript": "^5.3.3"
   },
