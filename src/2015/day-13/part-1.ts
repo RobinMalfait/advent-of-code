@@ -46,5 +46,11 @@ function permutations<T>(input: T[]): T[][] {
     return [[]]
   }
 
-  return input.reduce((rows, value, i) => [...rows, ...permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x])], [])
+  return input.reduce(
+    (rows, value, i) => [
+      ...rows,
+      ...permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x]),
+    ],
+    []
+  )
 }

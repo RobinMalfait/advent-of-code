@@ -37,5 +37,8 @@ function parse(input: string) {
 
 function parseMap(input: string[]) {
   let name = input.shift().replace(' map:', '')
-  return [name, input.map((line) => line.split(/\s+/g).map(Number) as [dst: number, src: number, len: number])] as const
+  return [
+    name,
+    input.map((line) => line.split(/\s+/g).map(Number) as [dst: number, src: number, len: number]),
+  ] as const
 }

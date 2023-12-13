@@ -19,7 +19,9 @@ module.exports = function amplification(program, amplifier_config) {
 async function calculateAmplifierOutput(program, amplifiers) {
   const [a, b, c, d, e] = amplifiers
 
-  const [amplifierA, amplifierB, amplifierC, amplifierD, amplifierE] = amplifiers.map(() => createIntcodeComputer(program))
+  const [amplifierA, amplifierB, amplifierC, amplifierD, amplifierE] = amplifiers.map(() =>
+    createIntcodeComputer(program)
+  )
 
   // Feed some input
   amplifierA.input(a, 0)
@@ -36,7 +38,13 @@ async function calculateAmplifierOutput(program, amplifiers) {
   amplifierE.output((value) => amplifierA.input(value))
 
   // Let's run!
-  const values = await Promise.all([amplifierA.run(), amplifierB.run(), amplifierC.run(), amplifierD.run(), amplifierE.run()])
+  const values = await Promise.all([
+    amplifierA.run(),
+    amplifierB.run(),
+    amplifierC.run(),
+    amplifierD.run(),
+    amplifierE.run(),
+  ])
 
   // Get the last output of amplifierE
   return values[values.length - 1].slice().pop()

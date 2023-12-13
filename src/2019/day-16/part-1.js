@@ -11,7 +11,9 @@ module.exports = function fft(input, phases = 1) {
         .map((index) => {
           const new_base = calculateBase(index + 1)
 
-          return lastDigit(sum(parts.map((value, index) => value * new_base[(index + 1) % new_base.length])))
+          return lastDigit(
+            sum(parts.map((value, index) => value * new_base[(index + 1) % new_base.length]))
+          )
         }, [])
         .join('')
     }, input)

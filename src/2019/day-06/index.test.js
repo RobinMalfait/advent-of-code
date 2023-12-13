@@ -8,7 +8,11 @@ let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-
 
 describe('Part 1', () => {
   it('should calculate the direct and indirect orbits', () => {
-    expect(part1(['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L'].join('\n'))).toEqual(42)
+    expect(
+      part1(
+        ['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L'].join('\n')
+      )
+    ).toEqual(42)
   })
 
   // Actual test, Part 2
@@ -19,7 +23,27 @@ describe('Part 1', () => {
 
 describe('Part 2', () => {
   it('should calculate amount of orbital transfers', () => {
-    expect(part2(['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L', 'K)YOU', 'I)SAN'].join('\n'), 'YOU', 'SAN')).toEqual(4)
+    expect(
+      part2(
+        [
+          'COM)B',
+          'B)C',
+          'C)D',
+          'D)E',
+          'E)F',
+          'B)G',
+          'G)H',
+          'D)I',
+          'E)J',
+          'J)K',
+          'K)L',
+          'K)YOU',
+          'I)SAN',
+        ].join('\n'),
+        'YOU',
+        'SAN'
+      )
+    ).toEqual(4)
   })
 
   // Actual test, Part 2

@@ -61,7 +61,10 @@ async function calculateTopEdgeSlope(read) {
 }
 
 async function calculateBottomEdgeSlope(read) {
-  const [[x1, y1], [x2, y2]] = await Promise.all([getBottomEdge(20, read), getBottomEdge(100, read)])
+  const [[x1, y1], [x2, y2]] = await Promise.all([
+    getBottomEdge(20, read),
+    getBottomEdge(100, read),
+  ])
 
   return y2 - y1 / x2 - x1
 }
@@ -90,7 +93,12 @@ module.exports = async function (input) {
 
       const [edge_cases, corners] = await Promise.all([
         Promise.all([value(x + GRID_SIZE + 1, y), value(x - 1, y + GRID_SIZE)]),
-        Promise.all([value(x, y), value(x + GRID_SIZE, y), value(x, y + GRID_SIZE), value(x + GRID_SIZE, y + GRID_SIZE)]),
+        Promise.all([
+          value(x, y),
+          value(x + GRID_SIZE, y),
+          value(x, y + GRID_SIZE),
+          value(x + GRID_SIZE, y + GRID_SIZE),
+        ]),
       ])
 
       if (

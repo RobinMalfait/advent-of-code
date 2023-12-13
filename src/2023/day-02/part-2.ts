@@ -12,7 +12,10 @@ export default function (blob: string) {
     .reduce((a, b) => a + b, 0)
 }
 
-function parse(input: string): { id: number; rounds: { red: number; green: number; blue: number }[] } {
+function parse(input: string): {
+  id: number
+  rounds: { red: number; green: number; blue: number }[]
+} {
   let [game, sets] = input.split(': ')
   return {
     id: Number(game.replace('Game ', '')),

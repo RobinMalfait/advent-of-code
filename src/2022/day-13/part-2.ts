@@ -8,7 +8,10 @@ export default function (blob: string) {
     .sort(compare)
     .map(identity)
 
-  return (list.findIndex((x) => x === identity([[2]])) + 1) * (list.findIndex((x) => x === identity([[6]])) + 1)
+  return (
+    (list.findIndex((x) => x === identity([[2]])) + 1) *
+    (list.findIndex((x) => x === identity([[6]])) + 1)
+  )
 }
 
 function identity(input: any) {

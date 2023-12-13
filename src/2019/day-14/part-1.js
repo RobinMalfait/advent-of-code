@@ -30,7 +30,13 @@ module.exports = function fuelproducer(input, fuel) {
     }
   )
   const graph = generateGraph(definition)
-  const order = Object.keys(Object.fromEntries(Object.entries(calculateTransitiveDependencies(graph)).sort(([, a], [, b]) => Math.sign(b.length - a.length))))
+  const order = Object.keys(
+    Object.fromEntries(
+      Object.entries(calculateTransitiveDependencies(graph)).sort(([, a], [, b]) =>
+        Math.sign(b.length - a.length)
+      )
+    )
+  )
 
   const counts = order.reduce((map, chemical, index) => {
     if (!map.has(chemical)) {
@@ -53,7 +59,9 @@ module.exports = function fuelproducer(input, fuel) {
     return map
   }, new Map())
 
-  const only_require_ore = Object.entries(reactions).filter(([, { requires }]) => requires[CHEMICALS.ORE] !== undefined)
+  const only_require_ore = Object.entries(reactions).filter(
+    ([, { requires }]) => requires[CHEMICALS.ORE] !== undefined
+  )
 
   // console.log("counts:", counts);
   return sum(
@@ -138,7 +146,9 @@ function generateGraph(definition = {}) {
         const dependency = nodes[id]
 
         if (dependency === undefined) {
-          throw new Error(`The generator with name "${node.name}" depends on "${id}" but it does not exist.`)
+          throw new Error(
+            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`
+          )
         }
 
         return dependency

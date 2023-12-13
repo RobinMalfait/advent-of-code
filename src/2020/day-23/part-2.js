@@ -39,8 +39,16 @@ export default function (blob, rounds = 10_000_000) {
     current.next = c.next
 
     let destinationValue = current.value - 1
-    while (a.value === destinationValue || b.value === destinationValue || c.value === destinationValue) destinationValue--
-    let destination = destinationValue > 0 ? byValue.get(destinationValue) : highestValues.find((node) => node !== a && node !== b && node !== c)
+    while (
+      a.value === destinationValue ||
+      b.value === destinationValue ||
+      c.value === destinationValue
+    )
+      destinationValue--
+    let destination =
+      destinationValue > 0
+        ? byValue.get(destinationValue)
+        : highestValues.find((node) => node !== a && node !== b && node !== c)
 
     // Re-insert
     c.next = destination.next

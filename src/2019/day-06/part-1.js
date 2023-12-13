@@ -13,7 +13,10 @@ module.exports = function calculateOrbits(input) {
 
   const nodes = generateGraph(direct_map)
 
-  return Object.values(calculateTransitiveDependencies(nodes)).reduce((total, deps) => total + deps.length, 0)
+  return Object.values(calculateTransitiveDependencies(nodes)).reduce(
+    (total, deps) => total + deps.length,
+    0
+  )
 }
 
 class Node {
@@ -67,7 +70,9 @@ function generateGraph(definition = {}) {
         const dependency = nodes[id]
 
         if (dependency === undefined) {
-          throw new Error(`The generator with name "${node.name}" depends on "${id}" but it does not exist.`)
+          throw new Error(
+            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`
+          )
         }
 
         return dependency

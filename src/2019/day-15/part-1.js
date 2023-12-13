@@ -74,7 +74,9 @@ module.exports = async function oxygenSystem(program) {
     })
 
     // Prefer "Free" slots over existing paths
-    const next_free_spot = neighbours.find((n) => canMove(state, n.movement, [DRAW.WALL, DRAW.PATH]))
+    const next_free_spot = neighbours.find((n) =>
+      canMove(state, n.movement, [DRAW.WALL, DRAW.PATH])
+    )
     if (next_free_spot !== undefined) {
       computer.input(move(next_free_spot.movement))
       return
@@ -153,7 +155,10 @@ module.exports = async function oxygenSystem(program) {
     ]
     neighbours.forEach(({ x, y }) => {
       const p = point(state.droid.x + x, state.droid.y + y)
-      if ((state.board.has(p) && state.board.get(p) === DRAW.WALL) || state.surrogate_walls.has(p)) {
+      if (
+        (state.board.has(p) && state.board.get(p) === DRAW.WALL) ||
+        state.surrogate_walls.has(p)
+      ) {
         const current = point(state.droid.x, state.droid.y)
 
         if (!state.neighbours.has(current)) {

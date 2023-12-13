@@ -32,7 +32,8 @@ export default function (blob: string) {
 }
 
 function parse(input: string) {
-  let [, posX, posY, velX, velY] = /position=<([\s\d-]+),([\s\d-]+)> velocity=<([\s\d-]+),([\s\d-]+)>/.exec(input)
+  let [, posX, posY, velX, velY] =
+    /position=<([\s\d-]+),([\s\d-]+)> velocity=<([\s\d-]+),([\s\d-]+)>/.exec(input)
   return new Point(Number(posX), Number(posY), Number(velX), Number(velY))
 }
 

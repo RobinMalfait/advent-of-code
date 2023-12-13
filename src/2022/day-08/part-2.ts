@@ -3,7 +3,9 @@ export default function (blob: string) {
     .trim()
     .split('\n')
     .map((line) => line.trim().split('').map(Number))
-    .flatMap((row, rowIdx, grid) => row.map((_, colIdx) => calculateScenicScore(grid, rowIdx, colIdx)))
+    .flatMap((row, rowIdx, grid) =>
+      row.map((_, colIdx) => calculateScenicScore(grid, rowIdx, colIdx))
+    )
     .reduce((a, z) => Math.max(a, z))
 }
 

@@ -44,7 +44,11 @@ async function exec(year, day) {
       timeTotal += Number(end - start)
     }
 
-    process.stdout.write(`[${year}] Day ${day} Part ${idx + 1} - ${ms(timeTotal / config.runs / 1e6, { formatSubMilliseconds: true })}\n`)
+    process.stdout.write(
+      `[${year}] Day ${day} Part ${idx + 1} - ${ms(timeTotal / config.runs / 1e6, {
+        formatSubMilliseconds: true,
+      })}\n`
+    )
     output.push(ms(timeTotal / config.runs / 1e6, { formatSubMilliseconds: true }))
   }
 
@@ -76,7 +80,15 @@ if (config.day !== null) {
   if (shouldWrite) {
     let readmeContents = await promises.readFile(`./src/${config.year}/README.md`, 'utf8')
     let r = /<!-- BENCH TABLE -->([\s\S]*?)<!-- \/BENCH TABLE -->/g
-    readmeContents = readmeContents.replace(r, `<!-- BENCH TABLE -->\n\n${output.map((row) => `| ${row.join(' | ')} |`).join('\n')}\n\n<!-- /BENCH TABLE -->`)
-    await promises.writeFile(`./src/${config.year}/README.md`, prettier.format(readmeContents, { parser: 'markdown' }))
+    readmeContents = readmeContents.replace(
+      r,
+      `<!-- BENCH TABLE -->\n\n${output
+        .map((row) => `| ${row.join(' | ')} |`)
+        .join('\n')}\n\n<!-- /BENCH TABLE -->`
+    )
+    await promises.writeFile(
+      `./src/${config.year}/README.md`,
+      prettier.format(readmeContents, { parser: 'markdown' })
+    )
   }
 }

@@ -3,12 +3,17 @@ export default function (blob: string) {
     .trim()
     .split('\n')
     .map((line) => parse(line.trim()))
-    .filter((game) => game.rounds.every((round) => round.red <= 12 && round.green <= 13 && round.blue <= 14))
+    .filter((game) =>
+      game.rounds.every((round) => round.red <= 12 && round.green <= 13 && round.blue <= 14)
+    )
     .map((game) => game.id)
     .reduce((a, b) => a + b, 0)
 }
 
-function parse(input: string): { id: number; rounds: { red: number; green: number; blue: number }[] } {
+function parse(input: string): {
+  id: number
+  rounds: { red: number; green: number; blue: number }[]
+} {
   let [game, sets] = input.split(': ')
   return {
     id: Number(game.replace('Game ', '')),

@@ -10,7 +10,14 @@ describe('Part 1', () => {
   it('should work', async () => {
     expect(
       await part1(
-        ['10 ORE => 10 A', '1 ORE => 1 B', '7 A, 1 B => 1 C', '7 A, 1 C => 1 D', '7 A, 1 D => 1 E', '7 A, 1 E => 1 FUEL'].join('\n'),
+        [
+          '10 ORE => 10 A',
+          '1 ORE => 1 B',
+          '7 A, 1 B => 1 C',
+          '7 A, 1 C => 1 D',
+          '7 A, 1 D => 1 E',
+          '7 A, 1 E => 1 FUEL',
+        ].join('\n'),
         2 // 2 FUEL INSTEAD OF 1
       )
     ).toEqual(62)
@@ -19,11 +26,26 @@ describe('Part 1', () => {
   it.each([
     [
       31, // 1 ORE -> 1 B + 30 ORE for 28 A (2 wasted)
-      ['10 ORE => 10 A', '1 ORE => 1 B', '7 A, 1 B => 1 C', '7 A, 1 C => 1 D', '7 A, 1 D => 1 E', '7 A, 1 E => 1 FUEL'].join('\n'),
+      [
+        '10 ORE => 10 A',
+        '1 ORE => 1 B',
+        '7 A, 1 B => 1 C',
+        '7 A, 1 C => 1 D',
+        '7 A, 1 D => 1 E',
+        '7 A, 1 E => 1 FUEL',
+      ].join('\n'),
     ],
     [
       165,
-      ['9 ORE => 2 A', '8 ORE => 3 B', '7 ORE => 5 C', '3 A, 4 B => 1 AB', '5 B, 7 C => 1 BC', '4 C, 1 A => 1 CA', '2 AB, 3 BC, 4 CA => 1 FUEL'].join('\n'),
+      [
+        '9 ORE => 2 A',
+        '8 ORE => 3 B',
+        '7 ORE => 5 C',
+        '3 A, 4 B => 1 AB',
+        '5 B, 7 C => 1 BC',
+        '4 C, 1 A => 1 CA',
+        '2 AB, 3 BC, 4 CA => 1 FUEL',
+      ].join('\n'),
     ],
     [
       13312,

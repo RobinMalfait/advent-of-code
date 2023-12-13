@@ -26,7 +26,10 @@ export default function (blob) {
 
       for (let i = 0; i < 2 ** xs; i++) {
         let floater = i.toString(2).padStart(xs, '0').split('').map(Number)
-        memory.set(bits.map((bit) => (bit === 'X' ? floater.shift() : bit)).join(''), instruction.value)
+        memory.set(
+          bits.map((bit) => (bit === 'X' ? floater.shift() : bit)).join(''),
+          instruction.value
+        )
       }
     }
   }

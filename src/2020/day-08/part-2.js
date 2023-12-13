@@ -13,7 +13,10 @@ export default function (blob) {
     lastIdx++
 
     let copy = instructions.slice()
-    let idx = copy.length - 1 - copy.findIndex(([name], idx) => (idx < lastIdx ? false : ['nop', 'jmp'].includes(name)))
+    let idx =
+      copy.length -
+      1 -
+      copy.findIndex(([name], idx) => (idx < lastIdx ? false : ['nop', 'jmp'].includes(name)))
     copy[lastIdx] = [copy[idx][0] === 'nop' ? 'jmp' : 'nop', copy[idx][1]]
 
     acc = compute(copy)

@@ -32,7 +32,10 @@ function buildFileSystem(data: string) {
     } else {
       let key = '/' + pwd.join('/')
       let identPath = key === '/' ? key + parts[1] : key + '/' + parts[1]
-      let ident: Ident = parts[0] === 'dir' ? { type: 'dir', path: identPath } : { type: 'file', path: identPath, size: Number(parts[0]) }
+      let ident: Ident =
+        parts[0] === 'dir'
+          ? { type: 'dir', path: identPath }
+          : { type: 'file', path: identPath, size: Number(parts[0]) }
       tree.set(key, [...(tree.get(key) ?? []), ident])
     }
   }

@@ -27,7 +27,10 @@ export default function (blob: string) {
   return min
 }
 
-function locateRange(seedRanges: [start: number, end: number][], mapRanges: [dst: number, src: number, len: number][]) {
+function locateRange(
+  seedRanges: [start: number, end: number][],
+  mapRanges: [dst: number, src: number, len: number][]
+) {
   let done = []
 
   for (let [dst, src, len] of mapRanges) {
@@ -118,5 +121,8 @@ function parse(input: string) {
 
 function parseMap(input: string[]) {
   let name = input.shift().replace(' map:', '')
-  return [name, input.map((line) => line.split(/\s+/g).map(Number) as [dst: number, src: number, len: number])] as const
+  return [
+    name,
+    input.map((line) => line.split(/\s+/g).map(Number) as [dst: number, src: number, len: number]),
+  ] as const
 }

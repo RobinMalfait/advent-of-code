@@ -10,7 +10,10 @@ function sumJSONNumbers(input: any): number {
   } else if (Array.isArray(input)) {
     sum += input.reduce((acc, item) => acc + sumJSONNumbers(item), 0)
   } else if (typeof input === 'object') {
-    sum += Object.values(input).reduce((acc: number, item) => acc + sumJSONNumbers(item), 0) as number
+    sum += Object.values(input).reduce(
+      (acc: number, item) => acc + sumJSONNumbers(item),
+      0
+    ) as number
   }
 
   return sum

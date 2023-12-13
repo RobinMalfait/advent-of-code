@@ -34,7 +34,11 @@ module.exports = function (input, size, times, card) {
     b %= sizen
   }
 
-  return (pow(a, timesn, sizen) * cardn + b * (pow(a, timesn, sizen) + sizen - ONE) * pow(a - ONE, sizen - TWO, sizen)) % sizen
+  return (
+    (pow(a, timesn, sizen) * cardn +
+      b * (pow(a, timesn, sizen) + sizen - ONE) * pow(a - ONE, sizen - TWO, sizen)) %
+    sizen
+  )
 }
 
 function mod(v, N) {

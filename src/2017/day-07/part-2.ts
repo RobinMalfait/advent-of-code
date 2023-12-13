@@ -38,10 +38,14 @@ export default function (blob: string) {
       let diff = a - oddOneOut + b - oddOneOut
 
       let idx = dependencyWeights.indexOf(oddOneOut)
-      let grandChildrenWeights = nodes.find((n) => n.name === node.dependencies[idx]).dependencies.map(weight)
+      let grandChildrenWeights = nodes
+        .find((n) => n.name === node.dependencies[idx])
+        .dependencies.map(weight)
 
       // The children themselves aren't balanced yet. Can skip this level
-      if (!grandChildrenWeights.every((weight, i, all) => (i === 0 ? true : all[i - 1] === weight))) {
+      if (
+        !grandChildrenWeights.every((weight, i, all) => (i === 0 ? true : all[i - 1] === weight))
+      ) {
         continue
       }
 

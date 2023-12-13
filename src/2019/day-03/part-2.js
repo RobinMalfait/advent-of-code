@@ -13,7 +13,11 @@ function calculateClosest(...paths) {
 
   const overlaps = intersect(...simplified_paths)
   const [closest] = overlaps
-    .map((overlap) => simplified_paths.map((path) => path.indexOf(overlap) + 1).reduce((total, current) => total + current, 0))
+    .map((overlap) =>
+      simplified_paths
+        .map((path) => path.indexOf(overlap) + 1)
+        .reduce((total, current) => total + current, 0)
+    )
     .sort((a, b) => Math.sign(a - b))
 
   return closest

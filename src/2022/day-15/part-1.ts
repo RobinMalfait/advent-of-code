@@ -2,8 +2,13 @@ export default function (blob: string, y: number) {
   let reports = blob
     .trim()
     .split('\n')
-    .map((line) => line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': '))
-    .map(([sensor_raw, beacon_raw]) => ({ sensor: parsePoint(sensor_raw), beacon: parsePoint(beacon_raw) }))
+    .map((line) =>
+      line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': ')
+    )
+    .map(([sensor_raw, beacon_raw]) => ({
+      sensor: parsePoint(sensor_raw),
+      beacon: parsePoint(beacon_raw),
+    }))
 
   let ranges: Range[] = []
 
@@ -32,7 +37,9 @@ export default function (blob: string, y: number) {
     }
   }
 
-  return range_stack.map((range) => range.end - range.start).reduce((total, current) => total + current, 0)
+  return range_stack
+    .map((range) => range.end - range.start)
+    .reduce((total, current) => total + current, 0)
 }
 
 function overlaps(a: Range, z: Range) {

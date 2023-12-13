@@ -8,7 +8,9 @@ export default function (blob: string) {
     .sort((a, z) => compareAsc(a.date, z.date))
 
   let totalSleepTime = new DefaultMap<number, number>(() => 0)
-  let minuteTracker = new DefaultMap<number, DefaultMap<number, number>>(() => new DefaultMap(() => 0))
+  let minuteTracker = new DefaultMap<number, DefaultMap<number, number>>(
+    () => new DefaultMap(() => 0)
+  )
 
   let state = {
     guard: null as null | number,
@@ -37,7 +39,9 @@ export default function (blob: string) {
     .pop()
 
   let chosenMinute = Array.from(minuteTracker.get(chosenGuardId).keys())
-    .sort((a, z) => minuteTracker.get(chosenGuardId).get(a) - minuteTracker.get(chosenGuardId).get(z))
+    .sort(
+      (a, z) => minuteTracker.get(chosenGuardId).get(a) - minuteTracker.get(chosenGuardId).get(z)
+    )
     .pop()
 
   return chosenGuardId * chosenMinute

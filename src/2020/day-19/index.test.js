@@ -47,7 +47,23 @@ describe('Part 1', () => {
       [['0: 1 2', '1: 2 3', '2: "a" "c"', '3: "d"', '', 'acdac'].join('\n'), 1],
 
       // Example input
-      [['0: 4 1 5', '1: 2 3 | 3 2', '2: 4 4 | 5 5', '3: 4 5 | 5 4', '4: "a"', '5: "b"', '', 'ababbb', 'bababa', 'abbbab', 'aaabbb', 'aaaabbb'].join('\n'), 2],
+      [
+        [
+          '0: 4 1 5',
+          '1: 2 3 | 3 2',
+          '2: 4 4 | 5 5',
+          '3: 4 5 | 5 4',
+          '4: "a"',
+          '5: "b"',
+          '',
+          'ababbb',
+          'bababa',
+          'abbbab',
+          'aaabbb',
+          'aaaabbb',
+        ].join('\n'),
+        2,
+      ],
     ].slice(21, 22)
   )('should produce the correct value for example %#', (input, expected) => {
     expect(part1(input)).toBe(expected)

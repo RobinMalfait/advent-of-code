@@ -3,7 +3,10 @@ export default function (blob) {
     .trim()
     .split('\n')
     .map((food) => /^(?<ingredients>.*) \(contains (?<allergens>.*)\)$/g.exec(food).groups)
-    .map(({ ingredients, allergens }) => [new Set(ingredients.split(' ')), new Set(allergens.split(', '))])
+    .map(({ ingredients, allergens }) => [
+      new Set(ingredients.split(' ')),
+      new Set(allergens.split(', ')),
+    ])
 
   let byAllergen = new Map()
 

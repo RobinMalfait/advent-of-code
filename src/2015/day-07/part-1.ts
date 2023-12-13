@@ -7,7 +7,9 @@ export default function (blob: string) {
 
   let registers = new Map<string, number>()
 
-  function lookup(input: { type: 'LITERAL'; value: number } | { type: 'VARIABLE'; name: string }): number | null {
+  function lookup(
+    input: { type: 'LITERAL'; value: number } | { type: 'VARIABLE'; name: string }
+  ): number | null {
     if (input.type === 'LITERAL') {
       return input.value
     } else if (registers.has(input.name)) {

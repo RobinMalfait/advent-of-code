@@ -13,7 +13,9 @@ function compute(program, input, options) {
 
 describe('Part 1', () => {
   it('should be a valid program', async () => {
-    expect(await compute('1101,100,-1,4,0', [], { mode: PROGRAM_MODES.MEMORY })).toEqual([1101, 100, -1, 4, 99])
+    expect(await compute('1101,100,-1,4,0', [], { mode: PROGRAM_MODES.MEMORY })).toEqual([
+      1101, 100, -1, 4, 99,
+    ])
   })
 
   it('should do multiplication and store the result in the last value', async () => {
@@ -23,7 +25,9 @@ describe('Part 1', () => {
     // mode, simply has value 3. The result of this operation, 33 * 3 = 99, is
     // written according to the third parameter, 4 in position mode, which also
     // works like it did before - 99 is written to address 4.
-    expect(await compute('1002,4,3,4,33', [], { mode: PROGRAM_MODES.MEMORY })).toEqual([1002, 4, 3, 4, 99])
+    expect(await compute('1002,4,3,4,33', [], { mode: PROGRAM_MODES.MEMORY })).toEqual([
+      1002, 4, 3, 4, 99,
+    ])
   })
 
   it('should output the input', async () => {

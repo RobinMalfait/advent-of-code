@@ -4,7 +4,10 @@ import { resolve } from 'path'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '{{YEAR}}-{{DAY}}.txt'), 'utf8')
+let data = promises.readFile(
+  resolve(__dirname, '..', '..', '..', 'data', '{{YEAR}}-{{DAY}}.txt'),
+  'utf8'
+)
 
 describe('Part 1', () => {
   it.each([

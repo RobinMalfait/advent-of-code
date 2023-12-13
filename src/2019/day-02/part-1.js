@@ -14,7 +14,11 @@ module.exports = function gravityAssist(input = '', noun = undefined, verb = und
   }
 
   try {
-    for (let instruction_pointer = 0; instruction_pointer <= memory.length; instruction_pointer += 4) {
+    for (
+      let instruction_pointer = 0;
+      instruction_pointer <= memory.length;
+      instruction_pointer += 4
+    ) {
       const operation = memory[instruction_pointer]
       const param1 = memory[memory[instruction_pointer + 1]]
       const param2 = memory[memory[instruction_pointer + 2]]

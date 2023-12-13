@@ -67,7 +67,9 @@ function parse(
   }
 }
 
-function parseValue(input: string): { type: 'variable'; name: string } | { type: 'literal'; value: number } {
+function parseValue(
+  input: string
+): { type: 'variable'; name: string } | { type: 'literal'; value: number } {
   if (/^[a-z]+$/.test(input)) {
     return { type: 'variable', name: input }
   } else {

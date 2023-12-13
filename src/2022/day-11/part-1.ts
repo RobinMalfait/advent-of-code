@@ -1,4 +1,8 @@
-export default function (blob: string, rounds: number = 20, stressReducer = (value: number) => Math.floor(value / 3)) {
+export default function (
+  blob: string,
+  rounds: number = 20,
+  stressReducer = (value: number) => Math.floor(value / 3)
+) {
   let monkeys = blob.trim().split('\n\n').map(parseMonkey)
   let activity_monitor = Array(monkeys.length).fill(0)
 

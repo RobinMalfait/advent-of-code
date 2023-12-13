@@ -18,7 +18,10 @@ function countValidPasswordsBetween(start, end) {
   const _start = Number(start)
   const _end = Number(end)
 
-  return range(_end - _start).reduce((total, current) => total + (isValidPassword(_start + current) ? 1 : 0), 0)
+  return range(_end - _start).reduce(
+    (total, current) => total + (isValidPassword(_start + current) ? 1 : 0),
+    0
+  )
 }
 
 module.exports = { isValidPassword, countValidPasswordsBetween }

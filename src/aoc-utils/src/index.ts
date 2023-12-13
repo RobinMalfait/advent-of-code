@@ -111,14 +111,20 @@ export function intersection<T>(a: T[], b: T[]) {
 }
 
 // Flow control
-export function match<T extends string | number = string, R = unknown>(value: T, lookup: Record<T, R | ((...args: any[]) => R)>, ...args: any[]): R {
+export function match<T extends string | number = string, R = unknown>(
+  value: T,
+  lookup: Record<T, R | ((...args: any[]) => R)>,
+  ...args: any[]
+): R {
   if (value in lookup) {
     let returnValue = lookup[value]
     return typeof returnValue === 'function' ? returnValue(...args) : returnValue
   }
 
   let error = new Error(
-    `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${Object.keys(lookup)
+    `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${Object.keys(
+      lookup
+    )
       .map((key) => `"${key}"`)
       .join(', ')}.`
   )
@@ -146,7 +152,14 @@ function defaultCacheKey(...args: any[]) {
   if (args.length === 1) {
     let arg = args[0]
 
-    if (typeof arg === 'string' || typeof arg === 'number' || typeof arg === 'boolean' || typeof arg === 'symbol' || arg === null || arg === undefined) {
+    if (
+      typeof arg === 'string' ||
+      typeof arg === 'number' ||
+      typeof arg === 'boolean' ||
+      typeof arg === 'symbol' ||
+      arg === null ||
+      arg === undefined
+    ) {
       return arg
     }
 
@@ -163,7 +176,10 @@ function defaultCacheKey(...args: any[]) {
 }
 
 // Performance
-export function memoize<T extends (...args: any[]) => any>(fn: T, cacheKey: (...args: Parameters<T>) => string = defaultCacheKey): T {
+export function memoize<T extends (...args: any[]) => any>(
+  fn: T,
+  cacheKey: (...args: Parameters<T>) => string = defaultCacheKey
+): T {
   let cache = new Map<string, ReturnType<T>>()
 
   return ((...args: Parameters<T>) => {
@@ -196,7 +212,9 @@ export class DefaultMap<K = string, V = any> extends Map<K, V> {
 }
 
 export class Point {
-  private static points = new DefaultMap<number, DefaultMap<number, Point>>((x) => new DefaultMap((y) => new Point(x, y)))
+  private static points = new DefaultMap<number, DefaultMap<number, Point>>(
+    (x) => new DefaultMap((y) => new Point(x, y))
+  )
 
   private constructor(
     public readonly x: number = 0,
@@ -300,7 +318,10 @@ export function transposePointSet(input: Set<Point>) {
   return transposed
 }
 
-export function visualizePointMap<T>(map: Map<Point, T>, valueFn: (value: T) => string = (x) => x.toString()) {
+export function visualizePointMap<T>(
+  map: Map<Point, T>,
+  valueFn: (value: T) => string = (x) => x.toString()
+) {
   let [width, height] = pointsToSize(map)
   let grid: string[][] = []
 

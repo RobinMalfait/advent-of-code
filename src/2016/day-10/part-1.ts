@@ -6,7 +6,10 @@ export default function (blob: string) {
     .sort((a, z) => a.type.localeCompare(z.type))
 
   let bots = new DefaultMap<number, number[]>(() => [])
-  let connections = new DefaultMap<number, { low: ['output' | 'bot', number] | null; high: ['output' | 'bot', number] | null }>(() => ({
+  let connections = new DefaultMap<
+    number,
+    { low: ['output' | 'bot', number] | null; high: ['output' | 'bot', number] | null }
+  >(() => ({
     low: null,
     high: null,
   }))
@@ -63,8 +66,18 @@ function* parse(
   for (let { groups } of input.matchAll(
     /bot (?<from>\d+) gives low to (?<lowType>output|bot) (?<lowId>\d+) and high to (?<highType>output|bot) (?<highId>\d+)/g
   )) {
-    yield { type: 'give-low', from: Number(groups.from), toType: groups.lowType as 'output' | 'bot', toId: Number(groups.lowId) }
-    yield { type: 'give-high', from: Number(groups.from), toType: groups.highType as 'output' | 'bot', toId: Number(groups.highId) }
+    yield {
+      type: 'give-low',
+      from: Number(groups.from),
+      toType: groups.lowType as 'output' | 'bot',
+      toId: Number(groups.lowId),
+    }
+    yield {
+      type: 'give-high',
+      from: Number(groups.from),
+      toType: groups.highType as 'output' | 'bot',
+      toId: Number(groups.highId),
+    }
     return
   }
 

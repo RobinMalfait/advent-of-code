@@ -9,5 +9,9 @@ export default function (blob: string) {
         .map((part) => part.split('-').map(Number))
         .map(([start, end]) => ({ start, end }))
     )
-    .filter(([lhs, rhs]) => (lhs.start >= rhs.start && lhs.end <= rhs.end) || (rhs.start >= lhs.start && rhs.end <= lhs.end)).length
+    .filter(
+      ([lhs, rhs]) =>
+        (lhs.start >= rhs.start && lhs.end <= rhs.end) ||
+        (rhs.start >= lhs.start && rhs.end <= lhs.end)
+    ).length
 }

@@ -35,7 +35,9 @@ async function copy(src, dst) {
 
   if (stat.isDirectory()) {
     let files = await fs.promises.readdir(src, { withFileTypes: true })
-    await Promise.all(files.map((dirent) => copy(path.resolve(src, dirent.name), path.resolve(dst, dirent.name))))
+    await Promise.all(
+      files.map((dirent) => copy(path.resolve(src, dirent.name), path.resolve(dst, dirent.name)))
+    )
   }
 
   if (stat.isFile()) {

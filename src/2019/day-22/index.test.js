@@ -8,9 +8,18 @@ let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-
 
 describe('Part 1', () => {
   it.each([
-    [['deal with increment 7', 'deal into new stack', 'deal into new stack'].join('\n'), [0, 3, 6, 9, 2, 5, 8, 1, 4, 7]],
-    [['cut 6', 'deal with increment 7', 'deal into new stack'].join('\n'), [3, 0, 7, 4, 1, 8, 5, 2, 9, 6]],
-    [['deal with increment 7', 'deal with increment 9', 'cut -2'].join('\n'), [6, 3, 0, 7, 4, 1, 8, 5, 2, 9]],
+    [
+      ['deal with increment 7', 'deal into new stack', 'deal into new stack'].join('\n'),
+      [0, 3, 6, 9, 2, 5, 8, 1, 4, 7],
+    ],
+    [
+      ['cut 6', 'deal with increment 7', 'deal into new stack'].join('\n'),
+      [3, 0, 7, 4, 1, 8, 5, 2, 9, 6],
+    ],
+    [
+      ['deal with increment 7', 'deal with increment 9', 'cut -2'].join('\n'),
+      [6, 3, 0, 7, 4, 1, 8, 5, 2, 9],
+    ],
     [
       [
         'deal into new stack',

@@ -8,7 +8,12 @@ let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-
 
 describe('Part 1', () => {
   it('should produce the correct output for the test input', () => {
-    const input = ['<x=-1, y=0, z=2>', '<x=2, y=-10, z=-7>', '<x=4, y=-8, z=8>', '<x=3, y=5, z=-1>'].join('\n')
+    const input = [
+      '<x=-1, y=0, z=2>',
+      '<x=2, y=-10, z=-7>',
+      '<x=4, y=-8, z=8>',
+      '<x=3, y=5, z=-1>',
+    ].join('\n')
 
     expect(part1.render(input, 0)).toEqual(
       [
@@ -38,7 +43,12 @@ describe('Part 1', () => {
   })
 
   it('should produce the correct total energy for the moons', () => {
-    const input = ['<x=-1, y=0, z=2>', '<x=2, y=-10, z=-7>', '<x=4, y=-8, z=8>', '<x=3, y=5, z=-1>'].join('\n')
+    const input = [
+      '<x=-1, y=0, z=2>',
+      '<x=2, y=-10, z=-7>',
+      '<x=4, y=-8, z=8>',
+      '<x=3, y=5, z=-1>',
+    ].join('\n')
 
     expect(part1.totalEnergy(input, 10)).toEqual(179)
   })
@@ -53,11 +63,22 @@ describe('Part 1', () => {
 
 describe('Part 2', () => {
   it.each([
-    [2772, ['<x=-1, y=0, z=2>', '<x=2, y=-10, z=-7>', '<x=4, y=-8, z=8>', '<x=3, y=5, z=-1>'].join('\n')],
-    [4686774924, ['<x=-8, y=-10, z=0>', '<x=5, y=5, z=10>', '<x=2, y=-7, z=3>', '<x=9, y=-8, z=-3>'].join('\n')],
-  ])('should produce the total amount of steps (%s) to go back to the initial state', (output, input) => {
-    expect(part2(input)).toEqual(output)
-  })
+    [
+      2772,
+      ['<x=-1, y=0, z=2>', '<x=2, y=-10, z=-7>', '<x=4, y=-8, z=8>', '<x=3, y=5, z=-1>'].join('\n'),
+    ],
+    [
+      4686774924,
+      ['<x=-8, y=-10, z=0>', '<x=5, y=5, z=10>', '<x=2, y=-7, z=3>', '<x=9, y=-8, z=-3>'].join(
+        '\n'
+      ),
+    ],
+  ])(
+    'should produce the total amount of steps (%s) to go back to the initial state',
+    (output, input) => {
+      expect(part2(input)).toEqual(output)
+    }
+  )
 
   // Actual test, Part 2
   it('should produce the correct value for the input data', async () => {

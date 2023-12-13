@@ -18,5 +18,9 @@ export default function (blob: string) {
 }
 
 function parse(input: string) {
-  return transpose(input.split('\n').map((line) => line.trim().split(':').slice(1)[0].trim().split(/\s+/g).map(Number)))
+  return transpose(
+    input
+      .split('\n')
+      .map((line) => line.trim().split(':').slice(1)[0].trim().split(/\s+/g).map(Number))
+  )
 }

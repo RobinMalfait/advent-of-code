@@ -51,7 +51,9 @@ function sensorBoost(input) {
 
   // Sort the asteroids to how many they can see, take the first value because
   // that's the highest one!
-  const [[position, visible_asteroids]] = [...hash.entries()].sort(([, a], [, b]) => Math.sign(b - a))
+  const [[position, visible_asteroids]] = [...hash.entries()].sort(([, a], [, b]) =>
+    Math.sign(b - a)
+  )
   return { position, visible_asteroids }
 }
 

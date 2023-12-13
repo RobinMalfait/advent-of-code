@@ -29,5 +29,7 @@ export default function (blob: string, rounds = 1, decryption_key = 1) {
   let sorted_numbers = locations.map((idx) => numbers[idx])
   let position_0 = sorted_numbers.indexOf(0)
 
-  return [1000, 2000, 3000].map((offset) => sorted_numbers[(position_0 + offset) % total]).reduce((total, current) => total + current)
+  return [1000, 2000, 3000]
+    .map((offset) => sorted_numbers[(position_0 + offset) % total])
+    .reduce((total, current) => total + current)
 }

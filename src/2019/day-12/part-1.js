@@ -9,7 +9,11 @@ function totalEnergy(input, steps = 0) {
   const moons = calculateMoonState(input, steps)
 
   return moons.reduce((total, moon) => {
-    return total + sum(Object.values(moon.position).map(Math.abs)) * sum(Object.values(moon.velocity).map(Math.abs))
+    return (
+      total +
+      sum(Object.values(moon.position).map(Math.abs)) *
+        sum(Object.values(moon.velocity).map(Math.abs))
+    )
   }, 0)
 }
 

@@ -20,9 +20,12 @@ describe('Part 1', () => {
 })
 
 describe('Part 2', () => {
-  it.each([[['F10', 'N3', 'F7', 'R90', 'F11'].join('\n'), 214 + 72]])('should produce the correct value for example %#', (input, expected) => {
-    expect(part2(input)).toBe(expected)
-  })
+  it.each([[['F10', 'N3', 'F7', 'R90', 'F11'].join('\n'), 214 + 72]])(
+    'should produce the correct value for example %#',
+    (input, expected) => {
+      expect(part2(input)).toBe(expected)
+    }
+  )
 
   it('should produce the correct value for the input data', async () => {
     expect(part2(await data)).toMatchInlineSnapshot(`45763`)

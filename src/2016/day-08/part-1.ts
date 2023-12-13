@@ -38,7 +38,11 @@ export default function (blob: string, width = 50, height = 6) {
   return grid.flat(Infinity).filter((x) => x === State.Lit).length
 }
 
-function parse(input: string): { type: 'rect'; width: number; height: number } | { type: 'rotate'; direction: 'row' | 'column'; idx: number; amount: number } {
+function parse(
+  input: string
+):
+  | { type: 'rect'; width: number; height: number }
+  | { type: 'rotate'; direction: 'row' | 'column'; idx: number; amount: number } {
   let tokens = input.split(' ')
   if (tokens[0] === 'rect') {
     let [w, h] = tokens[1].split('x').map(Number)

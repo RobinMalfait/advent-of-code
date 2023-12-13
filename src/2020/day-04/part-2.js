@@ -2,7 +2,8 @@ let validations = {
   byr: (value) => value >= 1920 && value <= 2002,
   iyr: (value) => value >= 2010 && value <= 2020,
   eyr: (value) => value >= 2020 && value <= 2030,
-  hgt: (value, [val, unit] = value.split(/(cm|in)/)) => ({ cm: val >= 150 && val <= 193, in: val >= 59 && val <= 76 })[unit] ?? false,
+  hgt: (value, [val, unit] = value.split(/(cm|in)/)) =>
+    ({ cm: val >= 150 && val <= 193, in: val >= 59 && val <= 76 })[unit] ?? false,
   hcl: (value) => /^#[0-9a-f]{6}$/.test(value),
   ecl: (value) => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
   pid: (value) => /^[0-9]{9}$/.test(value),

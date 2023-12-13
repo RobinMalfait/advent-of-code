@@ -13,7 +13,9 @@ module.exports.match = function match(value, patterns, ...args) {
     const available_keys = Object.keys(patterns)
     if (!available_keys.includes(value.toString())) {
       throw new Error(
-        `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${available_keys.map((key) => `"${key}"`).join(', ')}.`
+        `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${available_keys
+          .map((key) => `"${key}"`)
+          .join(', ')}.`
       )
     }
 
@@ -39,9 +41,15 @@ function intersectBetween(a, b) {
   const [left, right] = [a, b].sort((a, b) => Math.sign(a.length - b.length))
 
   const can_use_hash_hack = ['string', 'number'].includes(typeof right[0])
-  const right_hash = can_use_hash_hack ? right.reduce((acc, current) => Object.assign(acc, { [current]: true }), {}) : right
+  const right_hash = can_use_hash_hack
+    ? right.reduce((acc, current) => Object.assign(acc, { [current]: true }), {})
+    : right
 
-  return left.filter(can_use_hash_hack ? (element) => right_hash[element] !== undefined : (element) => right.includes(element))
+  return left.filter(
+    can_use_hash_hack
+      ? (element) => right_hash[element] !== undefined
+      : (element) => right.includes(element)
+  )
 }
 
 module.exports.intersect = function intersect(...args) {
@@ -74,7 +82,12 @@ module.exports.permutations = function permutations(input) {
   }
 
   return input.reduce(
-    (rows, value, i) => [...rows, ...module.exports.permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x])],
+    (rows, value, i) => [
+      ...rows,
+      ...module.exports
+        .permutations([...input.slice(0, i), ...input.slice(i + 1)])
+        .map((x) => [value, ...x]),
+    ],
     []
   )
 }

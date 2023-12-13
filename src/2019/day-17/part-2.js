@@ -39,7 +39,12 @@ function decode(feed) {
     .join('')
 }
 
-const encoded_main = encode(MAIN_MOVEMENT_ROUTINE.A, MAIN_MOVEMENT_ROUTINE.A, MAIN_MOVEMENT_ROUTINE.B, MAIN_MOVEMENT_ROUTINE.C)
+const encoded_main = encode(
+  MAIN_MOVEMENT_ROUTINE.A,
+  MAIN_MOVEMENT_ROUTINE.A,
+  MAIN_MOVEMENT_ROUTINE.B,
+  MAIN_MOVEMENT_ROUTINE.C
+)
 
 // R4L12L8R4L8
 // const encoded_A = encode(

@@ -9,7 +9,18 @@ let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2020-
 describe('Part 1', () => {
   it.each([
     [
-      ['L.LL.LL.LL', 'LLLLLLL.LL', 'L.L.L..L..', 'LLLL.LL.LL', 'L.LL.LL.LL', 'L.LLLLL.LL', '..L.L.....', 'LLLLLLLLLL', 'L.LLLLLL.L', 'L.LLLLL.LL'].join('\n'),
+      [
+        'L.LL.LL.LL',
+        'LLLLLLL.LL',
+        'L.L.L..L..',
+        'LLLL.LL.LL',
+        'L.LL.LL.LL',
+        'L.LLLLL.LL',
+        '..L.L.....',
+        'LLLLLLLLLL',
+        'L.LLLLLL.L',
+        'L.LLLLL.LL',
+      ].join('\n'),
       37,
     ],
   ])('should produce the correct value for example %#', (input, expected) => {
@@ -24,7 +35,18 @@ describe('Part 1', () => {
 describe('Part 2', () => {
   it.each([
     [
-      ['L.LL.LL.LL', 'LLLLLLL.LL', 'L.L.L..L..', 'LLLL.LL.LL', 'L.LL.LL.LL', 'L.LLLLL.LL', '..L.L.....', 'LLLLLLLLLL', 'L.LLLLLL.L', 'L.LLLLL.LL'].join('\n'),
+      [
+        'L.LL.LL.LL',
+        'LLLLLLL.LL',
+        'L.L.L..L..',
+        'LLLL.LL.LL',
+        'L.LL.LL.LL',
+        'L.LLLLL.LL',
+        '..L.L.....',
+        'LLLLLLLLLL',
+        'L.LLLLLL.L',
+        'L.LLLLL.LL',
+      ].join('\n'),
       26,
     ],
   ])('should produce the correct value for example %#', (input, expected) => {

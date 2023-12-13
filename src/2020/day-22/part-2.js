@@ -5,7 +5,10 @@ export default function (blob) {
     .map((section) => section.split('\n'))
     .map(([, ...cards]) => cards.map(Number))
 
-  return game(players)[1].reduce((total, current, i, list) => total + current * (list.length - i), 0)
+  return game(players)[1].reduce(
+    (total, current, i, list) => total + current * (list.length - i),
+    0
+  )
 
   function game(players) {
     let seen = new Map()

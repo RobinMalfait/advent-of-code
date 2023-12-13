@@ -29,7 +29,12 @@ function split([grid, { width, height }]: [Map<Point, string>, { width: number; 
   )
 }
 
-function findSplitPoint(pattern: Map<Point, string>, width: number, height: number, orientation: Split) {
+function findSplitPoint(
+  pattern: Map<Point, string>,
+  width: number,
+  height: number,
+  orientation: Split
+) {
   next: for (let y = 1; y < height; y++) {
     let r = Math.min(y, height - y)
     let ys = Array.from(range(0, r)).map((i) => [y - i - 1, y + i])

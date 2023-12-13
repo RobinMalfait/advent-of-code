@@ -57,7 +57,8 @@ export default function (blob: string, workers = 5, minduration = 60) {
 }
 
 function parse(input: string) {
-  let { first, second } = /Step (?<first>\w) must be finished before step (?<second>\w) can begin./.exec(input).groups
+  let { first, second } =
+    /Step (?<first>\w) must be finished before step (?<second>\w) can begin./.exec(input).groups
   return [first, second] as const
 }
 

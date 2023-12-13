@@ -43,7 +43,9 @@ function print(points: Point[]) {
   for (let y = minY; y <= maxY; y++) {
     let row = []
     for (let x = minX; x <= maxX; x++) {
-      row.push(points.some((point) => point.x === x && point.y === y) ? Pixels.filled : Pixels.empty)
+      row.push(
+        points.some((point) => point.x === x && point.y === y) ? Pixels.filled : Pixels.empty
+      )
     }
     grid.push(row.join(''))
   }
@@ -51,7 +53,8 @@ function print(points: Point[]) {
 }
 
 function parse(input: string) {
-  let [, posX, posY, velX, velY] = /position=<([\s\d-]+),([\s\d-]+)> velocity=<([\s\d-]+),([\s\d-]+)>/.exec(input)
+  let [, posX, posY, velX, velY] =
+    /position=<([\s\d-]+),([\s\d-]+)> velocity=<([\s\d-]+),([\s\d-]+)>/.exec(input)
   return new Point(Number(posX), Number(posY), Number(velX), Number(velY))
 }
 

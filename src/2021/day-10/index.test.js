@@ -27,9 +27,12 @@ describe('Part 1', () => {
 })
 
 describe('Part 2', () => {
-  it.each([[test, 288957]])('should produce the correct value for example %#', (input, expected) => {
-    expect(part2(input)).toBe(expected)
-  })
+  it.each([[test, 288957]])(
+    'should produce the correct value for example %#',
+    (input, expected) => {
+      expect(part2(input)).toBe(expected)
+    }
+  )
 
   it('should produce the correct value for the input data', async () => {
     expect(part2(await data)).toMatchInlineSnapshot(`2412013412`)

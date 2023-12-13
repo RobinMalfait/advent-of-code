@@ -48,7 +48,10 @@ let output = [['Day', ...data[0].map((year) => `[${year}][link-${year}]`)]]
 output.push([':---:', ...data[0].map(() => ':---')])
 
 for (let [idx, row] of data.slice(1).entries()) {
-  output.push([`**${idx + 1}**`, ...row.map((stars) => (stars === 2 ? '⭐⭐' : stars === 1 ? '⭐' : ' '))])
+  output.push([
+    `**${idx + 1}**`,
+    ...row.map((stars) => (stars === 2 ? '⭐⭐' : stars === 1 ? '⭐' : ' ')),
+  ])
 }
 
 output.push([
@@ -73,13 +76,24 @@ let markdown =
   '\n\n' +
   output.map((row) => `|${row.join(' | ')}|`).join('\n') +
   '\n\n' +
-  data[0].map((year) => `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`).join('\n')
+  data[0]
+    .map(
+      (year) =>
+        `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
+    )
+    .join('\n')
 
 {
   let readme = path.join(process.cwd(), 'README.md')
   let contents = await fs.readFile(readme, 'utf8')
   await fs.writeFile(
     readme,
-    await prettier.format(contents.replace(/<\!-- start -->([\s\S]*)<\!-- end -->/g, `<!-- start -->\n${markdown}\n<!-- end -->`), { parser: 'markdown' })
+    await prettier.format(
+      contents.replace(
+        /<\!-- start -->([\s\S]*)<\!-- end -->/g,
+        `<!-- start -->\n${markdown}\n<!-- end -->`
+      ),
+      { parser: 'markdown' }
+    )
   )
 }

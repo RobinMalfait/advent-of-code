@@ -2,8 +2,13 @@ export default function (blob: string, min_value: number, max_value: number) {
   let reports = blob
     .trim()
     .split('\n')
-    .map((line) => line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': '))
-    .map(([sensor_raw, beacon_raw]) => ({ sensor: parsePoint(sensor_raw), beacon: parsePoint(beacon_raw) }))
+    .map((line) =>
+      line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': ')
+    )
+    .map(([sensor_raw, beacon_raw]) => ({
+      sensor: parsePoint(sensor_raw),
+      beacon: parsePoint(beacon_raw),
+    }))
 
   for (let y = max_value; y >= min_value; y--) {
     let ranges: Range[] = []
@@ -18,7 +23,10 @@ export default function (blob: string, min_value: number, max_value: number) {
         let min_x = report.sensor.x - remaining
         let max_x = report.sensor.x + remaining
 
-        ranges.push({ start: clamp(min_x, min_value, max_value), end: clamp(max_x, min_value, max_value) })
+        ranges.push({
+          start: clamp(min_x, min_value, max_value),
+          end: clamp(max_x, min_value, max_value),
+        })
       }
     }
 

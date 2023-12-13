@@ -3,7 +3,8 @@ export default function (blob: string) {
     .trim()
     .split('\n')
     .map((line) => line.trim().split('').map(Number))
-    .flatMap((row, rowIdx, grid) => row.filter((_, colIdx) => isVisibleTree(grid, rowIdx, colIdx))).length
+    .flatMap((row, rowIdx, grid) => row.filter((_, colIdx) => isVisibleTree(grid, rowIdx, colIdx)))
+    .length
 }
 
 function isVisibleTree(grid: number[][], rowIdx: number, colIdx: number) {

@@ -7,9 +7,12 @@ import { border, flatten, process, raw, render, scale } from './part-2.js'
 let data = promises.readFile(resolve(globalThis.process.cwd(), 'data', '2019-08.txt'), 'utf8')
 
 describe('Part 1', () => {
-  it.each([['123456789012', 3, 2, 1]])('An input of %s with width=%s and height=%s results in a value of "%s"', (image, width, height, output) => {
-    expect(part1(image, width, height)).toEqual(output)
-  })
+  it.each([['123456789012', 3, 2, 1]])(
+    'An input of %s with width=%s and height=%s results in a value of "%s"',
+    (image, width, height, output) => {
+      expect(part1(image, width, height)).toEqual(output)
+    }
+  )
 
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {

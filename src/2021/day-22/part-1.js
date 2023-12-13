@@ -3,7 +3,10 @@ export default function (blob) {
     .trim()
     .split('\n')
     .map((line) => line.split(' '))
-    .map(([state, data]) => [state, /x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)/g.exec(data).map(Number)])
+    .map(([state, data]) => [
+      state,
+      /x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)/g.exec(data).map(Number),
+    ])
     .map(([state, data, _ = data.shift()]) => [state, ...data])
     .map(([state, x1, x2, y1, y2, z1, z2]) => [
       state,
