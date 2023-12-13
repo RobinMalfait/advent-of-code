@@ -283,6 +283,15 @@ export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
 
   return [width, height] as const
 }
+
+export function transposePointMap<T>(input: Map<Point, T>) {
+  let transposed = new Map<Point, T>()
+  for (let [point, value] of input.entries()) {
+    transposed.set(Point.new(point.y, point.x), value)
+  }
+  return transposed
+}
+
 export enum Direction {
   /** `↑` */
   North,
