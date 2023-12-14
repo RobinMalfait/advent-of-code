@@ -9,7 +9,8 @@
     "setup": "node ./setup.js",
     "readme": "node ./update-readme.js",
     "bench": "node ./bench.js",
-    "format": "prettier . --write --ignore-unknown"
+    "format": "prettier . --write --ignore-unknown",
+    "lint": "prettier . --check --ignore-unknown"
   },
   "prettier": {
     "semi": false,
