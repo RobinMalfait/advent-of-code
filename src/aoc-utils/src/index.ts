@@ -299,7 +299,9 @@ export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
   let width = maxX - minX + 1
   let height = maxY - minY + 1
 
-  return [width, height] as const
+  return { width, height }
+}
+
 }
 
 export function transposePointMap<T>(input: Map<Point, T>) {
