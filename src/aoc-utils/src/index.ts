@@ -302,6 +302,11 @@ export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
   return { width, height }
 }
 
+export function rotateGrid<T>(grid: T[][], direction: -90 | 90) {
+  return match(direction, {
+    [90]: () => transpose(grid).reverse(),
+    [-90]: () => transpose(grid).map((row) => row.reverse()),
+  })
 }
 
 export function transposePointMap<T>(input: Map<Point, T>) {
