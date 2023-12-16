@@ -13,6 +13,29 @@ export default function (blob: string) {
   return compute(grid, Point.new(0, 0), Direction.East)
 }
 
+let nextDirectionMap = {
+  [Direction.North]: {
+    [Contraption.MirrorUp]: [Direction.East],
+    [Contraption.MirrorDown]: [Direction.West],
+    [Contraption.SplitterHorizontal]: [Direction.West, Direction.East],
+  },
+  [Direction.East]: {
+    [Contraption.MirrorUp]: [Direction.North],
+    [Contraption.MirrorDown]: [Direction.South],
+    [Contraption.SplitterVertical]: [Direction.North, Direction.South],
+  },
+  [Direction.South]: {
+    [Contraption.MirrorUp]: [Direction.West],
+    [Contraption.MirrorDown]: [Direction.East],
+    [Contraption.SplitterHorizontal]: [Direction.West, Direction.East],
+  },
+  [Direction.West]: {
+    [Contraption.MirrorUp]: [Direction.South],
+    [Contraption.MirrorDown]: [Direction.North],
+    [Contraption.SplitterVertical]: [Direction.North, Direction.South],
+  },
+}
+
 export function compute(grid: Map<Point, Contraption>, start: Point, dir: Direction) {
   let beams = new DefaultMap<Point, Set<Direction>>(() => new Set<Direction>())
   beams.get(start).add(dir)
@@ -22,46 +45,7 @@ export function compute(grid: Map<Point, Contraption>, start: Point, dir: Direct
     let [beam, dir] = q.shift()
     let contraption = grid.get(beam)
 
-    let directions = match(dir, {
-      [Direction.North]: () => {
-        return match(contraption, {
-          [Contraption.Empty]: [dir],
-          [Contraption.MirrorUp]: [Direction.East],
-          [Contraption.MirrorDown]: [Direction.West],
-          [Contraption.SplitterVertical]: [dir],
-          [Contraption.SplitterHorizontal]: [Direction.West, Direction.East],
-        })
-      },
-      [Direction.East]: () => {
-        return match(contraption, {
-          [Contraption.Empty]: [dir],
-          [Contraption.MirrorUp]: [Direction.North],
-          [Contraption.MirrorDown]: [Direction.South],
-          [Contraption.SplitterVertical]: [Direction.North, Direction.South],
-          [Contraption.SplitterHorizontal]: [dir],
-        })
-      },
-      [Direction.South]: () => {
-        return match(contraption, {
-          [Contraption.Empty]: [dir],
-          [Contraption.MirrorUp]: [Direction.West],
-          [Contraption.MirrorDown]: [Direction.East],
-          [Contraption.SplitterVertical]: [dir],
-          [Contraption.SplitterHorizontal]: [Direction.West, Direction.East],
-        })
-      },
-      [Direction.West]: () => {
-        return match(contraption, {
-          [Contraption.Empty]: [dir],
-          [Contraption.MirrorUp]: [Direction.South],
-          [Contraption.MirrorDown]: [Direction.North],
-          [Contraption.SplitterVertical]: [Direction.North, Direction.South],
-          [Contraption.SplitterHorizontal]: [dir],
-        })
-      },
-    })
-
-    for (let direction of directions) {
+    for (let direction of nextDirectionMap[dir][contraption] ?? [dir]) {
       let next = beam.navigate(direction)
       if (grid.has(next) && !beams.get(next).has(direction)) {
         q.push([next, direction])
