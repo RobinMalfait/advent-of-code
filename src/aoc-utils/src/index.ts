@@ -241,6 +241,15 @@ export class Point {
     return Point.new(this.x + 1, this.y)
   }
 
+  navigate(direction: Direction) {
+    return match(direction, {
+      [Direction.North]: () => this.up(),
+      [Direction.East]: () => this.right(),
+      [Direction.South]: () => this.down(),
+      [Direction.West]: () => this.left(),
+    })
+  }
+
   neighbours() {
     return [this.up(), this.down(), this.left(), this.right()]
   }
