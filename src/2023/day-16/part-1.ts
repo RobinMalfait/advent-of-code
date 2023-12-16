@@ -1,11 +1,11 @@
 import { DefaultMap, Direction, Point, match } from 'aoc-utils'
 
 enum Contraption {
-  Empty = 1 << 0,
-  MirrorUp = 1 << 1,
-  MirrorDown = 1 << 2,
-  SplitterVertical = 1 << 3,
-  SplitterHorizontal = 1 << 4,
+  Empty,
+  MirrorUp,
+  MirrorDown,
+  SplitterVertical,
+  SplitterHorizontal,
 }
 
 export default function (blob: string) {
