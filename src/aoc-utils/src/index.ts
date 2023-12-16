@@ -359,16 +359,16 @@ export function visualizePointMap<T>(
 
 export enum Direction {
   /** `↑` */
-  North,
+  North = 1 << 0,
 
   /** `→` */
-  East,
+  East = 1 << 1,
 
   /** `↓` */
-  South,
+  South = 1 << 2,
 
   /** `←` */
-  West,
+  West = 1 << 3,
 }
 
 // Iterator helpers
