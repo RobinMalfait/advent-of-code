@@ -350,7 +350,7 @@ export function transposePointSet(input: Set<Point>) {
 
 export function visualizePointMap<T>(
   map: Map<Point, T>,
-  valueFn: (value: T) => string = (x) => x?.toString()
+  valueFn: (value: T, point: Point) => string = (x) => x?.toString()
 ) {
   let { width, height } = pointsToSize(map)
   let grid: string[][] = []
@@ -360,9 +360,9 @@ export function visualizePointMap<T>(
     for (let x = 0; x < width; x++) {
       let p = Point.new(x, y)
       if (map.has(p)) {
-        row.push(valueFn(map.get(p)!))
+        row.push(valueFn(map.get(p)!, p))
       } else {
-        row.push(valueFn(null))
+        row.push(valueFn(null, p))
       }
     }
     grid.push(row)
