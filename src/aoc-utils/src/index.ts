@@ -250,6 +250,20 @@ export class Point {
     })
   }
 
+  direction(other: Point) {
+    if (this.x === other.x) {
+      if (this.y < other.y) return Direction.South
+      if (this.y > other.y) return Direction.North
+    }
+
+    if (this.y === other.y) {
+      if (this.x < other.x) return Direction.East
+      if (this.x > other.x) return Direction.West
+    }
+
+    return null
+  }
+
   neighbours() {
     return [this.up(), this.down(), this.left(), this.right()]
   }
