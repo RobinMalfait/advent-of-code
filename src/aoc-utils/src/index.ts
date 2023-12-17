@@ -385,6 +385,15 @@ export enum Direction {
   West = 1 << 3,
 }
 
+export function directionToChar(direction: Direction) {
+  return match(direction, {
+    [Direction.North]: () => '↑',
+    [Direction.East]: () => '→',
+    [Direction.South]: () => '↓',
+    [Direction.West]: () => '←',
+  })
+}
+
 // Iterator helpers
 export function h<T>(it: Iterable<T>) {
   return new IteratorHelpers(it)
