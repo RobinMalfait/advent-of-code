@@ -5,9 +5,7 @@ import { bench, group, run } from 'mitata'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = await Bun.file(
-  resolve(__dirname, '..', '..', '..', 'data', '2023-17.txt')
-).text()
+let data = await Bun.file(resolve(__dirname, '..', '..', '..', 'data', '2023-17.txt')).text()
 
 group({ name: '2023 — day 17', summary: false }, () => {
   bench('Part 1', () => part1(data))
