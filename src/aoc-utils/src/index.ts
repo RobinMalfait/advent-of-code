@@ -402,6 +402,136 @@ export function isOppositeDirection(a: Direction, b: Direction) {
   return false
 }
 
+// Algorithms
+export function astar<T>({
+  start,
+  successors,
+  heuristic = () => 0,
+  success,
+  value = () => 1,
+}: {
+  start: T
+  successors: (node: T) => Iterable<T>
+  heuristic?: (node: T) => number
+  success: (node: T) => boolean
+  value?: (node: T, previous: T) => number
+}): [path: T[], cost: number] | null {
+  let path = []
+  let parent = new Map()
+
+  let g = new DefaultMap<T, number>(() => Infinity)
+  g.set(start, 0)
+
+  let f = new DefaultMap<T, number>(() => Infinity)
+  f.set(start, g.get(start) + heuristic(start))
+
+  let open = new BinaryHeap((node) => f.get(node), [start])
+
+  while (open.size > 0) {
+    let current = open.pop()
+
+    if (success(current)) {
+      let node = current
+      while (node !== start) {
+        path.unshift(node)
+        node = parent.get(node)
+      }
+      path.unshift(start)
+      return [path, f.get(current)]
+    }
+
+    for (let next of successors(current)) {
+      let score = g.get(current) + value(next, current)
+      if (score < g.get(next)) {
+        parent.set(next, current)
+        g.set(next, score)
+        f.set(next, score + heuristic(next))
+        open.push(next)
+      }
+    }
+  }
+}
+
+class BinaryHeap<T> {
+  constructor(
+    private score: (item: T) => number,
+    private data: T[] = []
+  ) {}
+
+  push(item: T) {
+    this.data.push(item)
+    this.sink(this.data.length - 1)
+  }
+
+  pop(): T {
+    let result = this.data[0]
+    let end = this.data.pop()
+
+    if (this.data.length > 0) {
+      this.data[0] = end
+      this.bubble(0)
+    }
+
+    return result
+  }
+
+  get size() {
+    return this.data.length
+  }
+
+  private sink(n: number) {
+    let element = this.data[n]
+
+    while (n > 0) {
+      let parentN = ((n + 1) >> 1) - 1
+      let parent = this.data[parentN]
+
+      if (this.score(element) < this.score(parent)) {
+        this.data[parentN] = element
+        this.data[n] = parent
+        n = parentN
+      } else {
+        break
+      }
+    }
+  }
+
+  private bubble(n: number) {
+    let length = this.data.length
+    let element = this.data[n]
+    let elemScore = this.score(element)
+
+    while (true) {
+      let child2N = (n + 1) << 1
+      let child1N = child2N - 1
+
+      let swap = null
+      let child1Score: number
+
+      if (child1N < length) {
+        let child1 = this.data[child1N]
+        child1Score = this.score(child1)
+
+        if (child1Score < elemScore) swap = child1N
+      }
+
+      if (child2N < length) {
+        let child2 = this.data[child2N]
+        let child2Score = this.score(child2)
+        if (child2Score < (swap === null ? elemScore : child1Score)) swap = child2N
+      }
+
+      if (swap !== null) {
+        this.data[n] = this.data[swap]
+        this.data[swap] = element
+        n = swap
+      } else {
+        break
+      }
+    }
+  }
+}
+
 // Iterator helpers
 export function h<T>(it: Iterable<T>) {
   return new IteratorHelpers(it)
