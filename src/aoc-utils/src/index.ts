@@ -265,7 +265,7 @@ export class Point {
   }
 
   neighbours() {
-    return [this.up(), this.down(), this.left(), this.right()]
+    return [this.up(), this.right(), this.down(), this.left()]
   }
 
   manhattanDistanceTo(other: Point) {
