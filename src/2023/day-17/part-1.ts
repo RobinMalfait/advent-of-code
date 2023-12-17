@@ -15,7 +15,7 @@ class State {
   private constructor(
     public readonly position: Point,
     public readonly direction: Direction | null = null,
-    public readonly directionCount: number = 0
+    public readonly count: number = 0
   ) {}
 
   static new(position: Point, direction: Direction | null = null, directionCount: number = 1) {
@@ -41,8 +41,8 @@ export default function (blob: string, min = 0, max = 3) {
         if (isOppositeDirection(state.direction, direction)) continue
 
         // Try to step in the same direction for at most `max` steps
-        if (state.direction === direction && state.directionCount < max) {
-          yield State.new(n, direction, state.directionCount + 1)
+        if (state.direction === direction && state.count < max) {
+          yield State.new(n, direction, state.count + 1)
         }
 
         // Step in a new direction
@@ -50,13 +50,13 @@ export default function (blob: string, min = 0, max = 3) {
           // First step, we don't have a direction yet
           state.direction === null ||
           // We do have direction, keep stepping in that direction for a minimum of `min` steps
-          (state.direction !== direction && state.directionCount >= min)
+          (state.direction !== direction && state.count >= min)
         ) {
           yield State.new(n, direction)
         }
       }
     },
-    success: (state) => state.position === end && state.directionCount >= min,
+    success: (state) => state.position === end && state.count >= min,
     value: (state) => grid.get(state.position),
   })
 
