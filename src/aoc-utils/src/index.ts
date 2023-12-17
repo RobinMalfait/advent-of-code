@@ -394,6 +394,14 @@ export function directionToChar(direction: Direction) {
   })
 }
 
+export function isOppositeDirection(a: Direction, b: Direction) {
+  if (a === Direction.North && b === Direction.South) return true
+  if (a === Direction.South && b === Direction.North) return true
+  if (a === Direction.East && b === Direction.West) return true
+  if (a === Direction.West && b === Direction.East) return true
+  return false
+}
+
 // Iterator helpers
 export function h<T>(it: Iterable<T>) {
   return new IteratorHelpers(it)
