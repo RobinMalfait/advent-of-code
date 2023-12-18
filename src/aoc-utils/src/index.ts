@@ -225,28 +225,28 @@ export class Point {
     return Point.points.get(x).get(y)
   }
 
-  up() {
-    return Point.new(this.x, this.y - 1)
+  up(amount = 1) {
+    return Point.new(this.x, this.y - amount)
   }
 
-  down() {
-    return Point.new(this.x, this.y + 1)
+  down(amount = 1) {
+    return Point.new(this.x, this.y + amount)
   }
 
-  left() {
-    return Point.new(this.x - 1, this.y)
+  left(amount = 1) {
+    return Point.new(this.x - amount, this.y)
   }
 
-  right() {
-    return Point.new(this.x + 1, this.y)
+  right(amount = 1) {
+    return Point.new(this.x + amount, this.y)
   }
 
-  navigate(direction: Direction) {
+  navigate(direction: Direction, amount = 1) {
     return match(direction, {
-      [Direction.North]: () => this.up(),
-      [Direction.East]: () => this.right(),
-      [Direction.South]: () => this.down(),
-      [Direction.West]: () => this.left(),
+      [Direction.North]: () => this.up(amount),
+      [Direction.East]: () => this.right(amount),
+      [Direction.South]: () => this.down(amount),
+      [Direction.West]: () => this.left(amount),
     })
   }
 
