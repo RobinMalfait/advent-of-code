@@ -348,6 +348,23 @@ export function transposePointSet(input: Set<Point>) {
   return transposed
 }
 
+// Polygon area using the Shoelace formula + Pick's theorem
+// - https://en.wikipedia.org/wiki/Shoelace_formula
+// - https://en.wikipedia.org/wiki/Pick%27s_theorem
+export function polygonArea(vertices: Point[]) {
+  let area = 0
+  let perimeter = 0
+  let previous = vertices[vertices.length - 1]
+
+  for (let vertex of vertices) {
+    area += previous.x * vertex.y - vertex.x * previous.y
+    perimeter += Math.abs(vertex.x - previous.x) + Math.abs(vertex.y - previous.y)
+    previous = vertex
+  }
+
+  return (Math.abs(area) + perimeter) / 2 + 1
+}
+
 export function visualizePointMap<T>(
   map: Map<Point, T>,
   valueFn: (value: T, point: Point) => string = (x) => x?.toString()
