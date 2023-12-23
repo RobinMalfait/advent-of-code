@@ -467,6 +467,8 @@ export function astar<T>({
       }
     }
   }
+
+  return null
 }
 
 class BinaryHeap<T> {
