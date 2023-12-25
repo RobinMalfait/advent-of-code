@@ -211,6 +211,27 @@ export class DefaultMap<K = string, V = any> extends Map<K, V> {
   }
 }
 
+export class Range {
+  constructor(
+    /** Inclusive */
+    public readonly start: number,
+    /** Exclusive */
+    public readonly end: number
+  ) {}
+
+  get size() {
+    return this.end - this.start + 1
+  }
+
+  split(value: number) {
+    return [new Range(this.start, value - 1), new Range(value, this.end)]
+  }
+
+  toString() {
+    return `Range(${this.start}, ${this.end})`
+  }
+}
+
 export class Point {
   private static points = new DefaultMap<number, DefaultMap<number, Point>>(
     (x) => new DefaultMap((y) => new Point(x, y))
