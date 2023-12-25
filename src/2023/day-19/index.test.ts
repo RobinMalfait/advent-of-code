@@ -39,7 +39,7 @@ describe('Part 1', () => {
   })
 })
 
-describe.skip('Part 2', () => {
+describe('Part 2', () => {
   it.each([
     [
       `
@@ -67,7 +67,7 @@ describe.skip('Part 2', () => {
     expect(part2(input)).toBe(expected)
   })
 
-  it.skip('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot()
+  it('should produce the correct value for the input data', async () => {
+    expect(part2(await data)).toMatchInlineSnapshot(`126107942006821`)
   })
 })
