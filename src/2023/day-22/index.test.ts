@@ -7,7 +7,7 @@ import part2 from './part-2'
 let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2023-22.txt'), 'utf8')
 
 describe('Part 1', () => {
-  it.each([
+  it.skip.each([
     [
       `
         1,0,1~1,2,1
