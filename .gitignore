@@ -1,7 +1,6 @@
 .*
 !.gitignore
 !.nvmrc
-!.prettierignore
 
 !.github
 

@@ -7,8 +7,7 @@
   "scripts": {
     "test": "vitest run",
     "tdd": "vitest",
-    "bench": "node ../../bench.js",
-    "format": "prettier . --write --ignore-unknown"
+    "bench": "node ../../bench.js"
   },
   "dependencies": {
     "aoc-utils": "workspace:*"
