@@ -22,6 +22,7 @@
     "cheerio": "1.0.0-rc.12",
     "cli-table": "^0.3.11",
     "mitata": "^0.1.6",
+    "prettier": "^3.3.3",
     "pretty-ms": "^8.0.0",
     "typescript": "^5.3.3",
     "vitest": "^2.1.1"

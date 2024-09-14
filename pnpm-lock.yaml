@@ -30,6 +30,9 @@ importers:
       mitata:
         specifier: ^0.1.6
         version: 0.1.6
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       pretty-ms:
         specifier: ^8.0.0
         version: 8.0.0
@@ -528,6 +531,11 @@ packages:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-ms@8.0.0:
     resolution: {integrity: sha512-ASJqOugUF1bbzI35STMBUpZqdfYKlJugy6JBziGi2EE+AL5JPJGSzvpeVXojxrr0ViUYoToUjb5kjSEGf7Y83Q==}
     engines: {node: '>=14.16'}
@@ -1018,6 +1026,8 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.1.0
       source-map-js: 1.2.1
+
+  prettier@3.3.3: {}
 
   pretty-ms@8.0.0:
     dependencies:

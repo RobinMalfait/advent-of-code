@@ -88,7 +88,7 @@ if (config.day !== null) {
     )
     await promises.writeFile(
       `./src/${config.year}/README.md`,
-      prettier.format(readmeContents, { parser: 'markdown' })
+      await prettier.format(readmeContents, { parser: 'markdown' })
     )
   }
 }
