@@ -53,5 +53,6 @@
   },
   "dependencies": {
     "date-fns": "^2.30.0"
-  }
+  },
+  "packageManager": "pnpm@9.10.0"
 }
