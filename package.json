@@ -9,17 +9,8 @@
     "setup": "node ./setup.js",
     "readme": "node ./update-readme.js",
     "bench": "node ./bench.js",
-    "format": "prettier . --write --ignore-unknown",
-    "lint": "prettier . --check --ignore-unknown"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "printWidth": 100,
-    "plugins": [
-      "prettier-plugin-organize-imports"
-    ]
+    "format": "biome check --fix",
+    "lint": "biome check"
   },
   "keywords": [],
   "author": "Robin Malfait <malfait.robin@gmail.com>",
@@ -47,8 +38,6 @@
     "cli-table": "^0.3.11",
     "jest": "30.0.0-alpha.2",
     "mitata": "^0.1.6",
-    "prettier": "^3.1.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
     "pretty-ms": "^8.0.0",
     "typescript": "^5.3.3"
   },
