@@ -5,7 +5,7 @@ const ZERO = BigInt(0)
 const ONE = BigInt(1)
 const TWO = BigInt(2)
 
-module.exports = function (input, size, times, card) {
+module.exports = (input, size, times, card) => {
   const cardn = BigInt(card)
   const sizen = BigInt(size)
   const timesn = BigInt(times)

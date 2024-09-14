@@ -7,8 +7,8 @@ export default function (blob: string) {
   let seconds = 0
   while (true) {
     seconds += 1
-    let minY = Infinity
-    let maxY = -Infinity
+    let minY = Number.POSITIVE_INFINITY
+    let maxY = Number.NEGATIVE_INFINITY
 
     let xCount = {}
 

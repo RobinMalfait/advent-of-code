@@ -2,7 +2,7 @@
 
 const { createIntcodeComputer } = require('../intcode/computer')
 
-module.exports = async function (input) {
+module.exports = async (input) => {
   const GRID_SIZE = 50
   const sqrt = Math.sqrt(GRID_SIZE)
 

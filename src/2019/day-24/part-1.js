@@ -5,7 +5,7 @@ const { sum, table } = require('../utils')
 const BUG = '#'
 const EMPTY = '.'
 
-module.exports = async function (input) {
+module.exports = async (input) => {
   let board = input.split('\n').map((row) => row.split(''))
 
   const history = [input]
@@ -23,7 +23,7 @@ module.exports = async function (input) {
     board = next_board
   }
 
-  const flat = board.flat(Infinity)
+  const flat = board.flat(Number.POSITIVE_INFINITY)
   return sum(
     flat
       .map((tile, i) => ({ tile, i }))

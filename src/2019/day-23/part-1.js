@@ -3,7 +3,7 @@
 const EventEmitter = require('events')
 const { createIntcodeComputer, collect } = require('../intcode/computer')
 
-module.exports = async function (input) {
+module.exports = async (input) => {
   const network = new EventEmitter()
 
   const NAT = new Promise((resolve) => {

@@ -92,8 +92,8 @@ export default function (blob: string, presses = 1000) {
 }
 
 enum Pulse {
-  Low,
-  High,
+  Low = 0,
+  High = 1,
 }
 
 function parse(input: string) {

@@ -35,7 +35,7 @@ export default function (blob: string, width = 50, height = 6) {
     }
   }
 
-  return grid.flat(Infinity).filter((x) => x === State.Lit).length
+  return grid.flat(Number.POSITIVE_INFINITY).filter((x) => x === State.Lit).length
 }
 
 function parse(

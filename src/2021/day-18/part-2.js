@@ -6,7 +6,7 @@ export default function (blob) {
     .split('\n')
     .map((assignment) => assignment.trim())
 
-  let max = -Infinity
+  let max = Number.NEGATIVE_INFINITY
 
   for (let lhs of assignments) {
     for (let rhs of assignments) {

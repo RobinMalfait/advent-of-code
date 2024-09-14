@@ -5,7 +5,7 @@ const { sum, table, range } = require('../utils')
 const BUG = '#'
 const EMPTY = '.'
 
-module.exports = async function (input, minutes) {
+module.exports = async (input, minutes) => {
   let board = input.split('\n').map((row) => row.split(''))
   const width = board.length
   const height = board[0].length
@@ -17,7 +17,7 @@ module.exports = async function (input, minutes) {
     board = produce(board)
   }
 
-  const flat = board.flat(Infinity).join('')
+  const flat = board.flat(Number.POSITIVE_INFINITY).join('')
   return (flat.match(/\#/g) || []).length
 }
 

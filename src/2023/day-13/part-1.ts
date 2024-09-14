@@ -14,8 +14,8 @@ export default function (blob: string) {
 }
 
 enum Split {
-  Horizontal,
-  Vertical,
+  Horizontal = 0,
+  Vertical = 1,
 }
 
 function split([grid, { width, height }]: [Map<Point, string>, { width: number; height: number }]) {

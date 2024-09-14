@@ -156,7 +156,7 @@ function createIntcodeComputer(program = '', OPTIONS = {}) {
         return
       }
 
-      const flattened = values.flat(Infinity)
+      const flattened = values.flat(Number.POSITIVE_INFINITY)
       if (flattened.some((v) => typeof v !== 'number')) {
         throw new Error('Inputs must be of type number')
       }
@@ -201,7 +201,7 @@ function resolvePosition(operator_state, computer_state) {
   const position = ++operator_state.local_instruction_pointer
 
   // Find the actual mode
-  const mode = operator_state.next_mode % 10 | 0
+  const mode = (operator_state.next_mode % 10) | 0
 
   // Prep the next_mode
   operator_state.next_mode /= 10

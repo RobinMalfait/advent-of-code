@@ -63,8 +63,8 @@ function parseInput(blob: string): [Map<string, Tile>, number] {
 }
 
 enum Tile {
-  Rock,
-  Sand,
+  Rock = 0,
+  Sand = 1,
 }
 
 function key(x: number, y: number) {

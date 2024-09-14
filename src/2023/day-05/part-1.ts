@@ -1,7 +1,7 @@
 export default function (blob: string) {
   let { seeds, maps } = parse(blob.trim())
 
-  let min = Infinity
+  let min = Number.POSITIVE_INFINITY
 
   for (let seed of seeds) {
     let a = locate(seed, maps.get('seed-to-soil'))

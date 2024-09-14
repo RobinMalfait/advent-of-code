@@ -5,10 +5,10 @@ export function solve(grid) {
   let path = []
   let parent = new Map()
 
-  let g = new Map(grid.flatMap((row) => row.map((node) => [node, Infinity])))
+  let g = new Map(grid.flatMap((row) => row.map((node) => [node, Number.POSITIVE_INFINITY])))
   g.set(start, 0)
 
-  let f = new Map(grid.flatMap((row) => row.map((node) => [node, Infinity])))
+  let f = new Map(grid.flatMap((row) => row.map((node) => [node, Number.POSITIVE_INFINITY])))
   f.set(start, g.get(start) + manhatten(start, target))
 
   // Had this working with a normal array where I looked for the next node with

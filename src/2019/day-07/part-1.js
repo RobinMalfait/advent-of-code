@@ -13,7 +13,7 @@ module.exports = async function amplification(program, amplifier_config) {
     const previous_result = await chain
     const result = await calculateAmplifierOutput(program, amplifiers)
     return result > previous_result ? result : previous_result
-  }, -Infinity)
+  }, Number.NEGATIVE_INFINITY)
 }
 
 async function calculateAmplifierOutput(program, amplifiers) {

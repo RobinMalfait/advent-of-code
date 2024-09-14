@@ -93,7 +93,7 @@ function findVaporizedAsteroid(input, number) {
 
   // Zip asteroids together, this will take the first asteroid from the first
   // array, the first array of the second and so on. It will go on in loops.
-  const woven = _.zip(...values).flat(Infinity)
+  const woven = _.zip(...values).flat(Number.POSITIVE_INFINITY)
 
   // Find the asteroid at position n
   const asteroid_n = woven[number - 1]

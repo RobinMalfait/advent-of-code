@@ -104,7 +104,7 @@ function parse(input: string) {
 
 function parseValue(input: string) {
   if (input.match(/^\d+$/)) {
-    return { type: 'LITERAL' as const, value: parseInt(input, 10) }
+    return { type: 'LITERAL' as const, value: Number.parseInt(input, 10) }
   } else {
     return { type: 'VARIABLE' as const, name: input }
   }

@@ -25,8 +25,8 @@ function compute(instructions, input) {
   let registers = new Map()
 
   function resolve(value) {
-    if (parseInt(value) == value) {
-      return parseInt(value)
+    if (Number.parseInt(value) == value) {
+      return Number.parseInt(value)
     } else {
       return registers.get(value)
     }

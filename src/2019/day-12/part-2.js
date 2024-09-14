@@ -9,7 +9,7 @@ function stepsToInitialValue(input) {
 function keyFor(moons, property) {
   return moons
     .map((moon) => [moon.position[property], moon.velocity[property]])
-    .flat(Infinity)
+    .flat(Number.POSITIVE_INFINITY)
     .join(' || ')
 }
 

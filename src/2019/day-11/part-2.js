@@ -103,7 +103,7 @@ function visualize(map) {
         return map.has(position) ? map.get(position) : COLORS.BLACK
       })
     )
-    .flat(Infinity)
+    .flat(Number.POSITIVE_INFINITY)
     .join('')
 
   return process(data, width, height).then(border(1)).then(scale(2)).then(render())

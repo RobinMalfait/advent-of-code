@@ -30,6 +30,6 @@ function parse(input: string) {
       1: Direction.South,
       2: Direction.West,
     }),
-    amount: parseInt(params.groups.amount, 16),
+    amount: Number.parseInt(params.groups.amount, 16),
   }
 }

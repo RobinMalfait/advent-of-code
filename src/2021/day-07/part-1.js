@@ -3,7 +3,7 @@ export default function (blob) {
   let from = Math.min(...positions)
   let to = Math.max(...positions)
 
-  let destination = Infinity
+  let destination = Number.POSITIVE_INFINITY
   for (let target = from; target <= to; target++) {
     let total = 0
     for (let position of positions) {

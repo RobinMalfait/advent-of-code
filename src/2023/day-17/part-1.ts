@@ -1,4 +1,11 @@
-import { DefaultMap, Direction, Point, astar, isOppositeDirection, pointsToSize } from 'aoc-utils'
+import {
+  DefaultMap,
+  type Direction,
+  Point,
+  astar,
+  isOppositeDirection,
+  pointsToSize,
+} from 'aoc-utils'
 
 class State {
   private static states = new DefaultMap<
@@ -18,7 +25,7 @@ class State {
     public readonly count: number = 0
   ) {}
 
-  static new(position: Point, direction: Direction | null = null, directionCount: number = 1) {
+  static new(position: Point, direction: Direction | null = null, directionCount = 1) {
     return State.states.get(position).get(direction).get(directionCount)
   }
 }

@@ -1,7 +1,7 @@
 enum Shape {
-  Rock,
-  Paper,
-  Scissors,
+  Rock = 0,
+  Paper = 1,
+  Scissors = 2,
 }
 
 let winners = new Map([
@@ -25,9 +25,9 @@ function pointsForShape(shape: Shape): number {
 }
 
 enum State {
-  Won,
-  Lost,
-  Draw,
+  Won = 0,
+  Lost = 1,
+  Draw = 2,
 }
 
 function pointsForState(state: State): number {

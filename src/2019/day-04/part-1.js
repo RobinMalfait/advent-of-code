@@ -11,7 +11,7 @@ function isValidPassword(password) {
   }
 
   // Verify increasing values
-  return parts.every((part, index) => (parts[index - 1] || -Infinity) <= part)
+  return parts.every((part, index) => (parts[index - 1] || Number.NEGATIVE_INFINITY) <= part)
 }
 
 function countValidPasswordsBetween(start, end) {

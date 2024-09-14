@@ -16,13 +16,8 @@
   "author": "Robin Malfait <malfait.robin@gmail.com>",
   "license": "MIT",
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/templates/"
-    ],
-    "projects": [
-      "<rootDir>/src/*"
-    ],
+    "testPathIgnorePatterns": ["/node_modules/", "/templates/"],
+    "projects": ["<rootDir>/src/*"],
     "transform": {
       "\\.(t|j)sx?$": "@swc/jest"
     }

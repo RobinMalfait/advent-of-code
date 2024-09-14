@@ -22,7 +22,7 @@ function _parse(binary, state = { ptr: 0 }) {
       str += number.slice(1)
     } while (repeat)
 
-    return { version, typeId, value: parseInt(str, 2) }
+    return { version, typeId, value: Number.parseInt(str, 2) }
   }
 
   // Operator(s)
@@ -63,5 +63,5 @@ function read(binary, bits, state) {
 }
 
 function readAsNumber(binary, bits, state) {
-  return parseInt(read(binary, bits, state), 2)
+  return Number.parseInt(read(binary, bits, state), 2)
 }

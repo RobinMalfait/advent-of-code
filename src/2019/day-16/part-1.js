@@ -29,7 +29,9 @@ function calculateBase(factor = 1) {
   if (s.has(factor)) {
     return s.get(factor)
   }
-  const base = [0, 1, 0, -1].map((value) => range(factor).map(() => value)).flat(Infinity)
+  const base = [0, 1, 0, -1]
+    .map((value) => range(factor).map(() => value))
+    .flat(Number.POSITIVE_INFINITY)
 
   s.set(factor, base)
 

@@ -11,7 +11,7 @@ function isValidPassword(password) {
   // }
 
   // Verify increasing values
-  if (!parts.every((part, index) => (parts[index - 1] || -Infinity) <= part)) {
+  if (!parts.every((part, index) => (parts[index - 1] || Number.NEGATIVE_INFINITY) <= part)) {
     return false
   }
 

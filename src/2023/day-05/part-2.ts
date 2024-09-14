@@ -3,7 +3,7 @@ import { chunk } from 'aoc-utils'
 export default function (blob: string) {
   let { seeds, maps } = parse(blob.trim())
 
-  let min = Infinity
+  let min = Number.POSITIVE_INFINITY
 
   for (let [start, len] of chunk(seeds, 2)) {
     let q: [start: number, end: number][] = [

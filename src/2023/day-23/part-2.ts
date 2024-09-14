@@ -1,9 +1,9 @@
 import { DefaultMap, Direction, Point, match } from 'aoc-utils'
 
 enum Tile {
-  Path,
-  Forest,
-  Slopes,
+  Path = 0,
+  Forest = 1,
+  Slopes = 2,
 }
 
 export default function (blob: string) {
@@ -91,7 +91,7 @@ function dfs(
     return 0
   }
 
-  let max = -Infinity
+  let max = Number.NEGATIVE_INFINITY
 
   seen.add(start)
   for (let [n, distance] of graph.get(start)) {

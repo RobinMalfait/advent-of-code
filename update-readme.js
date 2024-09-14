@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
 import path from 'path'
+import fs from 'fs/promises'
 
 import cheerio from 'cheerio'
 import prettier from 'prettier'

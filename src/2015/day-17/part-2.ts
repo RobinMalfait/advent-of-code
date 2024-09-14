@@ -1,11 +1,11 @@
-export default function (blob: string, liters: number = 150) {
+export default function (blob: string, liters = 150) {
   let buckets = blob
     .trim()
     .split('\n')
     .map((line) => Number(line.trim()))
 
   let byContainersCount = new Map<number, number>()
-  let lowestNumber = Infinity
+  let lowestNumber = Number.POSITIVE_INFINITY
   for (let combo of combinations(buckets)) {
     if (combo.reduce((a, b) => a + b, 0) === liters) {
       lowestNumber = Math.min(lowestNumber, combo.length)

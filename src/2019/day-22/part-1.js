@@ -2,7 +2,7 @@
 
 const { range } = require('../utils')
 
-module.exports = function (input, size) {
+module.exports = (input, size) => {
   return input.split('\n').reduce((next_deck, action) => {
     if (action === 'deal into new stack') {
       return next_deck.reverse()

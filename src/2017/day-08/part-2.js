@@ -12,7 +12,7 @@ export default function (blob) {
 
   let registers = {}
   let sign = { inc: +1, dec: -1 }
-  let max = -Infinity
+  let max = Number.NEGATIVE_INFINITY
 
   for (let { register, action, amount, arg1, arg2, operator } of instructions) {
     registers[register] ??= 0

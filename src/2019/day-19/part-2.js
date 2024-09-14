@@ -69,7 +69,7 @@ async function calculateBottomEdgeSlope(read) {
   return y2 - y1 / x2 - x1
 }
 
-module.exports = async function (input) {
+module.exports = async (input) => {
   const GRID_SIZE = 100
   const value = createValue(input)
 

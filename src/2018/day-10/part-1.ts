@@ -5,8 +5,8 @@ export default function (blob: string) {
     .map((line) => parse(line.trim()))
 
   while (true) {
-    let minY = Infinity
-    let maxY = -Infinity
+    let minY = Number.POSITIVE_INFINITY
+    let maxY = Number.NEGATIVE_INFINITY
 
     let xCount = {}
 

@@ -4,10 +4,10 @@ export default function (blob: string, maxDistance = 10_000) {
     .split('\n')
     .map((line) => Point.fromString(line.trim()))
 
-  let minX = points.reduce((acc, p) => Math.min(acc, p.x), Infinity)
-  let maxX = points.reduce((acc, p) => Math.max(acc, p.x), -Infinity)
-  let minY = points.reduce((acc, p) => Math.min(acc, p.y), Infinity)
-  let maxY = points.reduce((acc, p) => Math.max(acc, p.y), -Infinity)
+  let minX = points.reduce((acc, p) => Math.min(acc, p.x), Number.POSITIVE_INFINITY)
+  let maxX = points.reduce((acc, p) => Math.max(acc, p.x), Number.NEGATIVE_INFINITY)
+  let minY = points.reduce((acc, p) => Math.min(acc, p.y), Number.POSITIVE_INFINITY)
+  let maxY = points.reduce((acc, p) => Math.max(acc, p.y), Number.NEGATIVE_INFINITY)
 
   let size = 0
 
@@ -47,8 +47,8 @@ class Point {
     (x) => new DefaultMap((y) => new Point(x, y))
   )
   private constructor(
-    public x: number = 0,
-    public y: number = 0
+    public x = 0,
+    public y = 0
   ) {}
 
   static fromString(input: string) {

@@ -3,7 +3,7 @@ import { compute, parse } from './part-1'
 
 export default function (blob: string) {
   let grid = parse(blob)
-  let max = -Infinity
+  let max = Number.NEGATIVE_INFINITY
   let { width, height } = pointsToSize(grid)
 
   // First and last row

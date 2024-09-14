@@ -4,10 +4,10 @@ export default function (blob: string) {
     .split('\n')
     .map((line) => Point.fromString(line.trim()))
 
-  let minX = points.reduce((acc, p) => Math.min(acc, p.x), Infinity)
-  let maxX = points.reduce((acc, p) => Math.max(acc, p.x), -Infinity)
-  let minY = points.reduce((acc, p) => Math.min(acc, p.y), Infinity)
-  let maxY = points.reduce((acc, p) => Math.max(acc, p.y), -Infinity)
+  let minX = points.reduce((acc, p) => Math.min(acc, p.x), Number.POSITIVE_INFINITY)
+  let maxX = points.reduce((acc, p) => Math.max(acc, p.x), Number.NEGATIVE_INFINITY)
+  let minY = points.reduce((acc, p) => Math.min(acc, p.y), Number.POSITIVE_INFINITY)
+  let maxY = points.reduce((acc, p) => Math.max(acc, p.y), Number.NEGATIVE_INFINITY)
 
   let corners = points.filter((p) => p.x === minX || p.x === maxX || p.y === minY || p.y === maxY)
 
@@ -31,7 +31,7 @@ export default function (blob: string) {
     counter.delete(corner)
   }
 
-  let maxArea = -Infinity
+  let maxArea = Number.NEGATIVE_INFINITY
   for (let x of counter.values()) {
     maxArea = Math.max(maxArea, x)
   }
@@ -58,8 +58,8 @@ class Point {
     (x) => new DefaultMap((y) => new Point(x, y))
   )
   private constructor(
-    public x: number = 0,
-    public y: number = 0
+    public x = 0,
+    public y = 0
   ) {}
 
   static fromString(input: string) {

@@ -3,9 +3,9 @@
 const EventEmitter = require('events')
 const { createIntcodeComputer, collect } = require('../intcode/computer')
 
-module.exports = async function (input) {
+module.exports = async (input) => {
   const network = new EventEmitter()
-  const mem = { x: Infinity, y: Infinity }
+  const mem = { x: Number.POSITIVE_INFINITY, y: Number.POSITIVE_INFINITY }
   const computers = []
 
   const NAT = new Promise((resolve) => {

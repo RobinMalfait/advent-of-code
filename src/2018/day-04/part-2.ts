@@ -35,7 +35,7 @@ export default function (blob: string) {
   let chosenGuardId = null as null | number
   let chosenMinute = null as null | number
 
-  let maxCount = -Infinity
+  let maxCount = Number.NEGATIVE_INFINITY
 
   for (let [guard, minuteCount] of minuteTracker) {
     for (let [minute, count] of minuteCount) {

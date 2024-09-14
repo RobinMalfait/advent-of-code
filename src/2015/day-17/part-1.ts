@@ -1,4 +1,4 @@
-export default function (blob: string, liters: number = 150) {
+export default function (blob: string, liters = 150) {
   let buckets = blob
     .trim()
     .split('\n')

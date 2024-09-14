@@ -9,8 +9,8 @@ export default function (blob) {
     })
 
   function modify(mask, value) {
-    let or = BigInt(parseInt(mask.replace(/X/g, '0'), 2))
-    let and = BigInt(parseInt(mask.replace(/X/g, '1'), 2))
+    let or = BigInt(Number.parseInt(mask.replace(/X/g, '0'), 2))
+    let and = BigInt(Number.parseInt(mask.replace(/X/g, '1'), 2))
     return (value | or) & and
   }
 

@@ -1,6 +1,6 @@
 export default function (blob) {
   let binaries = blob.trim().split('\n')
-  let numbers = binaries.map((line) => parseInt(line.trim(), 2))
+  let numbers = binaries.map((line) => Number.parseInt(line.trim(), 2))
   let bits = binaries[0].length
 
   let gamma = 0

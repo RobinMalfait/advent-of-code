@@ -31,10 +31,10 @@ function play(info: ReturnType<typeof parse>) {
     }
   }
 
-  return players.reduce((a, b) => Math.max(a, b), -Infinity)
+  return players.reduce((a, b) => Math.max(a, b), Number.NEGATIVE_INFINITY)
 }
 
-function parse(input: string, multiplier: number = 1) {
+function parse(input: string, multiplier = 1) {
   let { players, marbles } = /(?<players>\d+).*?(?<marbles>\d+).*/.exec(input).groups
   return { players: Number(players), marbles: Number(marbles) * multiplier }
 }

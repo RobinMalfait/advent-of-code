@@ -17,7 +17,7 @@ export default function (blob: string) {
     distances.set(key(to, from), distance)
   }
 
-  let max = -Infinity
+  let max = Number.NEGATIVE_INFINITY
   for (let path of permutations(Array.from(cities))) {
     let distance = 0
 

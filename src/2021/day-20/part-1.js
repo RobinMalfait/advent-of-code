@@ -26,10 +26,10 @@ export default function (blob, steps = 2) {
 
     let newLights = new Set()
 
-    let minX = Infinity
-    let minY = Infinity
-    let maxX = -Infinity
-    let maxY = -Infinity
+    let minX = Number.POSITIVE_INFINITY
+    let minY = Number.POSITIVE_INFINITY
+    let maxX = Number.NEGATIVE_INFINITY
+    let maxY = Number.NEGATIVE_INFINITY
 
     for (let light of lights) {
       let [y, x] = fromId(light)
@@ -52,7 +52,7 @@ export default function (blob, steps = 2) {
           }
         }
 
-        if (imageEnhancementAlgorithm[parseInt(binary, 2)] === expect) {
+        if (imageEnhancementAlgorithm[Number.parseInt(binary, 2)] === expect) {
           newLights.add(id(y, x))
         }
       }
@@ -65,10 +65,10 @@ export default function (blob, steps = 2) {
 }
 
 function debug(lights) {
-  let minX = Infinity
-  let minY = Infinity
-  let maxX = -Infinity
-  let maxY = -Infinity
+  let minX = Number.POSITIVE_INFINITY
+  let minY = Number.POSITIVE_INFINITY
+  let maxX = Number.NEGATIVE_INFINITY
+  let maxY = Number.NEGATIVE_INFINITY
 
   for (let light of lights) {
     let [y, x] = fromId(light)

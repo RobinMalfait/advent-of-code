@@ -303,10 +303,10 @@ export class Point {
 }
 
 export function pointsToGrid(it: Iterable<Point>) {
-  let minX = Infinity
-  let minY = Infinity
-  let maxX = -Infinity
-  let maxY = -Infinity
+  let minX = Number.POSITIVE_INFINITY
+  let minY = Number.POSITIVE_INFINITY
+  let maxX = Number.NEGATIVE_INFINITY
+  let maxY = Number.NEGATIVE_INFINITY
 
   for (let point of it) {
     minX = Math.min(minX, point.x)
@@ -328,10 +328,10 @@ export function pointsToGrid(it: Iterable<Point>) {
 }
 
 export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
-  let minX = Infinity
-  let minY = Infinity
-  let maxX = -Infinity
-  let maxY = -Infinity
+  let minX = Number.POSITIVE_INFINITY
+  let minY = Number.POSITIVE_INFINITY
+  let maxX = Number.NEGATIVE_INFINITY
+  let maxY = Number.NEGATIVE_INFINITY
 
   for (let point of it.keys()) {
     minX = Math.min(minX, point.x)
@@ -457,10 +457,10 @@ export function astar<T>({
   let path = []
   let parent = new Map()
 
-  let g = new DefaultMap<T, number>(() => Infinity)
+  let g = new DefaultMap<T, number>(() => Number.POSITIVE_INFINITY)
   g.set(start, 0)
 
-  let f = new DefaultMap<T, number>(() => Infinity)
+  let f = new DefaultMap<T, number>(() => Number.POSITIVE_INFINITY)
   f.set(start, g.get(start) + heuristic(start))
 
   let open = new BinaryHeap((node) => f.get(node), [start])

@@ -1,6 +1,6 @@
 export default function (
   blob: string,
-  rounds: number = 20,
+  rounds = 20,
   stressReducer = (value: number) => Math.floor(value / 3)
 ) {
   let monkeys = blob.trim().split('\n\n').map(parseMonkey)
@@ -44,7 +44,7 @@ function parseMonkey(block: string): Monkey {
   return {
     id: Number(lines[0].replace('Monkey ', '').replace(':', '')),
     items: lines[1].replace('Starting items: ', '').split(', ').map(Number),
-    operation: (function () {
+    operation: (() => {
       let [lhs, op, rhs] = lines[2].replace('Operation: new = ', '').split(' ')
       if (lhs === 'old' && op === '+' && rhs === 'old') {
         return (old: number) => old + old
