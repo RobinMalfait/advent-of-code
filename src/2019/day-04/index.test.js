@@ -1,5 +1,6 @@
-import part1 from './part-1.js'
-import part2 from './part-2.js'
+import { describe, expect, it } from 'vitest'
+import part1 from './part-1'
+import part2 from './part-2'
 
 describe('Part 1', () => {
   // Part 1

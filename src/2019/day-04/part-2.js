@@ -1,6 +1,6 @@
 // Day 4: Secure Container
 
-const { range } = require('../utils')
+import { range } from '../utils'
 
 function isValidPassword(password) {
   const parts = `${password || ''}`.split('').map(Number)
@@ -47,4 +47,4 @@ function countValidPasswordsBetween(start, end) {
   )
 }
 
-module.exports = { isValidPassword, countValidPasswordsBetween }
+export default { isValidPassword, countValidPasswordsBetween }

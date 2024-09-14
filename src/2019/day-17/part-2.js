@@ -1,6 +1,6 @@
 // Day 17: Set and Forget
 
-const { createIntcodeComputer } = require('../intcode/computer')
+import { createIntcodeComputer } from '../intcode/computer'
 
 const MAIN_MOVEMENT_ROUTINE = {
   A: 'A'.charCodeAt(0),
@@ -77,7 +77,7 @@ const A = encodeRaw('R,4,L,12,L,8')
 const B = encodeRaw('') //"R,4,R,4,R,8");
 const C = encodeRaw('') //"L,6,L,2");
 
-module.exports = async function ASCII(input) {
+export default async function ASCII(input) {
   const computer = createIntcodeComputer(input)
   let buffer = ''
   computer.output((value, index) => {

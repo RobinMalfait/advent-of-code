@@ -1,9 +1,9 @@
 // Day 23: Category Six
 
-const EventEmitter = require('node:events')
-const { createIntcodeComputer, collect } = require('../intcode/computer')
+import EventEmitter from 'node:events'
+import { collect, createIntcodeComputer } from '../intcode/computer'
 
-module.exports = async (input) => {
+export default async (input) => {
   const network = new EventEmitter()
 
   const NAT = new Promise((resolve) => {

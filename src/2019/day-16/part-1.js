@@ -1,8 +1,8 @@
 // Day 16: Flawed Frequency Transmission
 
-const { range, sum } = require('../utils')
+import { range, sum } from '../utils'
 
-module.exports = function fft(input, phases = 1) {
+export default function fft(input, phases = 1) {
   return range(phases)
     .reduce((previous_value) => {
       const parts = `${previous_value}`.split('').map(Number)

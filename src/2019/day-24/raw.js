@@ -1,6 +1,6 @@
-const run = require('./part-2.js')
+import run from './part-2'
 
-const { createInterface } = require('node:readline')
+import { createInterface } from 'node:readline'
 const rl = createInterface({ input: process.stdin, crlfDelay: Number.POSITIVE_INFINITY })
 ;(async () => {
   for await (const program of rl) {

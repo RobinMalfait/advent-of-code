@@ -1,8 +1,8 @@
 // Day 2: 1202 Program Alarm
 
-const { match, abort, aborted } = require('../utils')
+import { abort, aborted, match } from '../utils'
 
-module.exports = function gravityAssist(input = '', noun = undefined, verb = undefined) {
+export default function gravityAssist(input = '', noun = undefined, verb = undefined) {
   const memory = input.split(',').map(Number)
 
   if (noun) {

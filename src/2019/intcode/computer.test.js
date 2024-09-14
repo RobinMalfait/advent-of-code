@@ -1,4 +1,5 @@
-const { createIntcodeComputer, PROGRAM_MODES } = require('./computer')
+import { describe, expect, it } from 'vitest'
+import { PROGRAM_MODES, createIntcodeComputer } from './computer'
 
 it('should be possible to create a computer', () => {
   const computer = createIntcodeComputer('')

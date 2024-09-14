@@ -1,8 +1,9 @@
 import { promises } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, expect, it } from 'vitest'
 
-import part1 from './part-1.js'
-import part2 from './part-2.js'
+import part1 from './part-1'
+import part2 from './part-2'
 
 let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2020-07.txt'), 'utf8')
 

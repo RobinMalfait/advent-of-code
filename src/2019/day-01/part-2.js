@@ -5,6 +5,6 @@ function calculateFuelForSingleMass(mass) {
   return fuel === 0 ? fuel : fuel + calculateFuelForSingleMass(fuel)
 }
 
-module.exports = function calculateFuelForMass(masses) {
+export default function calculateFuelForMass(masses) {
   return masses.reduce((total, mass) => total + calculateFuelForSingleMass(mass), 0)
 }

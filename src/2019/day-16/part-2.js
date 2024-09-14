@@ -1,6 +1,6 @@
 // Day 16: Flawed Frequency Transmission
 
-module.exports = function fft({
+export default function fft({
   input = '',
   phases = 1,
   repeat = 1,

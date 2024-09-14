@@ -1,8 +1,8 @@
 // Day 3: Crossed Wires
 
-const { match, range, intersect, manhatten } = require('../utils')
+import { intersect, manhatten, match, range } from '../utils'
 
-module.exports = function calculateClosestIntersection(paths_as_string) {
+export default function calculateClosestIntersection(paths_as_string) {
   const paths = paths_as_string.split('\n')
 
   return calculateClosest(...paths.map((path) => parse(path)))

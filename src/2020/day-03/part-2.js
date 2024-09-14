@@ -1,4 +1,4 @@
-import part1 from './part-1.js'
+import part1 from './part-1'
 
 let DEFAULT_SLOPES = [
   [1, 1],

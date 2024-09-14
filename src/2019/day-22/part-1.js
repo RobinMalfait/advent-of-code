@@ -1,8 +1,8 @@
 // Day 22: Slam Shuffle
 
-const { range } = require('../utils')
+import { range } from '../utils'
 
-module.exports = (input, size) => {
+export default (input, size) => {
   return input.split('\n').reduce((next_deck, action) => {
     if (action === 'deal into new stack') {
       return next_deck.reverse()

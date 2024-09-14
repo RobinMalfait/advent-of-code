@@ -1,10 +1,10 @@
 // Day 7: Amplification Circuit
 
-const { permutations } = require('../utils')
+import { permutations } from '../utils'
 
-const { createIntcodeComputer } = require('../intcode/computer')
+import { createIntcodeComputer } from '../intcode/computer'
 
-module.exports = function amplification(program, amplifier_config) {
+export default function amplification(program, amplifier_config) {
   const amplifiers = amplifier_config.split(',').map(Number)
 
   const configs = permutations(amplifiers)

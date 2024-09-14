@@ -1,7 +1,7 @@
 // Day 19: Tractor Beam
 
-const { createIntcodeComputer } = require('../intcode/computer')
-const { asyncBinarySearch, abort } = require('../utils')
+import { createIntcodeComputer } from '../intcode/computer'
+import { abort, asyncBinarySearch } from '../utils'
 
 let scanned = 0
 
@@ -69,7 +69,7 @@ async function calculateBottomEdgeSlope(read) {
   return y2 - y1 / x2 - x1
 }
 
-module.exports = async (input) => {
+export default async (input) => {
   const GRID_SIZE = 100
   const value = createValue(input)
 

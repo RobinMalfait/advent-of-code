@@ -1,7 +1,7 @@
 // Day 13: Care Package
 
-const { createIntcodeComputer } = require('../intcode/computer')
-const { match } = require('../utils')
+import { createIntcodeComputer } from '../intcode/computer'
+import { match } from '../utils'
 
 const TILES = {
   EMPTY: 0,
@@ -17,7 +17,7 @@ const ACTION = {
   SET_TILE: 2,
 }
 
-module.exports = async function arcadeCabinet(program) {
+export default async function arcadeCabinet(program) {
   const painted_tiles = new Map()
   const computer = createIntcodeComputer(program)
   const position = { x: 0, y: 0 }

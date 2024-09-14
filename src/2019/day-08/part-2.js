@@ -1,16 +1,16 @@
 // Day 8: Space Image Format
 
-const { chunk, range } = require('../utils')
+import { chunk, range } from '../utils'
 
 const BLACK = '0'
 const WHITE = '1'
 const TRANSPARENT = '2'
 
-function process(data, width, height) {
+export function process(data, width, height) {
   return Promise.resolve({ data, width, height })
 }
 
-function flatten() {
+export function flatten() {
   return ({ data, width, height }) => {
     const layers = chunk(data, width * height)
 
@@ -38,7 +38,7 @@ const PIXELS = {
   [TRANSPARENT]: '░',
 }
 
-function render(lookup = PIXELS) {
+export function render(lookup = PIXELS) {
   return ({ data, width }) => {
     const image_with_pixels = data.split('').map((value) => lookup[value])
     const image = chunk(image_with_pixels.join(''), width).join('\n')
@@ -46,7 +46,7 @@ function render(lookup = PIXELS) {
   }
 }
 
-function scale(factorX = 1, factorY = factorX) {
+export function scale(factorX = 1, factorY = factorX) {
   return ({ data, width, height }) => {
     const next_width = width * factorX
     const next_height = height * factorY
@@ -72,7 +72,7 @@ function scale(factorX = 1, factorY = factorX) {
   }
 }
 
-function border(top = 0, right = top, bottom = top, left = right) {
+export function border(top = 0, right = top, bottom = top, left = right) {
   return ({ data, width, height }) => {
     const BORDER_CHARACTER = BLACK
     const next_width = width + left + right
@@ -92,15 +92,6 @@ function border(top = 0, right = top, bottom = top, left = right) {
   }
 }
 
-function raw() {
+export function raw() {
   return ({ data }) => data
-}
-
-module.exports = {
-  process,
-  flatten,
-  render,
-  scale,
-  border,
-  raw,
 }

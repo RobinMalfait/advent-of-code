@@ -1,8 +1,8 @@
-const EventEmitter = require('node:events')
-const { match, abort, aborted } = require('../utils')
+import EventEmitter from 'node:events'
+import { abort, aborted, match } from '../utils'
 
 const PARAMETER_MODES = { POSITION: 0, IMMEDIATE: 1, RELATIVE: 2 }
-const PROGRAM_MODES = { OUTPUT: 0, MEMORY: 1, ALL: 2, input: 3 }
+export const PROGRAM_MODES = { OUTPUT: 0, MEMORY: 1, ALL: 2, input: 3 }
 const IO = { IN: 'input', OUT: 'output' }
 const STATE = { IDLE: 0, RUNNING: 1, HALTED: 2 }
 
@@ -85,7 +85,7 @@ function readInput(state) {
   return state.input.length > 0 ? state.input.shift() : state.waitForInput()
 }
 
-function createIntcodeComputer(program = '', OPTIONS = {}) {
+export function createIntcodeComputer(program = '', OPTIONS = {}) {
   const { mode = PROGRAM_MODES.OUTPUT, waitForInput } = OPTIONS
 
   // Let's create a state bucket where we can store stuff, and make it easy to
@@ -244,7 +244,7 @@ function parseOperator(computer_state) {
   }
 }
 
-function collect(amount, cb) {
+export function collect(amount, cb) {
   let collection = []
   return (value) => {
     collection.push(value)
@@ -253,5 +253,3 @@ function collect(amount, cb) {
     }
   }
 }
-
-module.exports = { PROGRAM_MODES, createIntcodeComputer, collect }

@@ -1,13 +1,13 @@
 // Day 14: Space Stoichiometry
 
-const { sum } = require('../utils')
+import { sum } from '../utils'
 
 const CHEMICALS = {
   ORE: 'ORE',
   FUEL: 'FUEL',
 }
 
-module.exports = function fuelproducer(input, fuel) {
+export default function fuelproducer(input, fuel) {
   const reactions = parseReactions(input)
 
   // So that we can control the amount of fuel...

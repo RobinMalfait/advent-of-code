@@ -1,8 +1,8 @@
 // Day 8: Space Image Format
 
-const { chunk } = require('../utils')
+import { chunk } from '../utils'
 
-module.exports = function calculateImageLayers(data, width, height) {
+export default function calculateImageLayers(data, width, height) {
   const layers = chunk(data, width * height)
   const sorted = layers.slice().sort((a, b) => {
     const zeroes_in_a = (a.match(/0/g) || []).length

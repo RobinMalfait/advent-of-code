@@ -1,8 +1,8 @@
 // Day 10: Monitoring Station
-const _ = require('lodash')
-const { table, distance, wave } = require('../utils')
+import _ from 'lodash'
+import { distance, table, wave } from '../utils'
 
-const part1 = require('./part-1')
+import part1 from './part-1'
 
 const ASTEROID = '#'
 
@@ -111,4 +111,4 @@ function visualize(input) {
   }
 }
 
-module.exports = { findVaporizedAsteroid, visualize }
+export default { findVaporizedAsteroid, visualize }

@@ -1,7 +1,7 @@
 // Day 15: Oxygen System
 
-const { createIntcodeComputer } = require('../intcode/computer')
-const { match, range, compactTable } = require('../utils')
+import { createIntcodeComputer } from '../intcode/computer'
+import { compactTable, match, range } from '../utils'
 
 const MOVEMENT = { NORTH: 1, SOUTH: 2, WEST: 3, EAST: 4 }
 const STATUS_CODES = {
@@ -18,7 +18,7 @@ const DRAW = {
   SURROGATE_WALL: '|',
 }
 
-module.exports = async function oxygenSystem(program) {
+export default async function oxygenSystem(program) {
   const computer = createIntcodeComputer(program)
 
   const state = {

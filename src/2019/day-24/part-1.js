@@ -1,11 +1,11 @@
 // Day 24: Planet of Discord
 
-const { sum, table } = require('../utils')
+import { sum, table } from '../utils'
 
 const BUG = '#'
 const EMPTY = '.'
 
-module.exports = async (input) => {
+export default async (input) => {
   let board = input.split('\n').map((row) => row.split(''))
 
   const history = [input]

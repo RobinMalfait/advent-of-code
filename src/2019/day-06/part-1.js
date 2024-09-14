@@ -1,6 +1,6 @@
 // Day 6: Universal Orbit Map
 
-module.exports = function calculateOrbits(input) {
+export default function calculateOrbits(input) {
   const direct_map = input.split('\n').reduce((combined, value) => {
     const [k, v] = value.split(')')
     combined[k] = combined[k] || []

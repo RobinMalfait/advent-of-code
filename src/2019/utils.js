@@ -1,12 +1,12 @@
-const fs = require('node:fs')
-const { resolve } = require('node:path')
-const Table = require('cli-table')
+import fs from 'node:fs'
+import { resolve } from 'node:path'
+import Table from 'cli-table'
 
-module.exports.read = async function read(base, path) {
+export async function read(base, path) {
   return fs.promises.readFile(resolve(base, path), 'utf8')
 }
 
-module.exports.match = function match(value, patterns, ...args) {
+export function match(value, patterns, ...args) {
   try {
     return patterns[value](...args)
   } catch (err) {
@@ -25,15 +25,15 @@ module.exports.match = function match(value, patterns, ...args) {
 
 class AbortError extends Error {}
 
-module.exports.abort = function abort() {
+export function abort() {
   throw new AbortError()
 }
 
-module.exports.aborted = function aborted(err) {
+export function aborted(err) {
   return err instanceof AbortError
 }
 
-module.exports.range = function range(n, offset = 0) {
+export function range(n, offset = 0) {
   return Array.from({ length: n }, (v, k) => k + offset)
 }
 
@@ -52,7 +52,7 @@ function intersectBetween(a, b) {
   )
 }
 
-module.exports.intersect = function intersect(...args) {
+export function intersect(...args) {
   if (args.length <= 0) {
     return []
   }
@@ -68,37 +68,35 @@ module.exports.intersect = function intersect(...args) {
   return args.reduce((a, b) => intersectBetween(a, b))
 }
 
-module.exports.manhatten = function manhatten([x0, y0], [x1, y1]) {
+export function manhatten([x0, y0], [x1, y1]) {
   return Math.abs(x1 - x0) + Math.abs(y1 - y0)
 }
 
-module.exports.distance = function distance([x0, y0], [x1, y1]) {
+export function distance([x0, y0], [x1, y1]) {
   return Math.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)
 }
 
-module.exports.permutations = function permutations(input) {
+export function permutations(input) {
   if (input.length === 0) {
     return [[]]
   }
 
   return input.reduce(
-    (rows, value, i) => [
-      ...rows,
-      ...module.exports
-        .permutations([...input.slice(0, i), ...input.slice(i + 1)])
-        .map((x) => [value, ...x]),
-    ],
+    (rows, value, i) =>
+      rows.concat(
+        permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x])
+      ),
     []
   )
 }
 
-module.exports.chunk = function chunk(array, n) {
-  return module.exports.range(Math.ceil(array.length / n)).map((x, i) => {
+export function chunk(array, n) {
+  return range(Math.ceil(array.length / n)).map((x, i) => {
     return array.slice(i * n, i * n + n)
   })
 }
 
-module.exports.perfLogs = function withPerfLogs(cb, message) {
+export function perfLogs(cb, message) {
   const start = Date.now()
   console.log({}, `[PERF]: [ START]: ${message}`)
 
@@ -128,8 +126,8 @@ function ensureTwoDimensional(input) {
   }
 }
 
-module.exports.compactTable = function compactTable(input, options = {}) {
-  return module.exports.table(input, {
+export function compactTable(input, options = {}) {
+  return table(input, {
     chars: {
       mid: '',
       'left-mid': '',
@@ -143,26 +141,26 @@ module.exports.compactTable = function compactTable(input, options = {}) {
   })
 }
 
-module.exports.table = function table(input, options = {}) {
+export function table(input, options = {}) {
   input = ensureTwoDimensional(input)
   const table = new Table(options)
   table.push(...input)
   return table.toString()
 }
 
-module.exports.lcm = function lcm(x, y) {
-  return !x || !y ? 0 : Math.abs((x * y) / module.exports.gcd(x, y))
+export function lcm(x, y) {
+  return !x || !y ? 0 : Math.abs((x * y) / gcd(x, y))
 }
 
-module.exports.gcd = function gcd(x, y) {
-  return !y ? x : module.exports.gcd(y, x % y)
+export function gcd(x, y) {
+  return !y ? x : gcd(y, x % y)
 }
 
-module.exports.sum = function sum(values) {
+export function sum(values) {
   return values.reduce((total, current) => total + current, 0)
 }
 
-module.exports.binarySearch = function binarySearch(cb, target = 0) {
+export function binarySearch(cb, target = 0) {
   let lower_bound = 0
   let higher_bound = target
   while (lower_bound < higher_bound) {
@@ -176,7 +174,7 @@ module.exports.binarySearch = function binarySearch(cb, target = 0) {
   return lower_bound
 }
 
-module.exports.asyncBinarySearch = async function binarySearch(cb, target = 0) {
+export async function asyncBinarySearch(cb, target = 0) {
   let lower_bound = 0
   let higher_bound = target
   while (lower_bound < higher_bound) {

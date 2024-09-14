@@ -1,11 +1,11 @@
 // Day 24: Planet of Discord
 
-const { sum, table, range } = require('../utils')
+import { range, sum, table } from '../utils'
 
 const BUG = '#'
 const EMPTY = '.'
 
-module.exports = async (input, minutes) => {
+export default async (input, minutes) => {
   let board = input.split('\n').map((row) => row.split(''))
   const width = board.length
   const height = board[0].length

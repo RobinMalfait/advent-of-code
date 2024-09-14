@@ -4,17 +4,5 @@
   "author": "Robin Malfait <malfait.robin@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "main": "./src/index.ts",
-  "scripts": {
-    "test": "jest",
-    "tdd": "jest --watchAll",
-    "bench": "node ../../bench.js",
-    "format": "prettier . --write --ignore-unknown"
-  },
-  "jest": {
-    "displayName": "utils",
-    "transform": {
-      "\\.(t|j)sx?$": "@swc/jest"
-    }
-  }
+  "main": "./src/index.ts"
 }

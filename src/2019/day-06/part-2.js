@@ -1,6 +1,6 @@
 // Day 6: Universal Orbit Map
 
-module.exports = function calculateOrbitalTransfers(input, start, target) {
+export default function calculateOrbitalTransfers(input, start, target) {
   const graph = new Graph()
 
   for (let value of input.split('\n')) {

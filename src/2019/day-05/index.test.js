@@ -1,9 +1,10 @@
 import { promises } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, expect, it } from 'vitest'
 
 let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-05.txt'), 'utf8')
 
-const { createIntcodeComputer, PROGRAM_MODES } = require('../intcode/computer')
+import { PROGRAM_MODES, createIntcodeComputer } from '../intcode/computer'
 
 function compute(program, input, options) {
   const computer = createIntcodeComputer(program, options)

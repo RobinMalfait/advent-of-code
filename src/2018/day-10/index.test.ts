@@ -1,5 +1,6 @@
 import { promises } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, expect, it } from 'vitest'
 
 import part1 from './part-1'
 import part2 from './part-2'
@@ -7,9 +8,9 @@ import part2 from './part-2'
 let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2018-10.txt'), 'utf8')
 
 describe('Part 1', () => {
-  it.each([
-    [
-      `
+  it('should produce the correct value for example %#', (input) => {
+    expect(
+      part1(`
         position=< 9,  1> velocity=< 0,  2>
         position=< 7,  0> velocity=<-1,  0>
         position=< 3, -2> velocity=<-1,  1>
@@ -41,10 +42,8 @@ describe('Part 1', () => {
         position=< 5,  9> velocity=< 1, -2>
         position=<14,  7> velocity=<-2,  0>
         position=<-3,  6> velocity=< 2, -1>
-      `,
-    ],
-  ])('should produce the correct value for example %#', (input) => {
-    expect(part1(input)).toMatchInlineSnapshot(`
+      `)
+    ).toMatchInlineSnapshot(`
       "
       █░░░█░░███
       █░░░█░░░█░

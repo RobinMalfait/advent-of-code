@@ -1,6 +1,6 @@
 // Day 10: Monitoring Station
 
-const { table } = require('../utils')
+import { table } from '../utils'
 
 const ASTEROID = '#'
 
@@ -66,4 +66,4 @@ function visualize(input) {
   console.log(table(input.split('\n').map((row) => row.split(''))))
 }
 
-module.exports = { sensorBoost, visualize }
+export default { sensorBoost, visualize }

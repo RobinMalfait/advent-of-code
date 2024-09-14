@@ -1,6 +1,6 @@
 // Day 12: The N-Body Problem
 
-const { abort, aborted, lcm } = require('../utils')
+import { abort, aborted, lcm } from '../utils'
 
 function stepsToInitialValue(input) {
   return calculateMoonState(parseInput(input))
@@ -106,4 +106,4 @@ function parseInput(input) {
   })
 }
 
-module.exports = stepsToInitialValue
+export default stepsToInitialValue

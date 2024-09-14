@@ -1,19 +1,13 @@
 {
-  "name": "advent-of-code",
+  "name": "aoc-2025",
   "private": true,
   "author": "Robin Malfait <malfait.robin@gmail.com>",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "tdd": "jest --watchAll",
+    "test": "vitest run",
+    "tdd": "vitest",
     "bench": "node ../../bench.js",
     "format": "prettier . --write --ignore-unknown"
-  },
-  "jest": {
-    "displayName": "2015",
-    "transform": {
-      "\\.(t|j)sx?$": "@swc/jest"
-    }
   }
 }

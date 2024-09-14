@@ -1,4 +1,4 @@
-import part1 from './part-1.js'
+import part1 from './part-1'
 
 export default function (blob, preamble = 25) {
   let numbers = blob.trim().split('\n').map(Number)

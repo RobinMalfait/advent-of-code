@@ -1,7 +1,7 @@
 // Day 13: Care Package
 
-const { createIntcodeComputer } = require('../intcode/computer')
-const { match } = require('../utils')
+import { createIntcodeComputer } from '../intcode/computer'
+import { match } from '../utils'
 
 const TILES = {
   EMPTY: 0,
@@ -22,7 +22,7 @@ const DRAW = {
   TILE: false,
 }
 
-module.exports = async function arcadeCabinet(program) {
+export default async function arcadeCabinet(program) {
   const modified_program = program.split(',')
 
   modified_program[0] = 2 // Set it to 2 to play for free.

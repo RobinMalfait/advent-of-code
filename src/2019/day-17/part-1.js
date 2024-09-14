@@ -1,8 +1,8 @@
 // Day 17: Set and Forget
 
-const { createIntcodeComputer } = require('../intcode/computer')
+import { createIntcodeComputer } from '../intcode/computer'
 
-module.exports = async function ASCII(input) {
+export default async function ASCII(input) {
   const computer = createIntcodeComputer(input)
   let buffer = ''
   computer.output((value) => {

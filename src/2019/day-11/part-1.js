@@ -1,7 +1,7 @@
 // Day 11: Space Police
 
-const { createIntcodeComputer } = require('../intcode/computer')
-const { match } = require('../utils')
+import { createIntcodeComputer } from '../intcode/computer'
+import { match } from '../utils'
 
 const COLORS = {
   BLACK: 0,
@@ -25,7 +25,7 @@ const ACTION = {
   TURN: 1,
 }
 
-module.exports = async function spacePolice(program) {
+export default async function spacePolice(program) {
   const painted_panels_map = new Map()
   const computer = createIntcodeComputer(program)
   const position = { x: 0, y: 0 }

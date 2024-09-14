@@ -1,8 +1,8 @@
 // Day 19: Tractor Beam
 
-const { createIntcodeComputer } = require('../intcode/computer')
+import { createIntcodeComputer } from '../intcode/computer'
 
-module.exports = async (input) => {
+export default async (input) => {
   const GRID_SIZE = 50
   const sqrt = Math.sqrt(GRID_SIZE)
 
