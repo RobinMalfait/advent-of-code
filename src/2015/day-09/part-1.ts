@@ -38,21 +38,21 @@ function key(from: string, to: string) {
   return `${from}->${to}`
 }
 
-function permutations<T>(input: T[]) {
+function permutations<T>(input: T[]): T[][] {
   if (input.length === 0) {
     return [[]]
   }
 
   return input.reduce(
-    (rows, value, i) => [
-      ...rows,
-      ...permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x]),
-    ],
+    (rows, value, i) =>
+      rows.concat(
+        permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x])
+      ),
     []
   )
 }
 
-function* windows(n, arr) {
+function* windows<T>(n: number, arr: T[]) {
   for (let i = 0; i <= arr.length - n; i++) {
     yield arr.slice(i, i + n)
   }
