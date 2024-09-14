@@ -25,11 +25,10 @@ function compute(instructions, input) {
   let registers = new Map()
 
   function resolve(value) {
-    if (Number.parseInt(value) == value) {
+    if (Number.parseInt(value) === value) {
       return Number.parseInt(value)
-    } else {
-      return registers.get(value)
     }
+    return registers.get(value)
   }
 
   for (let [instruction, ...values] of instructions) {

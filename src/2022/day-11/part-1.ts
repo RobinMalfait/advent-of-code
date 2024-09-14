@@ -48,11 +48,14 @@ function parseMonkey(block: string): Monkey {
       let [lhs, op, rhs] = lines[2].replace('Operation: new = ', '').split(' ')
       if (lhs === 'old' && op === '+' && rhs === 'old') {
         return (old: number) => old + old
-      } else if (lhs === 'old' && op === '*' && rhs === 'old') {
+      }
+      if (lhs === 'old' && op === '*' && rhs === 'old') {
         return (old: number) => old * old
-      } else if (lhs === 'old' && op === '+') {
+      }
+      if (lhs === 'old' && op === '+') {
         return (old: number) => old + Number(rhs)
-      } else if (lhs === 'old' && op === '*') {
+      }
+      if (lhs === 'old' && op === '*') {
         return (old: number) => old * Number(rhs)
       }
     })(),

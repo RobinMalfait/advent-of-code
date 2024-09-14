@@ -15,12 +15,12 @@ export default function (
   function resolve(input: ReturnType<typeof parseValue>) {
     if (input.type === 'literal') {
       return input.value
-    } else if (input.type === 'variable') {
-      return registers.get(input.name)
-    } else {
-      console.log('TODO', input)
-      throw new Error('Not yet implemented.')
     }
+    if (input.type === 'variable') {
+      return registers.get(input.name)
+    }
+    console.log('TODO', input)
+    throw new Error('Not yet implemented.')
   }
 
   for (let i = 0; i < instructions.length; i++) {
@@ -55,16 +55,18 @@ function parse(
   let tokens = input.split(' ')
   if (tokens[0] === 'cpy') {
     return { type: 'cpy', src: parseValue(tokens[1]), dst: tokens[2] }
-  } else if (tokens[0] === 'inc') {
-    return { type: 'inc', name: tokens[1] }
-  } else if (tokens[0] === 'dec') {
-    return { type: 'dec', name: tokens[1] }
-  } else if (tokens[0] === 'jnz') {
-    return { type: 'jnz', src: parseValue(tokens[1]), amount: parseValue(tokens[2]) }
-  } else {
-    console.log('TODO', input)
-    throw new Error('Not yet implemented.')
   }
+  if (tokens[0] === 'inc') {
+    return { type: 'inc', name: tokens[1] }
+  }
+  if (tokens[0] === 'dec') {
+    return { type: 'dec', name: tokens[1] }
+  }
+  if (tokens[0] === 'jnz') {
+    return { type: 'jnz', src: parseValue(tokens[1]), amount: parseValue(tokens[2]) }
+  }
+  console.log('TODO', input)
+  throw new Error('Not yet implemented.')
 }
 
 function parseValue(
@@ -72,7 +74,6 @@ function parseValue(
 ): { type: 'variable'; name: string } | { type: 'literal'; value: number } {
   if (/^[a-z]+$/.test(input)) {
     return { type: 'variable', name: input }
-  } else {
-    return { type: 'literal', value: Number(input) }
   }
+  return { type: 'literal', value: Number(input) }
 }

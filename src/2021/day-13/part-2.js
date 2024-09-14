@@ -47,7 +47,7 @@ export default function (blob) {
     }
   }
 
-  return '\n' + grid.map((line) => line.join('')).join('\n') + '\n'
+  return `\n${grid.map((line) => line.join('')).join('\n')}\n`
 }
 
 function transpose(grid) {

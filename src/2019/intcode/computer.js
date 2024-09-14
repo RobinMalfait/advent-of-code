@@ -1,4 +1,4 @@
-const EventEmitter = require('events')
+const EventEmitter = require('node:events')
 const { match, abort, aborted } = require('../utils')
 
 const PARAMETER_MODES = { POSITION: 0, IMMEDIATE: 1, RELATIVE: 2 }

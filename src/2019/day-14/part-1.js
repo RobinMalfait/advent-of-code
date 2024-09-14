@@ -11,7 +11,7 @@ module.exports = function fuelproducer(input, fuel) {
   const reactions = parseReactions(input)
 
   // So that we can control the amount of fuel...
-  reactions['MAGIC_START'] = {
+  reactions.MAGIC_START = {
     amount: 1,
     requires: {
       [CHEMICALS.FUEL]: fuel || reactions[CHEMICALS.FUEL].amount,

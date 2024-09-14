@@ -11,9 +11,9 @@ let winners = new Map([
 ])
 
 function toShape(input: string): Shape {
-  if (input === 'A' || input == 'X') return Shape.Rock
-  if (input === 'B' || input == 'Y') return Shape.Paper
-  if (input === 'C' || input == 'Z') return Shape.Scissors
+  if (input === 'A' || input === 'X') return Shape.Rock
+  if (input === 'B' || input === 'Y') return Shape.Paper
+  if (input === 'C' || input === 'Z') return Shape.Scissors
   throw new Error(`Unknown input: ${input}`)
 }
 
@@ -38,10 +38,10 @@ function pointsForState(state: State): number {
 }
 
 function stateFromShapes(left: Shape, right: Shape): State {
-  if (left == right) return State.Draw
+  if (left === right) return State.Draw
 
   for (let [winner, loser] of winners) {
-    if (winner === left && loser == right) {
+    if (winner === left && loser === right) {
       return State.Won
     }
   }

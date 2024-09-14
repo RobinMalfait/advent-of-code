@@ -8,7 +8,7 @@ export default function (blob: string) {
     while (true) {
       if (!grid.has(key(x, y + 1))) {
         y += 1
-        if (y == bottom) break outer
+        if (y === bottom) break outer
       } else if (!grid.has(key(x - 1, y + 1))) {
         x -= 1
       } else if (!grid.has(key(x + 1, y + 1))) {

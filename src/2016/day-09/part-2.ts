@@ -27,9 +27,8 @@ function decompressedLength(line: string): number {
     }
 
     // Data
-    else {
-      length += 1
-    }
+
+    length += 1
 
     idx += 1
   }

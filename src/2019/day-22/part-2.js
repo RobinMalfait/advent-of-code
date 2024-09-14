@@ -53,7 +53,7 @@ function pow(a, b, N) {
   while (b > BigInt(0)) {
     const lsb = b % BigInt(2)
     b = b / BigInt(2)
-    if (lsb == BigInt(1)) {
+    if (lsb === BigInt(1)) {
       r *= x
       r %= N
     }

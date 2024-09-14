@@ -70,7 +70,7 @@ function evaluate(packet) {
 
     // Unreachable
     default: {
-      throw new Error('Unknown typeId: ' + packet.typeId)
+      throw new Error(`Unknown typeId: ${packet.typeId}`)
     }
   }
 }

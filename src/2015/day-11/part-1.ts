@@ -51,10 +51,12 @@ function increment(password: string) {
     if (location === -1) {
       parts.unshift(A)
       break
-    } else if (parts[location] < Z) {
+    }
+    if (parts[location] < Z) {
       parts[location] += 1
       break
-    } else if (parts[location] === Z) {
+    }
+    if (parts[location] === Z) {
       parts[location] = A
       location -= 1
     }

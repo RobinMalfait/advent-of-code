@@ -1,6 +1,6 @@
 // Day 23: Category Six
 
-const EventEmitter = require('events')
+const EventEmitter = require('node:events')
 const { createIntcodeComputer, collect } = require('../intcode/computer')
 
 module.exports = async (input) => {

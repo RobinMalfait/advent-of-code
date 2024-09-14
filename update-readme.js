@@ -1,5 +1,5 @@
-import path from 'path'
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 import cheerio from 'cheerio'
 import prettier from 'prettier'
@@ -71,17 +71,11 @@ output.push([
 
 let allStars = data.slice(1).reduce((acc, row) => acc + row.reduce((acc, v) => acc + v, 0), 0)
 
-let markdown =
-  `Total stars: **${allStars}**` +
-  '\n\n' +
-  output.map((row) => `|${row.join(' | ')}|`).join('\n') +
-  '\n\n' +
-  data[0]
-    .map(
-      (year) =>
-        `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
-    )
-    .join('\n')
+let markdown = `Total stars: **${allStars}**\n\n${output.map((row) => `|${row.join(' | ')}|`).join('\n')}\n\n${data[0]
+  .map(
+    (year) => `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
+  )
+  .join('\n')}`
 
 {
   let readme = path.join(process.cwd(), 'README.md')

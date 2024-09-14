@@ -19,17 +19,13 @@ export default function (blob) {
   function createRegex(rules, idx) {
     if (idx === 8) return `(${r42})+`
     if (idx === 11) {
-      return (
-        '(' +
-        Array.from(Array(5)) // I am ashamed.
-          .map((_, i) => `(${r42.repeat(i + 1)})(${r31.repeat(i + 1)})`)
-          .join('|') +
-        ')'
-      )
+      return `(${Array.from(Array(5)) // I am ashamed.
+        .map((_, i) => `(${r42.repeat(i + 1)})(${r31.repeat(i + 1)})`)
+        .join('|')})`
     }
 
     if (Array.isArray(rules[idx])) {
-      return '(' + rules[idx].map((rule) => createRegex(rules, rule)).join('|') + ')'
+      return `(${rules[idx].map((rule) => createRegex(rules, rule)).join('|')})`
     }
 
     if (Array.isArray(idx)) {

@@ -27,9 +27,8 @@ function decompress(line: string): string {
     }
 
     // Data
-    else {
-      buffer += line[idx]
-    }
+
+    buffer += line[idx]
 
     idx += 1
   }

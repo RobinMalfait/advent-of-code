@@ -17,7 +17,7 @@ export default function (blob) {
     while (players.every((deck) => deck.length > 0)) {
       for (let player of players) {
         if (seen.has(player.join(','))) return [0, players[0]]
-        else seen.set(player.join(','), true)
+        seen.set(player.join(','), true)
       }
 
       let topCards = players.map((player) => player.shift())

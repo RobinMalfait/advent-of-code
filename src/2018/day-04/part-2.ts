@@ -58,21 +58,21 @@ function parse(input: string) {
       type: 'SLEEP',
       date: new Date(groups.date),
     }
-  } else if (groups.message === 'wakes up') {
+  }
+  if (groups.message === 'wakes up') {
     return {
       type: 'WAKE',
       date: new Date(groups.date),
     }
-  } else {
-    let {
-      groups: { guardId },
-    } = /Guard #(?<guardId>\d+) begins shift/.exec(groups.message)
+  }
+  let {
+    groups: { guardId },
+  } = /Guard #(?<guardId>\d+) begins shift/.exec(groups.message)
 
-    return {
-      type: 'SHIFT',
-      date: new Date(groups.date),
-      id: Number(guardId),
-    }
+  return {
+    type: 'SHIFT',
+    date: new Date(groups.date),
+    id: Number(guardId),
   }
 }
 

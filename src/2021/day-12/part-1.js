@@ -27,7 +27,7 @@ export default function (blob) {
       let _path = path.slice()
 
       if (to.toLowerCase() === to && path.includes(to)) continue
-      else _path.push(to)
+      _path.push(to)
 
       count += countPaths(to, _path)
     }

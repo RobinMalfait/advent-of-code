@@ -11,7 +11,7 @@ export default function (blob: string) {
     .map((line) => line.trim().split(' '))
     .flatMap(([command, arg]) => {
       if (command === 'noop') return { type: 'noop' } as const
-      else if (command === 'addx')
+      if (command === 'addx')
         return [{ type: 'noop' }, { type: 'addx', value: Number(arg) }] as const
     })
 

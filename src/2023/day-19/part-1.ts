@@ -68,10 +68,10 @@ function parseRule(input: string): (xmas: XMAS) => string | null {
   return (xmas: XMAS) => {
     if (operator === '<') {
       return xmas[key] < value ? target : null
-    } else if (operator === '>') {
-      return xmas[key] > value ? target : null
-    } else {
-      throw new Error(`Unknown operator ${operator}`)
     }
+    if (operator === '>') {
+      return xmas[key] > value ? target : null
+    }
+    throw new Error(`Unknown operator ${operator}`)
   }
 }

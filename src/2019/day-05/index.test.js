@@ -1,5 +1,5 @@
-import { promises } from 'fs'
-import { resolve } from 'path'
+import { promises } from 'node:fs'
+import { resolve } from 'node:path'
 
 let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2019-05.txt'), 'utf8')
 

@@ -47,7 +47,8 @@ function parse(
   if (tokens[0] === 'rect') {
     let [w, h] = tokens[1].split('x').map(Number)
     return { type: 'rect', width: w, height: h }
-  } else if (tokens[0] === 'rotate') {
+  }
+  if (tokens[0] === 'rotate') {
     let idx = tokens[2].split('=').map(Number).pop()
     let amount = Number(tokens[4])
     return { type: 'rotate', direction: tokens[1] as 'row' | 'column', idx: Number(idx), amount }

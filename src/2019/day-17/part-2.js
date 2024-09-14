@@ -63,7 +63,7 @@ const encoded_main = encode(
 function encodeRaw(input) {
   return encode(
     ...input.split(',').map((v) => {
-      if (v == Number(v)) {
+      if (v === Number(v)) {
         return Number(v)
       }
 

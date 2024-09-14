@@ -1,5 +1,5 @@
 export function parse(blob) {
-  let number = BigInt('0x' + blob.trim())
+  let number = BigInt(`0x${blob.trim()}`)
   let binary = number.toString(2)
   if (binary.length % 4 !== 0) {
     binary = binary.padStart(binary.length + (4 - (binary.length % 4)), '0')
@@ -44,7 +44,7 @@ function _parse(binary, state = { ptr: 0 }) {
   }
 
   // number of sub-packets immediately contained
-  else if (lengthTypeId === 1) {
+  if (lengthTypeId === 1) {
     let numberOfSubPackets = readAsNumber(binary, 11, state)
     let packets = []
 

@@ -91,9 +91,11 @@ function parse(input: string) {
           .map((s) => s.trim())
         if (module === 'broadcaster') {
           return ['broadcaster', { type: 'broadcaster', output }] as const
-        } else if (module.startsWith('%')) {
+        }
+        if (module.startsWith('%')) {
           return [module.slice(1), { type: 'flip-flop', output, on: false }] as const
-        } else if (module.startsWith('&')) {
+        }
+        if (module.startsWith('&')) {
           return [
             module.slice(1),
             { type: 'conjunction', input: new DefaultMap<string, Pulse>(() => Pulse.Low), output },

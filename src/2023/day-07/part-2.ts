@@ -22,7 +22,7 @@ function type(cards: string[]) {
   )
 
   // Move joker counts to the highest card
-  if (countsObj['J']) {
+  if (countsObj.J) {
     let highest = null
     for (let [card, count] of Object.entries(countsObj)) {
       if (card === 'J') continue
@@ -32,8 +32,8 @@ function type(cards: string[]) {
       }
     }
     if (highest !== null) {
-      countsObj[highest] += countsObj['J']
-      delete countsObj['J']
+      countsObj[highest] += countsObj.J
+      countsObj.J = undefined
     }
   }
 

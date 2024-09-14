@@ -1,5 +1,5 @@
-import { promises } from 'fs'
-import { resolve } from 'path'
+import { promises } from 'node:fs'
+import { resolve } from 'node:path'
 
 import part1 from './part-1.js'
 import part2 from './part-2.js'
@@ -15,7 +15,7 @@ describe('Part 1', () => {
   )
 
   it('should produce the correct value for the input data', async () => {
-    expect(part1(await data)).toMatchInlineSnapshot(`4808`)
+    expect(part1(await data)).toMatchInlineSnapshot('4808')
   })
 })
 
@@ -35,6 +35,6 @@ describe('Part 2', () => {
     let result = part2(await data)
 
     expect(result).toBeGreaterThan(100_000_000_000_000)
-    expect(result).toMatchInlineSnapshot(`741745043105674`)
+    expect(result).toMatchInlineSnapshot('741745043105674')
   })
 })

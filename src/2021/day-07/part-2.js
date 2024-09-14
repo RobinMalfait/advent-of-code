@@ -8,7 +8,7 @@ export default function (blob) {
     let total = 0
     for (let position of positions) {
       let distance = Math.abs(target - position)
-      total += (Math.pow(distance, 2) + distance) / 2
+      total += (distance ** 2 + distance) / 2
     }
     destination = Math.min(destination, total)
   }

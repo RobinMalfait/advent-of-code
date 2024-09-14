@@ -4,7 +4,7 @@ export default function (blob: string) {
   let SIZE_AT_MOST = 100_000
 
   return ls(fs)
-    .filter((ident) => ident.path != '/')
+    .filter((ident) => ident.path !== '/')
     .filter((ident) => ident.size <= SIZE_AT_MOST)
     .map((ident) => ident.size)
     .reduce((total, current) => total + current)
@@ -19,7 +19,7 @@ function buildFileSystem(data: string) {
     .trim()
     .split('\n')
     .map((line) => line.split(' '))) {
-    if (parts[0] == '$') {
+    if (parts[0] === '$') {
       if (parts[1] === 'cd') {
         if (parts[2] === '/') {
           pwd.splice(0)
@@ -30,8 +30,8 @@ function buildFileSystem(data: string) {
         }
       }
     } else {
-      let key = '/' + pwd.join('/')
-      let identPath = key === '/' ? key + parts[1] : key + '/' + parts[1]
+      let key = `/${pwd.join('/')}`
+      let identPath = key === '/' ? key + parts[1] : `${key}/${parts[1]}`
       let ident: Ident =
         parts[0] === 'dir'
           ? { type: 'dir', path: identPath }

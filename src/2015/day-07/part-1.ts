@@ -12,11 +12,11 @@ export default function (blob: string) {
   ): number | null {
     if (input.type === 'LITERAL') {
       return input.value
-    } else if (registers.has(input.name)) {
-      return registers.get(input.name)
-    } else {
-      return null
     }
+    if (registers.has(input.name)) {
+      return registers.get(input.name)
+    }
+    return null
   }
 
   let todo = instructions.slice()
@@ -85,27 +85,29 @@ function parse(input: string) {
   if (expression.startsWith('NOT')) {
     let [_, rhs] = expression.split(' ').map(parseValue)
     return { type: 'NOT' as const, rhs, target }
-  } else if (expression.includes('OR')) {
+  }
+  if (expression.includes('OR')) {
     let [lhs, rhs] = expression.split(' OR ').map(parseValue)
     return { type: 'OR' as const, lhs, rhs, target }
-  } else if (expression.includes('AND')) {
+  }
+  if (expression.includes('AND')) {
     let [lhs, rhs] = expression.split(' AND ').map(parseValue)
     return { type: 'AND' as const, lhs, rhs, target }
-  } else if (expression.includes('LSHIFT')) {
+  }
+  if (expression.includes('LSHIFT')) {
     let [lhs, rhs] = expression.split(' LSHIFT ').map(parseValue)
     return { type: 'LSHIFT' as const, lhs, rhs, target }
-  } else if (expression.includes('RSHIFT')) {
+  }
+  if (expression.includes('RSHIFT')) {
     let [lhs, rhs] = expression.split(' RSHIFT ').map(parseValue)
     return { type: 'RSHIFT' as const, lhs, rhs, target }
-  } else {
-    return { type: 'VALUE' as const, value: parseValue(expression), target }
   }
+  return { type: 'VALUE' as const, value: parseValue(expression), target }
 }
 
 function parseValue(input: string) {
   if (input.match(/^\d+$/)) {
     return { type: 'LITERAL' as const, value: Number.parseInt(input, 10) }
-  } else {
-    return { type: 'VARIABLE' as const, name: input }
   }
+  return { type: 'VARIABLE' as const, name: input }
 }

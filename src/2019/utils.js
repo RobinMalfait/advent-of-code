@@ -1,5 +1,5 @@
-const fs = require('fs')
-const { resolve } = require('path')
+const fs = require('node:fs')
+const { resolve } = require('node:path')
 const Table = require('cli-table')
 
 module.exports.read = async function read(base, path) {
@@ -73,7 +73,7 @@ module.exports.manhatten = function manhatten([x0, y0], [x1, y1]) {
 }
 
 module.exports.distance = function distance([x0, y0], [x1, y1]) {
-  return Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2))
+  return Math.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)
 }
 
 module.exports.permutations = function permutations(input) {
@@ -119,9 +119,11 @@ module.exports.perfLogs = function withPerfLogs(cb, message) {
 function ensureTwoDimensional(input) {
   if (Array.isArray(input) && Array.isArray(input[0])) {
     return input
-  } else if (Array.isArray(input) && !Array.isArray(input[0])) {
+  }
+  if (Array.isArray(input) && !Array.isArray(input[0])) {
     return [input]
-  } else if (!Array.isArray(input)) {
+  }
+  if (!Array.isArray(input)) {
     return [[input]]
   }
 }

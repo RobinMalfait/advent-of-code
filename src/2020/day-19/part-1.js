@@ -10,7 +10,7 @@ export default function (blob) {
 
 function createRegex(rules, idx) {
   if (Array.isArray(rules[idx])) {
-    return '(' + rules[idx].map((rule) => createRegex(rules, rule)).join('|') + ')'
+    return `(${rules[idx].map((rule) => createRegex(rules, rule)).join('|')})`
   }
 
   if (Array.isArray(idx)) {

@@ -1,5 +1,5 @@
-import { promises } from 'fs'
-import { resolve } from 'path'
+import { promises } from 'node:fs'
+import { resolve } from 'node:path'
 
 import part1 from './part-1.js'
 import part2 from './part-2.js'
@@ -33,8 +33,8 @@ describe('Part 2', () => {
   it('should produce the correct value for the input data', async () => {
     const input = await data
 
-    for (var noun = 0; noun < 100; noun++) {
-      for (var verb = 0; verb < 100; verb++) {
+    for (let noun = 0; noun < 100; noun++) {
+      for (let verb = 0; verb < 100; verb++) {
         const [first_value] = part2(input, noun, verb)
         if (first_value === 19690720) {
           return

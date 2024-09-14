@@ -58,10 +58,10 @@ function parse(input: string): Instruction[] {
           focal: Number(value),
         },
       }
-    } else if (instruction.endsWith('-')) {
-      return { type: 'DASH', box: hash(instruction.slice(0, -1)), label: instruction.slice(0, -1) }
-    } else {
-      throw new Error(`Cannot parse instruction: ${instruction}`)
     }
+    if (instruction.endsWith('-')) {
+      return { type: 'DASH', box: hash(instruction.slice(0, -1)), label: instruction.slice(0, -1) }
+    }
+    throw new Error(`Cannot parse instruction: ${instruction}`)
   })
 }

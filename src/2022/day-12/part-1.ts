@@ -20,7 +20,7 @@ function solve(data: string, start: string, target: string): number {
         start_point = point
       }
 
-      if (value == target) {
+      if (value === target) {
         possible_targets.push(point)
       }
 
@@ -41,8 +41,8 @@ function solve(data: string, start: string, target: string): number {
 
         if (
           start.charCodeAt(0) > target.charCodeAt(0)
-            ? val(n_value) <= val(value) || val(n_value) - val(value) == 1
-            : val(value) <= val(n_value) || val(value) - val(n_value) == 1
+            ? val(n_value) <= val(value) || val(n_value) - val(value) === 1
+            : val(value) <= val(n_value) || val(value) - val(n_value) === 1
         ) {
           graph.set(point, [...(graph.get(point) ?? []), neighbour])
         }

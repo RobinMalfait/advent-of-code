@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
 let day = (process.argv[2] ?? new Date().getDate().toString()).padStart(2, '0')
 let year = process.argv[3] ?? new Date().getFullYear().toString()
