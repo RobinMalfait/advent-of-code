@@ -1,6 +1,6 @@
 // Day 10: Monitoring Station
 import _ from 'lodash'
-import { distance, table, wave } from '../utils'
+import { distance, table } from '../utils'
 
 import part1 from './part-1'
 
