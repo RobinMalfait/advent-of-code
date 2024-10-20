@@ -9,7 +9,7 @@
     "setup": "node ./setup.js",
     "readme": "node ./update-readme.js",
     "bench": "node ./bench.js",
-    "format": "biome check --fix",
+    "format": "biome check --staged --unsafe",
     "lint": "biome check"
   },
   "keywords": [],
