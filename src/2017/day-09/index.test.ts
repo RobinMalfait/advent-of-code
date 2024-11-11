@@ -26,19 +26,20 @@ describe('Part 1', () => {
   })
 })
 
-describe.skip('Part 2', () => {
+describe('Part 2', () => {
   it.each([
-    [
-      `
-
-      `,
-      'TODO',
-    ],
+    ['<>', 0],
+    ['<random characters>', 17],
+    ['<<<<>', 3],
+    ['<{!>}>', 2],
+    ['<!!>', 0],
+    ['<!!!>>', 0],
+    ['<{o"i!a,<{i<a>', 10],
   ])('should produce the correct value for example %#', (input, expected) => {
     expect(part2(input)).toBe(expected)
   })
 
-  it.skip('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot()
+  it('should produce the correct value for the input data', async () => {
+    expect(part2(await data)).toMatchInlineSnapshot(`4903`)
   })
 })
