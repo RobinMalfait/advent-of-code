@@ -1,4 +1,4 @@
-import { DefaultMap, windows } from 'aoc-utils'
+import { DefaultMap } from 'aoc-utils'
 
 export default function (blob: string) {
   return blob
