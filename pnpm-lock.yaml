@@ -49,7 +49,11 @@ importers:
 
   src/2017: {}
 
-  src/2018: {}
+  src/2018:
+    dependencies:
+      aoc-utils:
+        specifier: workspace:*
+        version: link:../aoc-utils
 
   src/2019:
     dependencies:
