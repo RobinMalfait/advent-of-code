@@ -2,7 +2,7 @@ import EventEmitter from 'node:events'
 import { abort, aborted, match } from '../utils'
 
 const PARAMETER_MODES = { POSITION: 0, IMMEDIATE: 1, RELATIVE: 2 }
-export const PROGRAM_MODES = { OUTPUT: 0, MEMORY: 1, ALL: 2, input: 3 }
+export const PROGRAM_MODES = { OUTPUT: 0, MEMORY: 1, ALL: 2, INPUT: 3 }
 const IO = { IN: 'input', OUT: 'output' }
 const STATE = { IDLE: 0, RUNNING: 1, HALTED: 2 }
 
