@@ -1,7 +1,14 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "ignoreUnknown": false, "ignore": [] },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": []
+  },
   "formatter": {
     "enabled": true,
     "useEditorconfig": true,
@@ -14,7 +21,9 @@
     "bracketSpacing": true,
     "ignore": ["**/.DS_Store", "**/data/", "**/node_modules/", "**/pnpm-lock.yaml"]
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true
+  },
   "linter": {
     "enabled": true,
     "rules": {
