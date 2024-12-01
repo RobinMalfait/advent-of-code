@@ -73,6 +73,8 @@ importers:
         specifier: workspace:*
         version: link:../aoc-utils
 
+  src/2024: {}
+
   src/aoc-utils: {}
 
 packages:

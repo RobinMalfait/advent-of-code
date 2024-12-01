@@ -1,0 +1,12 @@
+{
+  "name": "aoc-2024",
+  "private": true,
+  "author": "Robin Malfait <malfait.robin@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "tdd": "vitest",
+    "bench": "node ../../bench.js"
+  }
+}
