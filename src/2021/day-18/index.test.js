@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-18.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2021-18.txt'), 'utf8')
 let slightlyLarger = `[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]
 [7,[[[3,7],[4,3]],[[6,3],[8,8]]]]
 [[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]]

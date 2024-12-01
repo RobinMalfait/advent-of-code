@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-21.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2021-21.txt'), 'utf8')
 let test = `Player 1 starting position: 4
 Player 2 starting position: 8`
 

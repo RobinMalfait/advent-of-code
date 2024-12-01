@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-17.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2021-17.txt'), 'utf8')
 let test = 'target area: x=20..30, y=-10..-5'
 
 describe('Part 1', () => {

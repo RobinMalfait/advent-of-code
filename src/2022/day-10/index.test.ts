@@ -5,11 +5,8 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let sample = promises.readFile(
-  resolve(__dirname, '..', '..', '..', 'data', '2022-10.sample.txt'),
-  'utf8'
-)
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2022-10.txt'), 'utf8')
+let sample = promises.readFile(resolve(__dirname, '../../../data/2022-10.sample.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2022-10.txt'), 'utf8')
 
 function dedent(input: string) {
   return input

@@ -4,9 +4,7 @@ import part1 from './part-1'
 import part2 from './part-2'
 
 async function main() {
-  let data = await Bun.file(
-    resolve(__dirname, '..', '..', '..', 'data', '2015-19.txt')
-  ).text()
+  let data = await Bun.file(resolve(__dirname, '../../../data/2015-19.txt')).text()
 
   // Part 1
   {

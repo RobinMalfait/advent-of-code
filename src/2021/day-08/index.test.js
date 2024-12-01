@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2021-08.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2021-08.txt'), 'utf8')
 let test = `
 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc

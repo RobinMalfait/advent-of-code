@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import part1 from './part-1'
 import part2 from './part-2'
 
-let data = promises.readFile(resolve(__dirname, '..', '..', '..', 'data', '2018-08.txt'), 'utf8')
+let data = promises.readFile(resolve(__dirname, '../../../data/2018-08.txt'), 'utf8')
 
 describe('Part 1', () => {
   it.each([['2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2', 138]])(
