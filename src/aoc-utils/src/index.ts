@@ -52,7 +52,7 @@ export function product(numbers: number[]) {
 }
 
 // Array / collection
-export function* windows<T>(input: Iterable<T>, size: number) {
+export function* windows<T>(input: Iterable<T>, size: number): Generator<T[]> {
   // Array optimization
   if (Array.isArray(input)) {
     for (let i = 0; i < input.length - size + 1; i++) {
