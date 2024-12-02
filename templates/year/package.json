@@ -8,5 +8,8 @@
     "test": "vitest run",
     "tdd": "vitest",
     "bench": "node ../../bench.js"
+  },
+  "dependencies": {
+    "aoc-utils": "workspace:*"
   }
 }

@@ -1,4 +1,4 @@
-import { DefaultMap } from '../../aoc-utils/src'
+import { DefaultMap } from 'aoc-utils'
 
 export default function (blob: string) {
   let { replacements, molecule } = parse(blob)

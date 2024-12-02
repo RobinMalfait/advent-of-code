@@ -43,7 +43,11 @@ importers:
         specifier: ^2.1.3
         version: 2.1.3(@types/node@20.16.13)
 
-  src/2015: {}
+  src/2015:
+    dependencies:
+      aoc-utils:
+        specifier: workspace:*
+        version: link:../aoc-utils
 
   src/2016: {}
 
@@ -73,7 +77,11 @@ importers:
         specifier: workspace:*
         version: link:../aoc-utils
 
-  src/2024: {}
+  src/2024:
+    dependencies:
+      aoc-utils:
+        specifier: workspace:*
+        version: link:../aoc-utils
 
   src/aoc-utils: {}
 

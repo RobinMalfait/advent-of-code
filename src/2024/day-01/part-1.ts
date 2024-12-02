@@ -1,4 +1,4 @@
-import { sum, transpose } from '../../aoc-utils/src'
+import { sum, transpose } from 'aoc-utils'
 
 export default function (blob: string) {
   let [a, b] = transpose(
