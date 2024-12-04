@@ -113,8 +113,8 @@ export function intersection<T>(a: T[], b: T[]) {
 // Flow control
 export function match<T extends string | number = string, R = unknown>(
   value: T,
-  lookup: Record<T, R | ((...args: any[]) => R)>,
-  ...args: any[]
+  lookup: Record<T, R | ((...args: unknown[]) => R)>,
+  ...args: unknown[]
 ): R {
   if (value in lookup) {
     let returnValue = lookup[value]
@@ -144,7 +144,7 @@ export function bail(message: string): never {
 }
 
 let EMPTY = Symbol('EMPTY')
-function defaultCacheKey(...args: any[]) {
+function defaultCacheKey(...args: unknown[]) {
   if (args.length === 0) {
     return EMPTY
   }
@@ -176,11 +176,11 @@ function defaultCacheKey(...args: any[]) {
 }
 
 // Performance
-export function memoize<T extends (...args: any[]) => any>(
+export function memoize<T extends (...args: unknown[]) => R, R>(
   fn: T,
   cacheKey: (...args: Parameters<T>) => string = defaultCacheKey
 ): T {
-  let cache = new Map<string, ReturnType<T>>()
+  let cache = new Map<string, R>()
 
   return ((...args: Parameters<T>) => {
     let key = cacheKey(...args)
@@ -197,17 +197,20 @@ export function memoize<T extends (...args: any[]) => any>(
 }
 
 // Class
-export class DefaultMap<K = string, V = any> extends Map<K, V> {
+export class DefaultMap<K = string, V = unknown> extends Map<K, V> {
   constructor(private factory: (key: K) => V) {
     super()
   }
 
   get(key: K): V {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
+    let value = super.get(key)
+
+    if (value === undefined) {
+      value = this.factory(key)
+      this.set(key, value)
     }
 
-    return super.get(key)!
+    return value
   }
 }
 
@@ -433,11 +436,8 @@ export function visualizePointMap<T>(
     let row = []
     for (let x = 0; x < width; x++) {
       let p = Point.new(x, y)
-      if (map.has(p)) {
-        row.push(valueFn(map.get(p)!, p))
-      } else {
-        row.push(valueFn(null, p))
-      }
+      let value = map.get(p) ?? null
+      row.push(valueFn(value, p))
     }
     grid.push(row)
   }
