@@ -246,6 +246,10 @@ export class Point {
     return Point.points.get(x).get(y)
   }
 
+  add(other: Point) {
+    return Point.new(this.x + other.x, this.y + other.y)
+  }
+
   up(amount = 1) {
     return Point.new(this.x, this.y - amount)
   }
@@ -260,6 +264,22 @@ export class Point {
 
   right(amount = 1) {
     return Point.new(this.x + amount, this.y)
+  }
+
+  ne() {
+    return this.add(Point.new(1, -1))
+  }
+
+  nw() {
+    return this.add(Point.new(-1, -1))
+  }
+
+  se() {
+    return this.add(Point.new(1, 1))
+  }
+
+  sw() {
+    return this.add(Point.new(-1, 1))
   }
 
   navigate(direction: Direction, amount = 1) {
@@ -300,6 +320,22 @@ export class Point {
   toString() {
     return `Point(${this.x}, ${this.y})`
   }
+}
+
+export function parseIntoGrid<T = string>(
+  input: string,
+  value: (x: string, p: Point) => T = (x) => x as T
+) {
+  let grid = new Map<Point, T>()
+
+  for (let [y, line] of input.trim().split('\n').entries()) {
+    for (let [x, cell] of line.trim().split('').entries()) {
+      let p = Point.new(x, y)
+      grid.set(p, value(cell, p))
+    }
+  }
+
+  return grid
 }
 
 export function pointsToGrid(it: Iterable<Point>) {
