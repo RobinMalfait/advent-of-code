@@ -286,12 +286,11 @@ export class Point {
   }
 
   navigate(direction: Direction, amount = 1) {
-    return match(direction, {
-      [Direction.North]: () => this.up(amount),
-      [Direction.East]: () => this.right(amount),
-      [Direction.South]: () => this.down(amount),
-      [Direction.West]: () => this.left(amount),
-    })
+    if (direction === Direction.North) return this.up(amount)
+    if (direction === Direction.East) return this.right(amount)
+    if (direction === Direction.South) return this.down(amount)
+    if (direction === Direction.West) return this.left(amount)
+    direction satisfies never
   }
 
   direction(other: Point) {
@@ -386,10 +385,9 @@ export function pointsToSize<T>(it: Set<Point> | Map<Point, T>) {
 }
 
 export function rotateGrid<T>(grid: T[][], direction: -90 | 90) {
-  return match(direction, {
-    [90]: () => transpose(grid).reverse(),
-    [-90]: () => transpose(grid).map((row) => row.reverse()),
-  })
+  if (direction === 90) return transpose(grid).reverse()
+  if (direction === -90) return transpose(grid).map((row) => row.reverse())
+  direction satisfies never
 }
 
 export function transposePointMap<T>(input: Map<Point, T>) {
@@ -460,12 +458,11 @@ export enum Direction {
 }
 
 export function directionToChar(direction: Direction) {
-  return match(direction, {
-    [Direction.North]: () => '↑',
-    [Direction.East]: () => '→',
-    [Direction.South]: () => '↓',
-    [Direction.West]: () => '←',
-  })
+  if (direction === Direction.North) return '↑'
+  if (direction === Direction.East) return '→'
+  if (direction === Direction.South) return '↓'
+  if (direction === Direction.West) return '←'
+  direction satisfies never
 }
 
 export function isOppositeDirection(a: Direction, b: Direction) {
