@@ -21,10 +21,10 @@ describe('Part 1', () => {
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {
     // Once you have a working computer, the first step is to restore the gravity assist program (your puzzle input) to the "1202 program alarm" state it had just before the last computer caught fire. To do this, before running the program, replace position 1 with the value 12 and replace position 2 with the value 2. What value is left at position 0 after the program halts?
-    const noun = 12
-    const verb = 2
+    let noun = 12
+    let verb = 2
 
-    const [first_value] = part1(await data, noun, verb)
+    let [first_value] = part1(await data, noun, verb)
     expect(first_value).toMatchSnapshot()
   })
 })
@@ -32,11 +32,11 @@ describe('Part 1', () => {
 describe('Part 2', () => {
   // Actual test, Part 2
   it('should produce the correct value for the input data', async () => {
-    const input = await data
+    let input = await data
 
     for (let noun = 0; noun < 100; noun++) {
       for (let verb = 0; verb < 100; verb++) {
-        const [first_value] = part2(input, noun, verb)
+        let [first_value] = part2(input, noun, verb)
         if (first_value === 19690720) {
           return
         }

@@ -17,7 +17,7 @@ describe('Part 1', () => {
 describe('Part 2', () => {
   // Actual test, Part 1
   it.skip('should produce the correct value for the input data', async () => {
-    const program = (await data).split('')
+    let program = (await data).split('')
     program[0] = 2
 
     expect(await part2(program.join(''))).toMatchSnapshot()

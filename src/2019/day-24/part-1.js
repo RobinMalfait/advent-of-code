@@ -8,11 +8,11 @@ const EMPTY = '.'
 export default async (input) => {
   let board = input.split('\n').map((row) => row.split(''))
 
-  const history = [input]
+  let history = [input]
 
   for (let i = 0; i < 1e3; i++) {
-    const next_board = produce(board)
-    const flat = next_board.map((r) => r.join('')).join('')
+    let next_board = produce(board)
+    let flat = next_board.map((r) => r.join('')).join('')
 
     if (history.includes(flat)) {
       board = next_board
@@ -23,7 +23,7 @@ export default async (input) => {
     board = next_board
   }
 
-  const flat = board.flat(Number.POSITIVE_INFINITY)
+  let flat = board.flat(Number.POSITIVE_INFINITY)
   return sum(
     flat
       .map((tile, i) => ({ tile, i }))
@@ -40,16 +40,16 @@ const neighbours = [
 ]
 
 function produce(board) {
-  const next_board = []
+  let next_board = []
   for (let y = 0; y < board.length; y++) {
     next_board[y] = []
     for (let x = 0; x < board[y].length; x++) {
       // A bug dies (becoming an empty space) unless there is exactly one bug adjacent to it.
       // An empty space becomes infested with a bug if exactly one or two bugs are adjacent to it.
-      const surrounding_tiles = neighbours
+      let surrounding_tiles = neighbours
         .map(([xD, yD]) => {
-          const posX = x + xD
-          const posY = y + yD
+          let posX = x + xD
+          let posY = y + yD
           if (posX < 0 || posY < 0 || posX > board.length - 1 || posY > board.length - 1) {
             return EMPTY
           }
@@ -57,8 +57,8 @@ function produce(board) {
         })
         .join('')
 
-      const me = board[y][x]
-      const BUG_NEIGHBOURS = (surrounding_tiles.match(/\#/g) || []).length
+      let me = board[y][x]
+      let BUG_NEIGHBOURS = (surrounding_tiles.match(/\#/g) || []).length
 
       // Default
       next_board[y][x] = me

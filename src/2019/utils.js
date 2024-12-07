@@ -10,7 +10,7 @@ export function match(value, patterns, ...args) {
   try {
     return patterns[value](...args)
   } catch (err) {
-    const available_keys = Object.keys(patterns)
+    let available_keys = Object.keys(patterns)
     if (!available_keys.includes(value.toString())) {
       throw new Error(
         `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${available_keys
@@ -38,10 +38,10 @@ export function range(n, offset = 0) {
 }
 
 function intersectBetween(a, b) {
-  const [left, right] = [a, b].sort((a, b) => Math.sign(a.length - b.length))
+  let [left, right] = [a, b].sort((a, b) => Math.sign(a.length - b.length))
 
-  const can_use_hash_hack = ['string', 'number'].includes(typeof right[0])
-  const right_hash = can_use_hash_hack
+  let can_use_hash_hack = ['string', 'number'].includes(typeof right[0])
+  let right_hash = can_use_hash_hack
     ? right.reduce((acc, current) => Object.assign(acc, { [current]: true }), {})
     : right
 
@@ -97,17 +97,17 @@ export function chunk(array, n) {
 }
 
 export function perfLogs(cb, message) {
-  const start = Date.now()
+  let start = Date.now()
   console.log({}, `[PERF]: [ START]: ${message}`)
 
   try {
-    const result = cb()
+    let result = cb()
 
-    const end = Date.now()
+    let end = Date.now()
     console.log({ duration: `${end - start}ms` }, `[PERF]: [FINISH]: ${message}`)
     return result
   } catch (err) {
-    const end = Date.now()
+    let end = Date.now()
     console.log({ duration: `${end - start}ms` }, `[PERF]: [FINISH]: ${message} (with error)`)
 
     throw err
@@ -143,7 +143,7 @@ export function compactTable(input, options = {}) {
 
 export function table(input, options = {}) {
   input = ensureTwoDimensional(input)
-  const table = new Table(options)
+  let table = new Table(options)
   table.push(...input)
   return table.toString()
 }
@@ -164,7 +164,7 @@ export function binarySearch(cb, target = 0) {
   let lower_bound = 0
   let higher_bound = target
   while (lower_bound < higher_bound) {
-    const middle = Math.floor((lower_bound + higher_bound + 1) / 2)
+    let middle = Math.floor((lower_bound + higher_bound + 1) / 2)
     if (cb(middle) <= target) {
       lower_bound = middle
     } else {
@@ -178,7 +178,7 @@ export async function asyncBinarySearch(cb, target = 0) {
   let lower_bound = 0
   let higher_bound = target
   while (lower_bound < higher_bound) {
-    const middle = Math.floor((lower_bound + higher_bound + 1) / 2)
+    let middle = Math.floor((lower_bound + higher_bound + 1) / 2)
     if ((await cb(middle)) <= target) {
       lower_bound = middle
     } else {

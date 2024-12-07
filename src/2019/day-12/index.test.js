@@ -9,7 +9,7 @@ let data = promises.readFile(resolve(__dirname, '../../../data/2019-12.txt'), 'u
 
 describe('Part 1', () => {
   it('should produce the correct output for the test input', () => {
-    const input = [
+    let input = [
       '<x=-1, y=0, z=2>',
       '<x=2, y=-10, z=-7>',
       '<x=4, y=-8, z=8>',
@@ -44,7 +44,7 @@ describe('Part 1', () => {
   })
 
   it('should produce the correct total energy for the moons', () => {
-    const input = [
+    let input = [
       '<x=-1, y=0, z=2>',
       '<x=2, y=-10, z=-7>',
       '<x=4, y=-8, z=8>',
@@ -56,7 +56,7 @@ describe('Part 1', () => {
 
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {
-    const steps = 1000
+    let steps = 1000
 
     expect(part1.totalEnergy(await data, steps)).toMatchSnapshot()
   })

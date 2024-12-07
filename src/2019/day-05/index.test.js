@@ -7,7 +7,7 @@ let data = promises.readFile(resolve(__dirname, '../../../data/2019-05.txt'), 'u
 import { PROGRAM_MODES, createIntcodeComputer } from '../intcode/computer'
 
 function compute(program, input, options) {
-  const computer = createIntcodeComputer(program, options)
+  let computer = createIntcodeComputer(program, options)
   computer.input(input)
   return computer.run()
 }
@@ -37,7 +37,7 @@ describe('Part 1', () => {
 
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {
-    const input = [1]
+    let input = [1]
 
     expect(await compute(await data, input)).toMatchSnapshot()
   })
@@ -55,7 +55,7 @@ describe('Part 2', () => {
   })
 
   it('should be a valid jump & equals test', async () => {
-    const program =
+    let program =
       '3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99'
 
     // Will output 999 if below 8
@@ -70,7 +70,7 @@ describe('Part 2', () => {
 
   // Actual test, Part 2
   it('should produce the correct value for the input data', async () => {
-    const input = [5]
+    let input = [5]
 
     expect(await compute(await data, input)).toMatchSnapshot()
   })

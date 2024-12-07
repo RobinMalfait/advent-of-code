@@ -3,7 +3,7 @@
 import { range } from '../utils'
 
 function isValidPassword(password) {
-  const parts = `${password || ''}`.split('').map(Number)
+  let parts = `${password || ''}`.split('').map(Number)
 
   // Verify doubles
   if (!parts.some((part, index) => parts[index - 1] === part)) {
@@ -15,8 +15,8 @@ function isValidPassword(password) {
 }
 
 function countValidPasswordsBetween(start, end) {
-  const _start = Number(start)
-  const _end = Number(end)
+  let _start = Number(start)
+  let _end = Number(end)
 
   return range(_end - _start).reduce(
     (total, current) => total + (isValidPassword(_start + current) ? 1 : 0),

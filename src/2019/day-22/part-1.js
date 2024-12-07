@@ -9,7 +9,7 @@ export default (input, size) => {
     }
 
     if (action.startsWith('deal with increment')) {
-      const amount = Number(action.split(' ').pop())
+      let amount = Number(action.split(' ').pop())
 
       return next_deck.reduce((new_deck, value, i) => {
         new_deck[(i * amount) % size] = value
@@ -18,7 +18,7 @@ export default (input, size) => {
     }
 
     if (action.startsWith('cut')) {
-      const amount = Number(action.split(' ').pop())
+      let amount = Number(action.split(' ').pop())
       return [...next_deck.slice(amount), ...next_deck.slice(0, amount)]
     }
   }, range(size))

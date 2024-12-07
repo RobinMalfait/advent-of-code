@@ -33,7 +33,7 @@ const SPECIAL_CASES = {
 function decode(feed) {
   return feed
     .map((value) => {
-      const string = possible_actions.includes(value) ? String.fromCharCode(value) : value
+      let string = possible_actions.includes(value) ? String.fromCharCode(value) : value
       return SPECIAL_CASES[string] || string
     })
     .join('')
@@ -78,7 +78,7 @@ const B = encodeRaw('') //"R,4,R,4,R,8");
 const C = encodeRaw('') //"L,6,L,2");
 
 export default async function ASCII(input) {
-  const computer = createIntcodeComputer(input)
+  let computer = createIntcodeComputer(input)
   let buffer = ''
   computer.output((value, index) => {
     if (value > 1000) {
@@ -97,7 +97,7 @@ export default async function ASCII(input) {
 
   await computer.run()
 
-  const positions = new Map()
+  let positions = new Map()
   // const board = buffer.split("\n");
   console.log(buffer)
 
@@ -121,9 +121,9 @@ export default async function ASCII(input) {
   //     return total;
   //   }
 
-  //   const me = fromPoint(position);
-  //   const surrounded_by_hashtags = neighbours.every(({ x, y }) => {
-  //     const neighbour_position = point(me.x + x, me.y + y);
+  //   let me = fromPoint(position);
+  //   let surrounded_by_hashtags = neighbours.every(({ x, y }) => {
+  //     let neighbour_position = point(me.x + x, me.y + y);
   //     return (
   //       positions.has(neighbour_position) &&
   //       positions.get(neighbour_position) === "#"
@@ -139,7 +139,7 @@ function point(x, y) {
 }
 
 function fromPoint(point) {
-  const [x, y] = point.slice(1, -1).split(', ').map(Number)
+  let [x, y] = point.slice(1, -1).split(', ').map(Number)
 
   return { x, y }
 }

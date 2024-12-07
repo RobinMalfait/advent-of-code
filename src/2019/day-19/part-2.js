@@ -6,7 +6,7 @@ import { abort, asyncBinarySearch } from '../utils'
 let scanned = 0
 
 function createValue(input) {
-  const cache = new Map()
+  let cache = new Map()
 
   return async (x, y) => {
     scanned++
@@ -15,14 +15,14 @@ function createValue(input) {
       console.log('Scanned positions:', scanned)
     }
 
-    const key = `${x},${y}`
+    let key = `${x},${y}`
     if (cache.has(key)) {
       return cache.get(key)
     }
 
-    const computer = createIntcodeComputer(input)
+    let computer = createIntcodeComputer(input)
     computer.input(x, y)
-    const [value] = await computer.run()
+    let [value] = await computer.run()
     cache.set(key, value)
     return value
   }
@@ -31,8 +31,8 @@ function createValue(input) {
 async function getTopEdge(x, read) {
   let y = 0
 
-  const last_value = await read(x, 0)
-  const direction = last_value === 1 ? 1 : -1
+  let last_value = await read(x, 0)
+  let direction = last_value === 1 ? 1 : -1
 
   while ((await read(x, y)) !== last_value) {
     y += direction
@@ -44,8 +44,8 @@ async function getTopEdge(x, read) {
 async function getBottomEdge(x, read) {
   let y = 0
 
-  const last_value = await read(x, 0)
-  const direction = last_value === 1 ? -1 : 1
+  let last_value = await read(x, 0)
+  let direction = last_value === 1 ? -1 : 1
 
   while ((await read(x, y)) !== last_value) {
     y += direction
@@ -55,30 +55,27 @@ async function getBottomEdge(x, read) {
 }
 
 async function calculateTopEdgeSlope(read) {
-  const [[x1, y1], [x2, y2]] = await Promise.all([getTopEdge(20, read), getTopEdge(100, read)])
+  let [[x1, y1], [x2, y2]] = await Promise.all([getTopEdge(20, read), getTopEdge(100, read)])
 
   return y2 - y1 / x2 - x1
 }
 
 async function calculateBottomEdgeSlope(read) {
-  const [[x1, y1], [x2, y2]] = await Promise.all([
-    getBottomEdge(20, read),
-    getBottomEdge(100, read),
-  ])
+  let [[x1, y1], [x2, y2]] = await Promise.all([getBottomEdge(20, read), getBottomEdge(100, read)])
 
   return y2 - y1 / x2 - x1
 }
 
 export default async (input) => {
-  const GRID_SIZE = 100
-  const value = createValue(input)
+  let GRID_SIZE = 100
+  let value = createValue(input)
 
   // Pre-analysis
-  const top_edge_slope = await calculateTopEdgeSlope(value)
-  const bottom_edge_slope = await calculateBottomEdgeSlope(value)
+  let top_edge_slope = await calculateTopEdgeSlope(value)
+  let bottom_edge_slope = await calculateBottomEdgeSlope(value)
 
-  const offset = GRID_SIZE
-  const guess = GRID_SIZE ** 3
+  let offset = GRID_SIZE
+  let guess = GRID_SIZE ** 3
 
   // to ensure the box * just * fits you also need to check the pixel to the right of the top right is empty, and the pixel to the left of the bottom left is empty
   for (let x = offset; x < guess; x++) {
@@ -91,7 +88,7 @@ export default async (input) => {
         continue
       }
 
-      const [edge_cases, corners] = await Promise.all([
+      let [edge_cases, corners] = await Promise.all([
         Promise.all([value(x + GRID_SIZE + 1, y), value(x - 1, y + GRID_SIZE)]),
         Promise.all([
           value(x, y),

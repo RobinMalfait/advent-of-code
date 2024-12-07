@@ -96,7 +96,7 @@ describe('Part 1', () => {
 
 describe('Part 2', () => {
   it('Should find the best monitoring system, and get the 200th vaporized asteroid', async () => {
-    const map = [
+    let map = [
       '.#..##.###...#######',
       '##.############..##.',
       '.#.######.########.#',

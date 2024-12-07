@@ -1,7 +1,7 @@
 // Day 6: Universal Orbit Map
 
 export default function calculateOrbitalTransfers(input, start, target) {
-  const graph = new Graph()
+  let graph = new Graph()
 
   for (let value of input.split('\n')) {
     let [k, v] = value.split(')')
@@ -39,12 +39,12 @@ class Graph {
   }
 
   path(start, target) {
-    const queue = [start]
-    const visited = [start]
-    const parent = {}
+    let queue = [start]
+    let visited = [start]
+    let parent = {}
 
     while (queue.length) {
-      const vertex = queue.shift()
+      let vertex = queue.shift()
 
       for (let vertex_from_edge of this.edges[vertex]) {
         if (visited.includes(vertex_from_edge)) {
@@ -61,7 +61,7 @@ class Graph {
       return []
     }
 
-    const path = [target]
+    let path = [target]
     let node = parent[target]
     path.push(node)
     while (parent[node] !== undefined) {

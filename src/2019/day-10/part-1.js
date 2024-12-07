@@ -9,9 +9,9 @@ function angle(x1, y1, x2, y2) {
 }
 
 function sensorBoost(input) {
-  const grid = input.split('\n').map((row) => row.split(''))
+  let grid = input.split('\n').map((row) => row.split(''))
 
-  const hash = new Map()
+  let hash = new Map()
 
   grid.forEach((row, y) => {
     row.forEach((cell, x) => {
@@ -23,7 +23,7 @@ function sensorBoost(input) {
       // Store all the angles for this position, use a Set to provide
       // uniqueness. Each asteroid inline will have the exact same angle and
       // thus only stored once!
-      const position = point(x, y)
+      let position = point(x, y)
       hash.set(position, new Set([]))
 
       grid.forEach((row2, y1) => {
@@ -51,9 +51,7 @@ function sensorBoost(input) {
 
   // Sort the asteroids to how many they can see, take the first value because
   // that's the highest one!
-  const [[position, visible_asteroids]] = [...hash.entries()].sort(([, a], [, b]) =>
-    Math.sign(b - a)
-  )
+  let [[position, visible_asteroids]] = [...hash.entries()].sort(([, a], [, b]) => Math.sign(b - a))
   return { position, visible_asteroids }
 }
 

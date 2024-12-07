@@ -16,7 +16,7 @@ describe('Part 1', () => {
 
 describe.skip('Part 2', () => {
   it('should produce the correct value for the input data', async () => {
-    const input = ['....#', '#..#.', '#.?##', '..#..', '#....'].join('\n')
+    let input = ['....#', '#..#.', '#.?##', '..#..', '#....'].join('\n')
 
     expect(await part2(input, 10)).toEqual(99)
   })

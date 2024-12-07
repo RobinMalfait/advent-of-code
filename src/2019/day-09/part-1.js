@@ -3,7 +3,7 @@
 import { createIntcodeComputer } from '../intcode/computer'
 
 export default function sensorBoost(program, input = []) {
-  const computer = createIntcodeComputer(program)
+  let computer = createIntcodeComputer(program)
 
   computer.input(input)
 

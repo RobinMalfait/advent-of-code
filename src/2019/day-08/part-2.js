@@ -12,9 +12,9 @@ export function process(data, width, height) {
 
 export function flatten() {
   return ({ data, width, height }) => {
-    const layers = chunk(data, width * height)
+    let layers = chunk(data, width * height)
 
-    const flattened = layers.reduce(
+    let flattened = layers.reduce(
       (final_layer, layer) => {
         if (!final_layer.includes(TRANSPARENT)) {
           return final_layer
@@ -40,20 +40,20 @@ const PIXELS = {
 
 export function render(lookup = PIXELS) {
   return ({ data, width }) => {
-    const image_with_pixels = data.split('').map((value) => lookup[value])
-    const image = chunk(image_with_pixels.join(''), width).join('\n')
+    let image_with_pixels = data.split('').map((value) => lookup[value])
+    let image = chunk(image_with_pixels.join(''), width).join('\n')
     return `\n${image}\n`
   }
 }
 
 export function scale(factorX = 1, factorY = factorX) {
   return ({ data, width, height }) => {
-    const next_width = width * factorX
-    const next_height = height * factorY
+    let next_width = width * factorX
+    let next_height = height * factorY
 
-    const canvas = chunk(data, width).map((row) => {
+    let canvas = chunk(data, width).map((row) => {
       // Scale the x-axis
-      const next_row = row
+      let next_row = row
         .split('')
         .map((value) => value.repeat(factorX))
         .join('')
@@ -74,15 +74,15 @@ export function scale(factorX = 1, factorY = factorX) {
 
 export function border(top = 0, right = top, bottom = top, left = right) {
   return ({ data, width, height }) => {
-    const BORDER_CHARACTER = BLACK
-    const next_width = width + left + right
-    const next_height = height + top + bottom
+    let BORDER_CHARACTER = BLACK
+    let next_width = width + left + right
+    let next_height = height + top + bottom
 
-    const top_rows = range(top).map(() => BORDER_CHARACTER.repeat(next_width))
-    const center = chunk(data, width).map((row) => {
+    let top_rows = range(top).map(() => BORDER_CHARACTER.repeat(next_width))
+    let center = chunk(data, width).map((row) => {
       return [BORDER_CHARACTER.repeat(left), row, BORDER_CHARACTER.repeat(right)].join('')
     })
-    const bottom_rows = range(bottom).map(() => BORDER_CHARACTER.repeat(next_width))
+    let bottom_rows = range(bottom).map(() => BORDER_CHARACTER.repeat(next_width))
 
     return {
       data: [...top_rows, ...center, ...bottom_rows].join(''),

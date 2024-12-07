@@ -2,21 +2,21 @@ import { describe, expect, it } from 'vitest'
 import { PROGRAM_MODES, createIntcodeComputer } from './computer'
 
 it('should be possible to create a computer', () => {
-  const computer = createIntcodeComputer('')
+  let computer = createIntcodeComputer('')
 
   expect(computer).toMatchSnapshot()
 })
 
 describe('ADDITION', () => {
   it('should be possible to add 2 values together', async () => {
-    const program = [
+    let program = [
       1, // The ADDITION OP
       0, // Position of param 1 (Which is the value 1)
       2, // Position of param 2 (Which is the value 3)
       0, // Position of target (Which will be in the beginning of the array)
     ].join(',')
 
-    const computer = createIntcodeComputer(program, {
+    let computer = createIntcodeComputer(program, {
       mode: PROGRAM_MODES.ALL,
     })
 
@@ -30,14 +30,14 @@ describe('ADDITION', () => {
 
 describe('MULTIPLICATION', () => {
   it('should be possible to add 2 values together', async () => {
-    const program = [
+    let program = [
       2, // The MULTIPLICATION OP
       0, // Position of param 1 (Which is the value 1)
       2, // Position of param 2 (Which is the value 3)
       0, // Position of target (Which will be in the beginning of the array)
     ].join(',')
 
-    const computer = createIntcodeComputer(program, {
+    let computer = createIntcodeComputer(program, {
       mode: PROGRAM_MODES.ALL,
     })
 
@@ -51,7 +51,7 @@ describe('MULTIPLICATION', () => {
 
 describe('I/O', () => {
   it('should be possible to do some IO related tasks', async () => {
-    const program = [
+    let program = [
       3, // The READ OP
       0, // Position of target
       4, // The OUTPUT OP
@@ -66,7 +66,7 @@ describe('I/O', () => {
       0, // Position of param 1
     ].join(',')
 
-    const computer = createIntcodeComputer(program, {
+    let computer = createIntcodeComputer(program, {
       mode: PROGRAM_MODES.ALL,
     })
 
@@ -86,7 +86,7 @@ describe('I/O', () => {
 
 describe('HALT', () => {
   it('should be possible to halt the program after a read', async () => {
-    const program = [
+    let program = [
       3, // The READ OP
       0, // Position of target
       99, // The HALT OP
@@ -100,7 +100,7 @@ describe('HALT', () => {
       2,
     ].join(',')
 
-    const computer = createIntcodeComputer(program, {
+    let computer = createIntcodeComputer(program, {
       mode: PROGRAM_MODES.ALL,
     })
 

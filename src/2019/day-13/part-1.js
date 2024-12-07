@@ -18,11 +18,11 @@ const ACTION = {
 }
 
 export default async function arcadeCabinet(program) {
-  const painted_tiles = new Map()
-  const computer = createIntcodeComputer(program)
-  const position = { x: 0, y: 0 }
+  let painted_tiles = new Map()
+  let computer = createIntcodeComputer(program)
+  let position = { x: 0, y: 0 }
 
-  const ACTION_HANDLERS = {
+  let ACTION_HANDLERS = {
     [ACTION.SET_X](value) {
       position.x = value
     },

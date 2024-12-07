@@ -8,9 +8,9 @@ export default function fft({
   offset_end_position = 0,
   target = 8,
 }) {
-  const full_input = input.repeat(repeat)
-  const offset = Number(full_input.slice(offset_start_position, offset_end_position))
-  const list = full_input.split('').map(Number)
+  let full_input = input.repeat(repeat)
+  let offset = Number(full_input.slice(offset_start_position, offset_end_position))
+  let list = full_input.split('').map(Number)
 
   for (let i = 0; i < phases; i++) {
     let position = list.length - 1

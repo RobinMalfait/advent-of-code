@@ -27,10 +27,10 @@ const ACTION = {
 }
 
 export default async function spacePolice(program) {
-  const painted_panels_map = new Map()
-  const computer = createIntcodeComputer(program)
-  const position = { x: 0, y: 0 }
-  const state = {
+  let painted_panels_map = new Map()
+  let computer = createIntcodeComputer(program)
+  let position = { x: 0, y: 0 }
+  let state = {
     color: COLORS.WHITE,
     direction: DIRECTION.UP,
   }
@@ -77,7 +77,7 @@ export default async function spacePolice(program) {
         })
 
         // Give the computer the color input again
-        const pos = point(position.x, position.y)
+        let pos = point(position.x, position.y)
         computer.input(painted_panels_map.has(pos) ? painted_panels_map.get(pos) : COLORS.BLACK)
       },
     })
@@ -94,12 +94,12 @@ export default async function spacePolice(program) {
 }
 
 function visualize(map) {
-  const width = 40 + 1
-  const height = 5 + 1
-  const data = range(height)
+  let width = 40 + 1
+  let height = 5 + 1
+  let data = range(height)
     .map((y) =>
       range(width).map((x) => {
-        const position = point(x, y)
+        let position = point(x, y)
         return map.has(position) ? map.get(position) : COLORS.BLACK
       })
     )

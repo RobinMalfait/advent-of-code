@@ -42,7 +42,7 @@ describe('Part 1', () => {
 
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {
-    const shuffled_deck = part1(await data, 10007)
+    let shuffled_deck = part1(await data, 10007)
 
     expect(shuffled_deck.indexOf(2019)).toMatchSnapshot()
   })
@@ -51,7 +51,7 @@ describe('Part 1', () => {
 describe('Part 2', () => {
   // Actual test, Part 2
   it.skip('should produce the correct value for the input data', async () => {
-    const card = part2(
+    let card = part2(
       await data,
 
       // Deck Size

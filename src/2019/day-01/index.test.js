@@ -20,7 +20,7 @@ describe('Part 1', () => {
 
   // Actual test, Part 1
   it('should produce the correct value for the input data', async () => {
-    const input = (await data).split('\n').map(Number)
+    let input = (await data).split('\n').map(Number)
     expect(part1(input)).toMatchSnapshot()
   })
 })
@@ -37,7 +37,7 @@ describe('Part 2', () => {
 
   // Actual test, Part 2
   it('should produce the correct value for the input data', async () => {
-    const input = (await data).split('\n').map(Number)
+    let input = (await data).split('\n').map(Number)
 
     expect(part2(input)).toMatchSnapshot()
   })

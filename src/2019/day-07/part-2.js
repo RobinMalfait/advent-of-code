@@ -5,21 +5,21 @@ import { permutations } from '../utils'
 import { createIntcodeComputer } from '../intcode/computer'
 
 export default function amplification(program, amplifier_config) {
-  const amplifiers = amplifier_config.split(',').map(Number)
+  let amplifiers = amplifier_config.split(',').map(Number)
 
-  const configs = permutations(amplifiers)
+  let configs = permutations(amplifiers)
 
   return configs.reduce(async (previous_result, amplifiers) => {
-    const prev = await previous_result
-    const result = await calculateAmplifierOutput(program, amplifiers)
+    let prev = await previous_result
+    let result = await calculateAmplifierOutput(program, amplifiers)
     return result > prev ? result : prev
   }, Number.NEGATIVE_INFINITY)
 }
 
 async function calculateAmplifierOutput(program, amplifiers) {
-  const [a, b, c, d, e] = amplifiers
+  let [a, b, c, d, e] = amplifiers
 
-  const [amplifierA, amplifierB, amplifierC, amplifierD, amplifierE] = amplifiers.map(() =>
+  let [amplifierA, amplifierB, amplifierC, amplifierD, amplifierE] = amplifiers.map(() =>
     createIntcodeComputer(program)
   )
 
@@ -38,7 +38,7 @@ async function calculateAmplifierOutput(program, amplifiers) {
   amplifierE.output((value) => amplifierA.input(value))
 
   // Let's run!
-  const values = await Promise.all([
+  let values = await Promise.all([
     amplifierA.run(),
     amplifierB.run(),
     amplifierC.run(),

@@ -4,11 +4,11 @@ import EventEmitter from 'node:events'
 import { collect, createIntcodeComputer } from '../intcode/computer'
 
 export default async (input) => {
-  const network = new EventEmitter()
-  const mem = { x: Number.POSITIVE_INFINITY, y: Number.POSITIVE_INFINITY }
-  const computers = []
+  let network = new EventEmitter()
+  let mem = { x: Number.POSITIVE_INFINITY, y: Number.POSITIVE_INFINITY }
+  let computers = []
 
-  const NAT = new Promise((resolve) => {
+  let NAT = new Promise((resolve) => {
     network.on(255, (x, y) => {
       if (computers.length === 50 && computers.every((computer) => computer.isInputPending)) {
         // Send x,y to computer 0
@@ -27,9 +27,9 @@ export default async (input) => {
   })
 
   for (let i = 0; i < 50; i++) {
-    const network_address = i
+    let network_address = i
 
-    const computer = createIntcodeComputer(input, {
+    let computer = createIntcodeComputer(input, {
       waitForInput: () => -1,
     })
 
@@ -52,7 +52,7 @@ export default async (input) => {
   }
 
   // Get the result
-  const result = await NAT
+  let result = await NAT
   network.removeAllListeners()
   return result
 }

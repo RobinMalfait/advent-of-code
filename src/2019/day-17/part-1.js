@@ -3,7 +3,7 @@
 import { createIntcodeComputer } from '../intcode/computer'
 
 export default async function ASCII(input) {
-  const computer = createIntcodeComputer(input)
+  let computer = createIntcodeComputer(input)
   let buffer = ''
   computer.output((value) => {
     buffer += String.fromCharCode(value)
@@ -11,8 +11,8 @@ export default async function ASCII(input) {
 
   await computer.run()
 
-  const positions = new Map()
-  const board = buffer.split('\n')
+  let positions = new Map()
+  let board = buffer.split('\n')
 
   // Let's create a positions maps
   board.forEach((row, y) => {
@@ -21,7 +21,7 @@ export default async function ASCII(input) {
     })
   })
 
-  const neighbours = [
+  let neighbours = [
     { x: 0, y: -1 },
     { x: 0, y: 1 },
     { x: -1, y: 0 },
@@ -34,9 +34,9 @@ export default async function ASCII(input) {
       return total
     }
 
-    const me = fromPoint(position)
-    const surrounded_by_hashtags = neighbours.every(({ x, y }) => {
-      const neighbour_position = point(me.x + x, me.y + y)
+    let me = fromPoint(position)
+    let surrounded_by_hashtags = neighbours.every(({ x, y }) => {
+      let neighbour_position = point(me.x + x, me.y + y)
       return positions.has(neighbour_position) && positions.get(neighbour_position) === '#'
     })
 
@@ -49,7 +49,7 @@ function point(x, y) {
 }
 
 function fromPoint(point) {
-  const [x, y] = point.slice(1, -1).split(', ').map(Number)
+  let [x, y] = point.slice(1, -1).split(', ').map(Number)
 
   return { x, y }
 }

@@ -23,13 +23,13 @@ const DRAW = {
 }
 
 export default async function arcadeCabinet(program) {
-  const modified_program = program.split(',')
+  let modified_program = program.split(',')
 
   modified_program[0] = 2 // Set it to 2 to play for free.
 
-  const computer = createIntcodeComputer(modified_program.join(','))
+  let computer = createIntcodeComputer(modified_program.join(','))
 
-  const state = {
+  let state = {
     score: 0,
     ball: { x: 0, y: 0 },
     paddle: { x: 0, y: 0 },
@@ -37,7 +37,7 @@ export default async function arcadeCabinet(program) {
     tmp: { x: 0, y: 0 },
   }
 
-  const DRAW_TILE_HANDLERS = {
+  let DRAW_TILE_HANDLERS = {
     [TILES.EMPTY]: () => {},
     [TILES.WALL]: () => {},
     [TILES.BLOCK]: () => {},
@@ -53,7 +53,7 @@ export default async function arcadeCabinet(program) {
     },
   }
 
-  const DRAW_HANDLERS = {
+  let DRAW_HANDLERS = {
     [DRAW.SCORE](value) {
       state.score = value
     },
@@ -62,7 +62,7 @@ export default async function arcadeCabinet(program) {
     },
   }
 
-  const ACTION_HANDLERS = {
+  let ACTION_HANDLERS = {
     [ACTION.SET_X](value) {
       state.tmp.x = value
     },

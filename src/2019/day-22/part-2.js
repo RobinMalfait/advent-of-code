@@ -6,9 +6,9 @@ const ONE = BigInt(1)
 const TWO = BigInt(2)
 
 export default (input, size, times, card) => {
-  const cardn = BigInt(card)
-  const sizen = BigInt(size)
-  const timesn = BigInt(times)
+  let cardn = BigInt(card)
+  let sizen = BigInt(size)
+  let timesn = BigInt(times)
 
   let a = ONE
   let b = ZERO
@@ -18,13 +18,13 @@ export default (input, size, times, card) => {
       a = mod(a * MINUS_ONE, cardn)
       b = mod(b * MINUS_ONE, cardn)
     } else if (action.startsWith('deal with increment')) {
-      const amount = BigInt(action.split(' ').pop())
-      const p = pow(amount, sizen - TWO, sizen)
+      let amount = BigInt(action.split(' ').pop())
+      let p = pow(amount, sizen - TWO, sizen)
 
       a = mod(a * p, cardn)
       b = mod(b * p, cardn)
     } else if (action.startsWith('cut')) {
-      const amount = BigInt(action.split(' ').pop())
+      let amount = BigInt(action.split(' ').pop())
       b = mod(b + amount, cardn)
     }
 
@@ -51,7 +51,7 @@ function pow(a, b, N) {
   let x = a
 
   while (b > BigInt(0)) {
-    const lsb = b % BigInt(2)
+    let lsb = b % BigInt(2)
     b = b / BigInt(2)
     if (lsb === BigInt(1)) {
       r *= x
