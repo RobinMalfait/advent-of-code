@@ -76,17 +76,16 @@ pub fn part_2(blob: &str) -> i64 {
             let mut results = vec![args[0]];
 
             for arg in args.iter().skip(1) {
-                let copy = results.clone();
-                results.clear();
-                for result in copy {
+                let mut new_results = vec![];
+                for result in results.iter() {
                     let add = result + arg;
                     if add <= target {
-                        results.push(add);
+                        new_results.push(add);
                     }
 
                     let mul = result * arg;
                     if mul <= target {
-                        results.push(mul);
+                        new_results.push(mul);
                     }
 
                     let concat = match arg {
@@ -98,9 +97,10 @@ pub fn part_2(blob: &str) -> i64 {
                             .expect("A number"),
                     };
                     if concat <= target {
-                        results.push(concat);
+                        new_results.push(concat);
                     }
                 }
+                results = new_results;
             }
 
             if results.contains(&target) {
