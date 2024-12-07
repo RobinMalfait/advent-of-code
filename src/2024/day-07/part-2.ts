@@ -20,7 +20,14 @@ function solve([target, ...args]: number[]) {
       let mul = result * arg
       if (mul <= target) results.push(mul)
 
-      let concat = Number(`${result}${arg}`)
+      let concat =
+        arg < 10
+          ? result * 10 + arg
+          : arg < 100
+            ? result * 100 + arg
+            : arg < 1000
+              ? result * 1000 + arg
+              : Number(`${result}${arg}`)
       if (concat <= target) results.push(concat)
     }
   }
