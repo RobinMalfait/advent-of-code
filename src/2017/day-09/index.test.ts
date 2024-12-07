@@ -22,7 +22,7 @@ describe('Part 1', () => {
   })
 
   it('should produce the correct value for the input data', async () => {
-    expect(part1(await data)).toMatchInlineSnapshot(`9662`)
+    expect(part1(await data).toString()).toMatchInlineSnapshot(`"9662"`)
   })
 })
 
@@ -40,6 +40,6 @@ describe('Part 2', () => {
   })
 
   it('should produce the correct value for the input data', async () => {
-    expect(part2(await data)).toMatchInlineSnapshot(`4903`)
+    expect(part2(await data).toString()).toMatchInlineSnapshot(`"4903"`)
   })
 })

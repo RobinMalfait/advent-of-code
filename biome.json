@@ -29,8 +29,7 @@
     "rules": {
       "style": {
         "useConst": "off",
-        "noParameterAssign": "off",
-        "noUnusedTemplateLiteral": "off"
+        "noParameterAssign": "off"
       },
       "nursery": {
         "useSortedClasses": "warn"
