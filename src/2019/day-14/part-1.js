@@ -8,7 +8,7 @@ const CHEMICALS = {
 }
 
 export default function fuelproducer(input, fuel) {
-  const reactions = parseReactions(input)
+  let reactions = parseReactions(input)
 
   // So that we can control the amount of fuel...
   reactions.MAGIC_START = {
@@ -18,19 +18,19 @@ export default function fuelproducer(input, fuel) {
     },
   }
 
-  const definition = Object.entries(reactions).reduce(
-    (obj, [chemical, { requires }]) => ({
-      ...obj,
-      [chemical]: Object.keys(requires || {}),
-    }),
+  let definition = Object.entries(reactions).reduce(
+    (obj, [chemical, { requires }]) => {
+      obj[chemical] = Object.keys(requires || {})
+      return obj
+    },
     {
       // ORE is the only resource we actually have that doesn't require other
       // resources.
       [CHEMICALS.ORE]: [],
     }
   )
-  const graph = generateGraph(definition)
-  const order = Object.keys(
+  let graph = generateGraph(definition)
+  let order = Object.keys(
     Object.fromEntries(
       Object.entries(calculateTransitiveDependencies(graph)).sort(([, a], [, b]) =>
         Math.sign(b.length - a.length)
@@ -38,7 +38,7 @@ export default function fuelproducer(input, fuel) {
     )
   )
 
-  const counts = order.reduce((map, chemical, index) => {
+  let counts = order.reduce((map, chemical) => {
     if (!map.has(chemical)) {
       map.set(chemical, 1)
     }
@@ -47,26 +47,26 @@ export default function fuelproducer(input, fuel) {
       return map
     }
 
-    const { amount, requires } = reactions[chemical]
-    const factor = Math.ceil(map.get(chemical) / amount)
+    let { amount, requires } = reactions[chemical]
+    let factor = Math.ceil(map.get(chemical) / amount)
 
-    for (const [dep_chemical, dep_amount] of Object.entries(requires)) {
-      const additional = factor * dep_amount
-      const existing = map.has(dep_chemical) ? map.get(dep_chemical) : 0
+    for (let [dep_chemical, dep_amount] of Object.entries(requires)) {
+      let additional = factor * dep_amount
+      let existing = map.has(dep_chemical) ? map.get(dep_chemical) : 0
       map.set(dep_chemical, existing + additional)
     }
 
     return map
   }, new Map())
 
-  const only_require_ore = Object.entries(reactions).filter(
+  let only_require_ore = Object.entries(reactions).filter(
     ([, { requires }]) => requires[CHEMICALS.ORE] !== undefined
   )
 
   // console.log("counts:", counts);
   return sum(
     only_require_ore.map(([chemical, { amount, requires }]) => {
-      const amounts_of_ore = requires[CHEMICALS.ORE]
+      let amounts_of_ore = requires[CHEMICALS.ORE]
       return amounts_of_ore * Math.ceil(counts.get(chemical) / amount)
     })
   )
@@ -76,9 +76,9 @@ function parseReactions(input) {
   return Object.assign(
     {},
     ...input.split('\n').map((reaction) => {
-      const [required_chemicals, produced_chemical] = reaction.split(' => ')
+      let [required_chemicals, produced_chemical] = reaction.split(' => ')
 
-      const [chemical, amount] = parseChemical(produced_chemical)
+      let [chemical, amount] = parseChemical(produced_chemical)
 
       return {
         [chemical]: {
@@ -91,7 +91,7 @@ function parseReactions(input) {
 }
 
 function parseChemical(input) {
-  const [amount, chemical] = input.split(' ')
+  let [amount, chemical] = input.split(' ')
   return [chemical, Number(amount)]
 }
 
@@ -116,13 +116,13 @@ class Node {
       )
     }
 
-    const dependencies = []
+    let dependencies = []
 
-    this.children.forEach((child) => {
-      child.getTransitiveDependencyNames(true, [...seen, this]).forEach((dependency) => {
+    for (let child of this.children) {
+      for (let dependency of child.getTransitiveDependencyNames(true, [...seen, this])) {
         dependencies.push(dependency)
-      })
-    })
+      }
+    }
 
     if (include_own_name) {
       dependencies.push(this.id)
@@ -134,16 +134,16 @@ class Node {
 
 function generateGraph(definition = {}) {
   // Create nodes for each item in the definition list
-  const nodes = Object.keys(definition).reduce((result, identifier) => {
+  let nodes = Object.keys(definition).reduce((result, identifier) => {
     result[identifier] = new Node(identifier, definition[identifier])
     return result
   }, {})
 
   // Attach each required dependency as an actual child by reference
-  Object.values(nodes).forEach((node) => {
+  for (let node of Object.values(nodes)) {
     node.addChildren(
       node.direct_dependency_ids.map((id) => {
-        const dependency = nodes[id]
+        let dependency = nodes[id]
 
         if (dependency === undefined) {
           throw new Error(
@@ -154,7 +154,7 @@ function generateGraph(definition = {}) {
         return dependency
       })
     )
-  })
+  }
 
   return nodes
 }

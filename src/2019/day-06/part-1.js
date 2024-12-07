@@ -1,8 +1,8 @@
 // Day 6: Universal Orbit Map
 
 export default function calculateOrbits(input) {
-  const direct_map = input.split('\n').reduce((combined, value) => {
-    const [k, v] = value.split(')')
+  let direct_map = input.split('\n').reduce((combined, value) => {
+    let [k, v] = value.split(')')
     combined[k] = combined[k] || []
     combined[v] = combined[v] || []
 
@@ -11,7 +11,7 @@ export default function calculateOrbits(input) {
     return combined
   }, {})
 
-  const nodes = generateGraph(direct_map)
+  let nodes = generateGraph(direct_map)
 
   return Object.values(calculateTransitiveDependencies(nodes)).reduce(
     (total, deps) => total + deps.length,
@@ -40,13 +40,13 @@ class Node {
       )
     }
 
-    const dependencies = []
+    let dependencies = []
 
-    this.children.forEach((child) => {
-      child.getTransitiveDependencyNames(true, [...seen, this]).forEach((dependency) => {
+    for (let child of this.children) {
+      for (let dependency of child.getTransitiveDependencyNames(true, [...seen, this])) {
         dependencies.push(dependency)
-      })
-    })
+      }
+    }
 
     if (include_own_name) {
       dependencies.push(this.id)
@@ -58,16 +58,16 @@ class Node {
 
 function generateGraph(definition = {}) {
   // Create nodes for each item in the definition list
-  const nodes = Object.keys(definition).reduce((result, identifier) => {
+  let nodes = Object.keys(definition).reduce((result, identifier) => {
     result[identifier] = new Node(identifier, definition[identifier])
     return result
   }, {})
 
   // Attach each required dependency as an actual child by reference
-  Object.values(nodes).forEach((node) => {
+  for (let node of Object.values(nodes)) {
     node.addChildren(
       node.direct_dependency_ids.map((id) => {
-        const dependency = nodes[id]
+        let dependency = nodes[id]
 
         if (dependency === undefined) {
           throw new Error(
@@ -78,7 +78,7 @@ function generateGraph(definition = {}) {
         return dependency
       })
     )
-  })
+  }
 
   return nodes
 }

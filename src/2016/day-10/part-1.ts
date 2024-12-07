@@ -1,3 +1,5 @@
+import { DefaultMap } from 'aoc-utils'
+
 export default function (blob: string) {
   let instructions = blob
     .trim()
@@ -83,18 +85,4 @@ function* parse(
 
   console.log('TODO:', input)
   throw new Error('Not yet implemented.')
-}
-
-class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
-    super()
-  }
-
-  get(key: TKey) {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
-    }
-
-    return super.get(key)
-  }
 }

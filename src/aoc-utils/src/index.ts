@@ -257,6 +257,11 @@ export class Point {
     return Point.points.get(x).get(y)
   }
 
+  static fromString(input: string) {
+    let [x, y] = input.split(',').map(Number)
+    return Point.points.get(x).get(y)
+  }
+
   add(other: Point) {
     return Point.new(this.x + other.x, this.y + other.y)
   }

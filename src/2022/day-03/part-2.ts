@@ -7,7 +7,7 @@ export default function (blob: string) {
       .map((line) => new Set(line.split(''))),
     3
   )
-    .map((sets) => Array.from(sets.pop()!).find((value) => sets.every((set) => set.has(value))))
+    .map((sets) => Array.from(sets.pop()).find((value) => sets.every((set) => set.has(value))))
     .map((letter = '') => (letter.charCodeAt(0) & 31) + 26 * Number(/[A-Z]/.test(letter)))
     .reduce((total, current) => total + current)
 }

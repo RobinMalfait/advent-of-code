@@ -15,7 +15,7 @@ function point(x, y) {
 }
 
 function toCoords(point) {
-  const [x, y] = point
+  let [x, y] = point
     .replace(/(\(|\))*/g, '')
     .split(',')
     .map(Number)
@@ -23,11 +23,11 @@ function toCoords(point) {
 }
 
 function findVaporizedAsteroid(input, number) {
-  const monitoring_asteroid_position = part1.sensorBoost(input).position
-  const { x, y } = toCoords(monitoring_asteroid_position)
+  let monitoring_asteroid_position = part1.sensorBoost(input).position
+  let { x, y } = toCoords(monitoring_asteroid_position)
 
-  const grid = input.split('\n').map((row) => row.split(''))
-  const vaporized_positions = []
+  let grid = input.split('\n').map((row) => row.split(''))
+  let vaporized_positions = []
 
   grid.forEach((row, y1) => {
     row.forEach((cell, x1) => {
@@ -37,7 +37,7 @@ function findVaporizedAsteroid(input, number) {
       }
 
       // Position of current asteroid
-      const position = point(x1, y1)
+      let position = point(x1, y1)
 
       // Skip myself
       if (monitoring_asteroid_position === position) {
@@ -60,7 +60,7 @@ function findVaporizedAsteroid(input, number) {
     })
   })
 
-  const grouped = vaporized_positions
+  let grouped = vaporized_positions
     .map((asteroid) => {
       // UP - angle of -90
       // LEFT - angle of 180
@@ -76,27 +76,28 @@ function findVaporizedAsteroid(input, number) {
     })
     .sort((a, b) => {
       // Sort by angle, then by distance
-      const angle = Math.sign(a.angle - b.angle)
-      const distance = Math.sign(a.distance - b.distance)
+      let angle = Math.sign(a.angle - b.angle)
+      let distance = Math.sign(a.distance - b.distance)
       return angle === 0 ? distance : angle
     })
     .reduce((grouped, current) => {
       // Group asteroids for the same angle together
-      const group = grouped[current.angle] || []
-      return { ...grouped, [current.angle]: [...group, current] }
+      let group = grouped[current.angle] || []
+      grouped[current.angle] = [...group, current]
+      return grouped
     }, {})
 
   // Create two dimensional array of asteroids
-  const values = Object.entries(grouped)
+  let values = Object.entries(grouped)
     .sort(([a], [b]) => Math.sign(Number(a) - Number(b)))
-    .map(([key, values]) => values)
+    .map(([_, values]) => values)
 
   // Zip asteroids together, this will take the first asteroid from the first
   // array, the first array of the second and so on. It will go on in loops.
-  const woven = _.zip(...values).flat(Number.POSITIVE_INFINITY)
+  let woven = _.zip(...values).flat(Number.POSITIVE_INFINITY)
 
   // Find the asteroid at position n
-  const asteroid_n = woven[number - 1]
+  let asteroid_n = woven[number - 1]
 
   // Do the math
   return asteroid_n.position.x * 100 + asteroid_n.position.y

@@ -10,7 +10,13 @@ function parse(line: string): [outsides: string[][], insides: string[][]] {
   return line
     .split(/[\[\]]/g)
     .map((x) => x.split(''))
-    .reduce((acc, current, i) => (acc[i % 2 === 0 ? 0 : 1].push(current), acc), [[], []])
+    .reduce(
+      (acc, current, i) => {
+        acc[i % 2 === 0 ? 0 : 1].push(current)
+        return acc
+      },
+      [[] as string[][], [] as string[][]]
+    )
 }
 
 function supportsSSL([outsides, insides]: ReturnType<typeof parse>) {

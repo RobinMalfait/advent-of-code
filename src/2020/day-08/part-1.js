@@ -16,7 +16,10 @@ export default function (blob) {
     let [operation, argument] = instructions[pc]
     pc += {
       nop: () => 1,
-      acc: () => ((acc += argument), 1),
+      acc: () => {
+        acc += argument
+        return 1
+      },
       jmp: () => argument,
     }[operation]()
   }

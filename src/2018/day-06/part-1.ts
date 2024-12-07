@@ -1,3 +1,5 @@
+import { DefaultMap, Point } from 'aoc-utils'
+
 export default function (blob: string) {
   let points = blob
     .trim()
@@ -17,8 +19,10 @@ export default function (blob: string) {
     for (let y = minY; y <= maxY; ++y) {
       let other = Point.new(x, y)
 
-      let [a, b] = points.slice().sort((a, z) => a.manhatten(other) - z.manhatten(other))
-      if (a.manhatten(other) === b.manhatten(other)) {
+      let [a, b] = points
+        .slice()
+        .sort((a, z) => a.manhattanDistanceTo(other) - z.manhattanDistanceTo(other))
+      if (a.manhattanDistanceTo(other) === b.manhattanDistanceTo(other)) {
         continue // Point is close to 2 points
       }
 
@@ -37,41 +41,4 @@ export default function (blob: string) {
   }
 
   return maxArea
-}
-
-class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
-    super()
-  }
-
-  get(key: TKey) {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
-    }
-
-    return super.get(key)
-  }
-}
-
-class Point {
-  private static points = new DefaultMap<number, DefaultMap<number, Point>>(
-    (x) => new DefaultMap((y) => new Point(x, y))
-  )
-  private constructor(
-    public x = 0,
-    public y = 0
-  ) {}
-
-  static fromString(input: string) {
-    let [x, y] = input.split(',').map(Number)
-    return Point.points.get(x).get(y)
-  }
-
-  static new(x: number, y: number) {
-    return Point.points.get(x).get(y)
-  }
-
-  manhatten(other: Point) {
-    return Math.abs(this.x - other.x) + Math.abs(this.y - other.y)
-  }
 }

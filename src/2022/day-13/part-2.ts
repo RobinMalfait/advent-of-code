@@ -14,11 +14,11 @@ export default function (blob: string) {
   )
 }
 
-function identity(input: any) {
+function identity(input: unknown) {
   return JSON.stringify(input)
 }
 
-function compare(lhs: any, rhs: any): number {
+function compare(lhs: number | number[], rhs: number | number[]): number {
   if (Array.isArray(lhs) && Array.isArray(rhs)) {
     lhs = lhs.slice()
     rhs = rhs.slice()

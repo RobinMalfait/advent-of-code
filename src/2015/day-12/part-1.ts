@@ -2,7 +2,7 @@ export default function (blob: string) {
   return sumJSONNumbers(JSON.parse(blob))
 }
 
-function sumJSONNumbers(input: any): number {
+function sumJSONNumbers(input: unknown): number {
   let sum = 0
 
   if (typeof input === 'number') {

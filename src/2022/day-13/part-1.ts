@@ -7,7 +7,7 @@ export default function (blob: string) {
     .reduce((total, current) => total + current)
 }
 
-function compare(lhs: any, rhs: any): number {
+function compare(lhs: number | number[], rhs: number | number[]): number {
   if (Array.isArray(lhs) && Array.isArray(rhs)) {
     lhs = lhs.slice()
     rhs = rhs.slice()

@@ -3,11 +3,10 @@
 import { createIntcodeComputer } from '../intcode/computer'
 
 export default async (input) => {
-  const GRID_SIZE = 50
-  const sqrt = Math.sqrt(GRID_SIZE)
+  let GRID_SIZE = 50
+  let sqrt = Math.sqrt(GRID_SIZE)
 
-  const promises = []
-  let total = 0
+  let promises = []
 
   for (let x = 0; x < GRID_SIZE; x++) {
     for (let y = 0; y < GRID_SIZE; y++) {
@@ -17,13 +16,11 @@ export default async (input) => {
         continue
       }
 
-      const computer = createIntcodeComputer(input)
+      let computer = createIntcodeComputer(input)
       computer.input(x, y)
-      promises.push(computer.run().then(([value]) => (total += value)))
+      promises.push(computer.run().then(([value]) => value))
     }
   }
 
-  await Promise.all(promises)
-
-  return total
+  return (await Promise.all(promises)).reduce((acc, value) => acc + value, 0)
 }

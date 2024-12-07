@@ -7,7 +7,7 @@ export default function (blob: string) {
   let parents = new Map<string, string>(nodes.map((node) => [node.name, null]))
 
   function weight(name: string) {
-    let node = nodes.find((i) => i.name === name)!
+    let node = nodes.find((i) => i.name === name)
     return node.weight + node.dependencies.reduce((total, child) => total + weight(child), 0)
   }
 

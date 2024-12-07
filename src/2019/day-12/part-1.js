@@ -6,7 +6,7 @@ import { range, sum } from '../utils'
 // 2. Once all velocities have been updated for each moon, apply gravity
 
 function totalEnergy(input, steps = 0) {
-  const moons = calculateMoonState(input, steps)
+  let moons = calculateMoonState(input, steps)
 
   return moons.reduce((total, moon) => {
     return (
@@ -22,13 +22,15 @@ function render(input, steps = 0) {
 }
 
 function calculateMoonState(input, steps = 0) {
-  const moons = parseInput(input)
+  let moons = parseInput(input)
 
-  range(steps).forEach(() => {
-    const pairs = new WeakMap()
+  for (let _ in range(steps)) {
+    let pairs = new WeakMap()
 
     // Ensure each moon has a key in the pairs map
-    moons.forEach((moon) => pairs.set(moon, []))
+    for (let moon of moons) {
+      pairs.set(moon, [])
+    }
 
     // Apply velocity
     for (let moon1 of moons) {
@@ -48,41 +50,42 @@ function calculateMoonState(input, steps = 0) {
         pairs.get(moon2).push(moon1)
 
         // Compare x
-        const diff_x = Math.sign(moon2.position.x - moon1.position.x)
+        let diff_x = Math.sign(moon2.position.x - moon1.position.x)
         moon1.velocity.x += diff_x
         moon2.velocity.x += -diff_x
 
         // Compare y
-        const diff_y = Math.sign(moon2.position.y - moon1.position.y)
+        let diff_y = Math.sign(moon2.position.y - moon1.position.y)
         moon1.velocity.y += diff_y
         moon2.velocity.y += -diff_y
 
         // Compare z
-        const diff_z = Math.sign(moon2.position.z - moon1.position.z)
+        let diff_z = Math.sign(moon2.position.z - moon1.position.z)
         moon1.velocity.z += diff_z
         moon2.velocity.z += -diff_z
       }
     }
 
     // Apply gravity
-    moons.forEach((moon) => {
+    for (let moon of moons) {
       moon.position.x += moon.velocity.x
       moon.position.y += moon.velocity.y
       moon.position.z += moon.velocity.z
-    })
-  })
+    }
+  }
 
   return moons
 }
 
 function parseInput(input) {
   return input.split('\n').map((moon) => {
-    const position = moon
+    let position = moon
       .slice(1, -1)
       .split(', ')
       .reduce((info, part) => {
-        const [key, value] = part.split('=')
-        return { ...info, [key]: Number(value) }
+        let [key, value] = part.split('=')
+        info[key] = Number(value)
+        return info
       }, {})
 
     return { position, velocity: { x: 0, y: 0, z: 0 } }
@@ -90,7 +93,7 @@ function parseInput(input) {
 }
 
 function display(moons) {
-  const padding = moons.reduce(
+  let padding = moons.reduce(
     ({ position, velocity }, moon) => ({
       position: {
         x: Math.max(position.x, moon.position.x.toString().length),
@@ -106,7 +109,7 @@ function display(moons) {
     { position: { x: 2, y: 2, z: 2 }, velocity: { x: 2, y: 2, z: 2 } }
   )
 
-  const map = {
+  let map = {
     pos: 'position',
     vel: 'velocity',
   }
@@ -115,9 +118,9 @@ function display(moons) {
     .map((moon) => {
       return Object.entries(map)
         .map(([label, prop]) => {
-          const details = Object.keys(moon[prop])
+          let details = Object.keys(moon[prop])
             .map((key) => {
-              const value = moon[prop][key]
+              let value = moon[prop][key]
               return [key, value.toString().padStart(padding[prop][key], ' ')].join('=')
             })
             .join(', ')

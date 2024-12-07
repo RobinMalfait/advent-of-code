@@ -1,3 +1,4 @@
+import { DefaultMap } from 'aoc-utils'
 import { compareAsc, differenceInMinutes } from 'date-fns'
 
 export default function (blob: string) {
@@ -70,19 +71,5 @@ function parse(input: string) {
     type: 'SHIFT',
     date: new Date(groups.date),
     id: Number(guardId),
-  }
-}
-
-class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
-    super()
-  }
-
-  get(key: TKey) {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
-    }
-
-    return super.get(key)
   }
 }

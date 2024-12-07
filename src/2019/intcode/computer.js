@@ -55,26 +55,30 @@ const OP_HANDLERS = {
     state.brain.emit(IO.OUT, op.readParam(), state.output.length)
   },
   [OP.JUMP_IF_TRUE](op) {
-    const param1 = op.readParam()
-    const param2 = op.readParam()
+    let param1 = op.readParam()
+    let param2 = op.readParam()
 
     if (param1 !== 0) {
       return param2 // Returning the new position
     }
   },
   [OP.JUMP_IF_FALSE](op) {
-    const param1 = op.readParam()
-    const param2 = op.readParam()
+    let param1 = op.readParam()
+    let param2 = op.readParam()
 
     if (param1 === 0) {
       return param2 // Returning the new position
     }
   },
   [OP.LESS_THAN](op) {
-    op.write(op.readParam() < op.readParam() ? 1 : 0)
+    let param1 = op.readParam()
+    let param2 = op.readParam()
+    op.write(param1 < param2 ? 1 : 0)
   },
   [OP.EQUALS](op) {
-    op.write(op.readParam() === op.readParam() ? 1 : 0)
+    let param1 = op.readParam()
+    let param2 = op.readParam()
+    op.write(param1 === param2 ? 1 : 0)
   },
   [OP.ADJUST_RELATIVE_BASE](op, state) {
     state.relative_base_pointer += op.readParam()
@@ -86,11 +90,11 @@ function readInput(state) {
 }
 
 export function createIntcodeComputer(program = '', OPTIONS = {}) {
-  const { mode = PROGRAM_MODES.OUTPUT, waitForInput } = OPTIONS
+  let { mode = PROGRAM_MODES.OUTPUT, waitForInput } = OPTIONS
 
   // Let's create a state bucket where we can store stuff, and make it easy to
   // pass around.
-  const state = {
+  let state = {
     state: STATE.IDLE,
 
     // Keep track of the memory
@@ -125,9 +129,9 @@ export function createIntcodeComputer(program = '', OPTIONS = {}) {
   async function IntcodeComputer() {
     try {
       while (state.instruction_pointer < state.memory.length && state.state === STATE.RUNNING) {
-        const operator = parseOperator(state)
+        let operator = parseOperator(state)
 
-        const next_position = await match(operator.operation, OP_HANDLERS, operator, state)
+        let next_position = await match(operator.operation, OP_HANDLERS, operator, state)
 
         if (next_position != null) {
           state.instruction_pointer = next_position
@@ -156,7 +160,7 @@ export function createIntcodeComputer(program = '', OPTIONS = {}) {
         return
       }
 
-      const flattened = values.flat(Number.POSITIVE_INFINITY)
+      let flattened = values.flat(Number.POSITIVE_INFINITY)
       if (flattened.some((v) => typeof v !== 'number')) {
         throw new Error('Inputs must be of type number')
       }
@@ -198,10 +202,10 @@ const OPERATOR_MODE_HANDLERS = {
 }
 
 function resolvePosition(operator_state, computer_state) {
-  const position = ++operator_state.local_instruction_pointer
+  let position = ++operator_state.local_instruction_pointer
 
   // Find the actual mode
-  const mode = (operator_state.next_mode % 10) | 0
+  let mode = (operator_state.next_mode % 10) | 0
 
   // Prep the next_mode
   operator_state.next_mode /= 10
@@ -211,12 +215,12 @@ function resolvePosition(operator_state, computer_state) {
 }
 
 function parseOperator(computer_state) {
-  const input = computer_state.memory[computer_state.instruction_pointer]
+  let input = computer_state.memory[computer_state.instruction_pointer]
   if (typeof input !== 'number') {
     throw new Error(`No no... "${input}" (${typeof input})`)
   }
 
-  const operator_state = {
+  let operator_state = {
     operation: input % 100, // Last 3 digits
     next_mode: (input / 100) | 0,
 
@@ -231,7 +235,7 @@ function parseOperator(computer_state) {
 
     // Expose a set of utils
     readParam() {
-      const value = computer_state.memory[resolvePosition(operator_state, computer_state)]
+      let value = computer_state.memory[resolvePosition(operator_state, computer_state)]
 
       return value == null ? 0 : value
     },

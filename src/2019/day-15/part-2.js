@@ -19,9 +19,9 @@ const DRAW = {
 }
 
 export default async function oxygenSystem(program) {
-  const computer = createIntcodeComputer(program)
+  let computer = createIntcodeComputer(program)
 
-  const state = {
+  let state = {
     // Keep track of the position of the droid
     droid: { x: 0, y: 0 },
 
@@ -56,7 +56,7 @@ export default async function oxygenSystem(program) {
     // Mark the node as being explored
     state.explored.add(state.queue.pop())
 
-    const neighbours = [
+    let neighbours = [
       { x: 0, y: -1, movement: MOVEMENT.NORTH },
       { x: 0, y: 1, movement: MOVEMENT.SOUTH },
       { x: -1, y: 0, movement: MOVEMENT.WEST },
@@ -64,17 +64,17 @@ export default async function oxygenSystem(program) {
     ]
 
     // Make neighbors explorable?
-    neighbours.forEach(({ x, y, movement }) => {
-      const next_x = state.next_position.x + x
-      const next_y = state.next_position.y + y
-      const neighbor = point(next_x, next_y)
+    for (let { x, y, movement } of neighbours) {
+      let next_x = state.next_position.x + x
+      let next_y = state.next_position.y + y
+      let neighbor = point(next_x, next_y)
       if (canMove(state, movement)) {
         state.queue.unshift(neighbor)
       }
-    })
+    }
 
     // Prefer "Free" slots over existing paths
-    const next_free_spot = neighbours.find((n) =>
+    let next_free_spot = neighbours.find((n) =>
       canMove(state, n.movement, [DRAW.WALL, DRAW.PATH, DRAW.OXYGEN_SYSTEM])
     )
     if (next_free_spot !== undefined) {
@@ -106,13 +106,13 @@ export default async function oxygenSystem(program) {
   }
 
   computer.output((value) => {
-    const next = point(state.next_position.x, state.next_position.y)
+    let next = point(state.next_position.x, state.next_position.y)
     match(value, {
       [STATUS_CODES.HIT_A_WALL]() {
         // Hit a wall, mark position as a WALL
         state.board.set(next, DRAW.WALL)
 
-        const current = point(state.droid.x, state.droid.y)
+        let current = point(state.droid.x, state.droid.y)
         if (!state.neighbours.has(current)) {
           state.neighbours.set(current, new Set())
         }
@@ -165,19 +165,19 @@ export default async function oxygenSystem(program) {
     })
 
     // Link neighbours for current point
-    const neighbours = [
+    let neighbours = [
       { x: 0, y: -1 },
       { x: 0, y: 1 },
       { x: -1, y: 0 },
       { x: 0, y: 1 },
     ]
-    neighbours.forEach(({ x, y }) => {
-      const p = point(state.droid.x + x, state.droid.y + y)
+    for (let { x, y } of neighbours) {
+      let p = point(state.droid.x + x, state.droid.y + y)
       if (
         (state.board.has(p) && state.board.get(p) === DRAW.WALL) ||
         state.surrogate_walls.has(p)
       ) {
-        const current = point(state.droid.x, state.droid.y)
+        let current = point(state.droid.x, state.droid.y)
 
         if (!state.neighbours.has(current)) {
           state.neighbours.set(current, new Set())
@@ -188,7 +188,7 @@ export default async function oxygenSystem(program) {
           state.surrogate_walls.add(point(state.droid.x, state.droid.y))
         }
       }
-    })
+    }
 
     // Let's try to move again
     tryToMove()
@@ -212,20 +212,20 @@ function point(x, y) {
 }
 
 function fromPoint(point) {
-  const [x, y] = point.slice(1, -1).split(', ').map(Number)
+  let [x, y] = point.slice(1, -1).split(', ').map(Number)
 
   return { x, y }
 }
 
 function canMove(state, movement, disallowed_tiles = [DRAW.WALL]) {
-  const { x = 0, y = 0 } = match(movement, {
+  let { x = 0, y = 0 } = match(movement, {
     [MOVEMENT.NORTH]: () => ({ y: -1 }),
     [MOVEMENT.SOUTH]: () => ({ y: 1 }),
     [MOVEMENT.WEST]: () => ({ x: -1 }),
     [MOVEMENT.EAST]: () => ({ x: 1 }),
   })
 
-  const next = point(state.next_position.x + x, state.next_position.y + y)
+  let next = point(state.next_position.x + x, state.next_position.y + y)
 
   // Check if we are not walking on a possible dead end
   if (state.surrogate_walls.has(next)) {
@@ -236,7 +236,7 @@ function canMove(state, movement, disallowed_tiles = [DRAW.WALL]) {
 }
 
 function visualize(state) {
-  const offset = {
+  let offset = {
     LEFT: 0,
     RIGHT: 0,
     TOP: 0,
@@ -244,37 +244,37 @@ function visualize(state) {
   }
 
   // Find the board offsets
-  ;[...state.board.keys()].forEach((position) => {
-    const { x, y } = fromPoint(position)
+  for (let position of state.board.keys()) {
+    let { x, y } = fromPoint(position)
     offset.LEFT = Math.min(offset.LEFT, x)
     offset.RIGHT = Math.max(offset.RIGHT, x)
     offset.TOP = Math.min(offset.TOP, y)
     offset.BOTTOM = Math.max(offset.BOTTOM, y)
-  })
+  }
 
-  const LEFT_OFFSET = Math.abs(offset.LEFT)
-  const TOP_OFFSET = Math.abs(offset.TOP)
+  let LEFT_OFFSET = Math.abs(offset.LEFT)
+  let TOP_OFFSET = Math.abs(offset.TOP)
 
-  const width = LEFT_OFFSET + Math.abs(offset.RIGHT) + 1
-  const height = TOP_OFFSET + Math.abs(offset.BOTTOM) + 1
+  let width = LEFT_OFFSET + Math.abs(offset.RIGHT) + 1
+  let height = TOP_OFFSET + Math.abs(offset.BOTTOM) + 1
 
   // Create an empty board
-  const visual_board = range(height).map(() => range(width).map(() => DRAW.UNKNOWN))
+  let visual_board = range(height).map(() => range(width).map(() => DRAW.UNKNOWN))
 
   // Fill in the board
-  ;[...state.board.entries()].forEach(([position, tile]) => {
-    const { x, y } = fromPoint(position)
+  for (let [position, tile] of state.board.entries()) {
+    let { x, y } = fromPoint(position)
     visual_board[y + TOP_OFFSET][x + LEFT_OFFSET] = tile
-  })
+  }
 
   // Display the start position
   visual_board[0 + TOP_OFFSET][0 + LEFT_OFFSET] = 'S'
 
   // Surrogate walls?
-  state.surrogate_walls.forEach((value) => {
-    const { x, y } = fromPoint(value)
+  for (let value of state.surrogate_walls) {
+    let { x, y } = fromPoint(value)
     visual_board[y + TOP_OFFSET][x + LEFT_OFFSET] = DRAW.SURROGATE_WALL
-  })
+  }
 
   // Set the droid
   visual_board[state.droid.y + TOP_OFFSET][state.droid.x + LEFT_OFFSET] = DRAW.DROID
@@ -282,10 +282,10 @@ function visualize(state) {
   // Apply a border of padding
   visual_board.unshift(range(width).map(() => ' '))
   visual_board.push(range(width).map(() => ' '))
-  visual_board.forEach((row) => {
-    row.push(' ')
+  for (let row of visual_board) {
     row.unshift(' ')
-  })
+    row.push(' ')
+  }
 
   // Draw
   return compactTable(visual_board)

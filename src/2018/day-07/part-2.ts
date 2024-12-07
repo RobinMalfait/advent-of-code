@@ -1,3 +1,5 @@
+import { DefaultMap } from 'aoc-utils'
+
 export default function (blob: string, workers = 5, minduration = 60) {
   let instructions = blob
     .trim()
@@ -60,18 +62,4 @@ function parse(input: string) {
   let { first, second } =
     /Step (?<first>\w) must be finished before step (?<second>\w) can begin./.exec(input).groups
   return [first, second] as const
-}
-
-class DefaultMap<TKey = string, TValue = any> extends Map<TKey, TValue> {
-  constructor(private factory: (key: TKey) => TValue) {
-    super()
-  }
-
-  get(key: TKey) {
-    if (!this.has(key)) {
-      this.set(key, this.factory(key))
-    }
-
-    return super.get(key)
-  }
 }

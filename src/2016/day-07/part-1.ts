@@ -1,3 +1,5 @@
+import { windows } from 'aoc-utils'
+
 export default function (blob: string) {
   return blob
     .trim()
@@ -10,7 +12,13 @@ function parse(line: string): [outsides: string[][], insides: string[][]] {
   return line
     .split(/[\[\]]/g)
     .map((x) => x.split(''))
-    .reduce((acc, current, i) => (acc[i % 2 === 0 ? 0 : 1].push(current), acc), [[], []])
+    .reduce(
+      (acc, current, i) => {
+        acc[i % 2 === 0 ? 0 : 1].push(current)
+        return acc
+      },
+      [[] as string[][], [] as string[][]]
+    )
 }
 
 function supportsTLS([outsides, insides]: ReturnType<typeof parse>) {
@@ -19,7 +27,7 @@ function supportsTLS([outsides, insides]: ReturnType<typeof parse>) {
 
 function hasABBA<T>(input: T[][]) {
   for (let group of input) {
-    for (let [a, b, c, d] of windows(4, group)) {
+    for (let [a, b, c, d] of windows(group, 4)) {
       if (a === d && b === c && a !== b) {
         return true
       }
@@ -27,10 +35,4 @@ function hasABBA<T>(input: T[][]) {
   }
 
   return false
-}
-
-function* windows<T>(n: number, input: T[]) {
-  for (let i = 0; i <= input.length - n; i++) {
-    yield input.slice(i, i + n)
-  }
 }

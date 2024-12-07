@@ -14,16 +14,18 @@ function keyFor(moons, property) {
 }
 
 function calculateMoonState(moons) {
-  const x_seen = new Set([keyFor(moons, 'x')])
-  const y_seen = new Set([keyFor(moons, 'y')])
-  const z_seen = new Set([keyFor(moons, 'z')])
+  let x_seen = new Set([keyFor(moons, 'x')])
+  let y_seen = new Set([keyFor(moons, 'y')])
+  let z_seen = new Set([keyFor(moons, 'z')])
 
   try {
     while (true) {
-      const pairs = new WeakMap()
+      let pairs = new WeakMap()
 
       // Ensure each moon has a key in the pairs map
-      moons.forEach((moon) => pairs.set(moon, []))
+      for (let moon of moons) {
+        pairs.set(moon, [])
+      }
 
       // Apply velocity
       for (let moon1 of moons) {
@@ -43,33 +45,33 @@ function calculateMoonState(moons) {
           pairs.get(moon2).push(moon1)
 
           // Compare X
-          const diff_x = Math.sign(moon2.position.x - moon1.position.x)
+          let diff_x = Math.sign(moon2.position.x - moon1.position.x)
           moon1.velocity.x += diff_x
           moon2.velocity.x += -diff_x
 
           // Compare Y
-          const diff_y = Math.sign(moon2.position.y - moon1.position.y)
+          let diff_y = Math.sign(moon2.position.y - moon1.position.y)
           moon1.velocity.y += diff_y
           moon2.velocity.y += -diff_y
 
           // Compare Z
-          const diff_z = Math.sign(moon2.position.z - moon1.position.z)
+          let diff_z = Math.sign(moon2.position.z - moon1.position.z)
           moon1.velocity.z += diff_z
           moon2.velocity.z += -diff_z
         }
       }
 
       // Apply gravity
-      moons.forEach((moon) => {
+      for (let moon of moons) {
         moon.position.x += moon.velocity.x
         moon.position.y += moon.velocity.y
         moon.position.z += moon.velocity.z
-      })
+      }
 
       // Check positions for each moon
-      const x_positions = keyFor(moons, 'x')
-      const y_positions = keyFor(moons, 'y')
-      const z_positions = keyFor(moons, 'z')
+      let x_positions = keyFor(moons, 'x')
+      let y_positions = keyFor(moons, 'y')
+      let z_positions = keyFor(moons, 'z')
 
       // We've seen them all, ABORT
       if (x_seen.has(x_positions) && y_seen.has(y_positions) && z_seen.has(z_positions)) {
@@ -94,12 +96,13 @@ function calculateMoonState(moons) {
 
 function parseInput(input) {
   return input.split('\n').map((moon) => {
-    const position = moon
+    let position = moon
       .slice(1, -1)
       .split(', ')
       .reduce((info, part) => {
-        const [key, value] = part.split('=')
-        return { ...info, [key]: Number(value) }
+        let [key, value] = part.split('=')
+        info[key] = Number(value)
+        return info
       }, {})
 
     return { position, velocity: { x: 0, y: 0, z: 0 } }
