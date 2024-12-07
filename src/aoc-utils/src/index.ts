@@ -1,10 +1,33 @@
+// Class
+export class DefaultMap<K = string, V = unknown> extends Map<K, V> {
+  constructor(private factory: (key: K) => V) {
+    super()
+  }
+
+  get(key: K): V {
+    let value = super.get(key)
+
+    if (value === undefined) {
+      value = this.factory(key)
+      this.set(key, value)
+    }
+
+    return value
+  }
+}
+
 // Math
 export function lcm(x: number, y: number) {
   return x === 0 || y === 0 ? 0 : Math.abs((x * y) / gcd(x, y))
 }
 
 export function gcd(x: number, y: number) {
-  return y === 0 ? x : gcd(y, x % y)
+  while (y !== 0) {
+    let tmp = y
+    y = x % y
+    x = tmp
+  }
+  return x
 }
 
 export function degrees(radians: number) {
@@ -15,22 +38,25 @@ export function radians(degrees: number) {
   return degrees * (Math.PI / 180)
 }
 
-export function choose(n: number, k: number) {
-  if (k > n) return 0
+let chooses = new DefaultMap((n: number) => {
+  return new DefaultMap((k: number) => {
+    if (k > n) return 0
+    return factorial(n) / (factorial(k) * factorial(n - k))
+  })
+})
 
-  return factorial(n) / (factorial(k) * factorial(n - k))
+export function choose(n: number, k: number) {
+  return chooses.get(n).get(k)
 }
 
-let factorialCache = new Map<number, number>([
-  [0, 1],
-  [1, 1],
-])
+let factorials = new DefaultMap<number, number>((n) => {
+  if (n === 0) return 1
+  if (n === 1) return 1
+  return n * factorials.get(n - 1)
+})
 
 export function factorial(n: number): number {
-  if (factorialCache.has(n)) return factorialCache.get(n) as number
-  let result = n * factorial(n - 1)
-  factorialCache.set(n, result)
-  return result
+  return factorials.get(n)
 }
 
 export function sum(numbers: number[]) {
@@ -194,24 +220,6 @@ export function memoize<T extends (...args: unknown[]) => R, R>(
 
     return result
   }) as T
-}
-
-// Class
-export class DefaultMap<K = string, V = unknown> extends Map<K, V> {
-  constructor(private factory: (key: K) => V) {
-    super()
-  }
-
-  get(key: K): V {
-    let value = super.get(key)
-
-    if (value === undefined) {
-      value = this.factory(key)
-      this.set(key, value)
-    }
-
-    return value
-  }
 }
 
 export class Range {
@@ -425,7 +433,7 @@ export function polygonArea(vertices: Point[]) {
 
 export function visualizePointMap<T>(
   map: Map<Point, T>,
-  valueFn: (value: T, point: Point) => string = (x) => x?.toString()
+  valueFn: (value: T, point: Point) => string = (x) => x?.toString() ?? ' '
 ) {
   let { width, height } = pointsToSize(map)
   let grid: string[][] = []
@@ -602,62 +610,5 @@ class BinaryHeap<T> {
         break
       }
     }
-  }
-}
-
-// Iterator helpers
-export function h<T>(it: Iterable<T>) {
-  return new IteratorHelpers(it)
-}
-
-class IteratorHelpers<T> {
-  constructor(private it: Iterable<T>) {}
-
-  first() {
-    return this.it[Symbol.iterator]().next().value
-  }
-
-  last() {
-    let it = this.it[Symbol.iterator]()
-    let x = it.next()
-    let last = x.value
-    while (!x.done) {
-      last = x.value
-      x = it.next()
-    }
-    return last
-  }
-
-  empty() {
-    return this.it[Symbol.iterator]().next().done
-  }
-
-  map<U>(fn: (x: T) => U) {
-    let it = this.it
-    return new IteratorHelpers({
-      *[Symbol.iterator]() {
-        for (let x of it) {
-          yield fn(x)
-        }
-      },
-    })
-  }
-
-  every(fn: (x: T) => boolean) {
-    for (let x of this.it) {
-      if (!fn(x)) return false
-    }
-    return true
-  }
-
-  some(fn: (x: T) => boolean) {
-    for (let x of this.it) {
-      if (fn(x)) return true
-    }
-    return false
-  }
-
-  collect() {
-    return Array.from(this.it)
   }
 }
