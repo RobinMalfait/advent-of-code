@@ -10,7 +10,7 @@ export default function (blob: string) {
     let minY = Number.POSITIVE_INFINITY
     let maxY = Number.NEGATIVE_INFINITY
 
-    let xCount = {}
+    let xCount: Record<string, number> = {}
 
     for (let point of points) {
       point.tick()
