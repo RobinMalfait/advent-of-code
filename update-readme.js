@@ -69,15 +69,16 @@ output.push([
   ),
 ])
 
-let allStars = data.slice(1).reduce((acc, row) => acc + row.reduce((acc, v) => acc + v, 0), 0)
-
-let markdown = `Total stars: **${allStars}**\n\n${output.map((row) => `|${row.join(' | ')}|`).join('\n')}\n\n${data[0]
-  .map(
-    (year) => `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
-  )
-  .join('\n')}`
-
+// Main README.md
 {
+  let allStars = data.slice(1).reduce((acc, row) => acc + row.reduce((acc, v) => acc + v, 0), 0)
+  let markdown = `Total stars: **${allStars}**\n\n${output.map((row) => `|${row.join(' | ')}|`).join('\n')}\n\n${data[0]
+    .map(
+      (year) =>
+        `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
+    )
+    .join('\n')}`
+
   let readme = path.join(process.cwd(), 'README.md')
   let contents = await fs.readFile(readme, 'utf8')
   await fs.writeFile(
@@ -90,4 +91,35 @@ let markdown = `Total stars: **${allStars}**\n\n${output.map((row) => `|${row.jo
       { parser: 'markdown' }
     )
   )
+}
+
+// Sub README.md
+{
+  for (let [year, ...stars] of totals) {
+    let count = stars.reduce((acc, v) => acc + v, 0)
+
+    let output = [
+      ['Day', 'Part 1', 'Part 2'],
+      [':---:', ':---:', ':---:'],
+    ]
+
+    for (let [idx, count] of stars.entries()) {
+      output.push([`**${idx + 1}**`, count >= 1 ? '⭐' : ' ', count === 2 ? '⭐' : ' '])
+    }
+
+    let markdown = `Total stars: **${count}**\n\n${output.map((row) => `|${row.join(' | ')}|`).join('\n')}\n`
+
+    let readme = path.join(process.cwd(), `src/${year}/README.md`)
+    let contents = await fs.readFile(readme, 'utf8')
+    await fs.writeFile(
+      readme,
+      await prettier.format(
+        contents.replace(
+          /<\!-- start -->([\s\S]*)<\!-- end -->/g,
+          `<!-- start -->\n${markdown}\n<!-- end -->`
+        ),
+        { parser: 'markdown' }
+      )
+    )
+  }
 }
