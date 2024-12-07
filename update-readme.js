@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import cheerio from 'cheerio'
+import { load } from 'cheerio'
 import prettier from 'prettier'
 
 async function get(url) {
@@ -17,7 +17,7 @@ async function getStars(year) {
   let contents = await get(`/${year}`)
 
   let starsByDay = new Map(Array.from({ length: 25 }, (_, i) => [i + 1, 0]))
-  let $ = cheerio.load(contents)
+  let $ = load(contents)
   for (let el of $('[aria-label^="Day "]')) {
     let label = el.attribs['aria-label']
     let { groups } = /Day (?<day>\d+)(?:, (?<stars>one|two) stars?)?/g.exec(label)
@@ -34,7 +34,7 @@ function transpose(grid) {
 // --
 
 let contents = await get(`/${new Date().getFullYear()}/events`)
-let $ = cheerio.load(contents)
+let $ = load(contents)
 
 let totals = []
 for await (let event of $('.eventlist-event')) {
