@@ -14,11 +14,11 @@ fn main() {
     println!("Part 2: {:<20}(took: {:>12?})", part_2_result, duration);
 }
 
-pub fn part_1(data: &str) -> i32 {
+pub fn part_1(blob: &str) -> i32 {
     todo!()
 }
 
-pub fn part_2(data: &str) -> i32 {
+pub fn part_2(blob: &str) -> i32 {
     todo!()
 }
 
