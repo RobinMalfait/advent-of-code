@@ -328,6 +328,10 @@ export class Point {
     return Math.abs(this.x - other.x) + Math.abs(this.y - other.y)
   }
 
+  isWithinBounds({ width, height }: { width: number; height: number }) {
+    return this.x >= 0 && this.x < width && this.y >= 0 && this.y < height
+  }
+
   tuple() {
     return [this.x, this.y] as const
   }
