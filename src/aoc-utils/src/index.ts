@@ -344,8 +344,18 @@ export function parseIntoGrid<T = string>(
 ) {
   let grid = new Map<Point, Exclude<T, typeof SKIP>>()
 
+  let minX = Number.POSITIVE_INFINITY
+  let minY = Number.POSITIVE_INFINITY
+  let maxX = Number.NEGATIVE_INFINITY
+  let maxY = Number.NEGATIVE_INFINITY
+
   for (let [y, line] of input.trim().split('\n').entries()) {
     for (let [x, cell] of line.trim().split('').entries()) {
+      minX = Math.min(minX, x)
+      minY = Math.min(minY, y)
+      maxX = Math.max(maxX, x)
+      maxY = Math.max(maxY, y)
+
       let p = Point.new(x, y)
       let v = value(cell, p)
       if (v === SKIP) continue
@@ -353,7 +363,10 @@ export function parseIntoGrid<T = string>(
     }
   }
 
-  return grid
+  let width = maxX - minX + 1
+  let height = maxY - minY + 1
+
+  return Object.assign(grid, { width, height })
 }
 
 export function pointsToGrid(it: Iterable<Point>) {
