@@ -337,16 +337,19 @@ export class Point {
   }
 }
 
+export const SKIP: unique symbol = Symbol('SKIP')
 export function parseIntoGrid<T = string>(
   input: string,
   value: (x: string, p: Point) => T = (x) => x as T
 ) {
-  let grid = new Map<Point, T>()
+  let grid = new Map<Point, Exclude<T, typeof SKIP>>()
 
   for (let [y, line] of input.trim().split('\n').entries()) {
     for (let [x, cell] of line.trim().split('').entries()) {
       let p = Point.new(x, y)
-      grid.set(p, value(cell, p))
+      let v = value(cell, p)
+      if (v === SKIP) continue
+      grid.set(p, v)
     }
   }
 
