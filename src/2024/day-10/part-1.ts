@@ -1,18 +1,14 @@
-import { parseIntoGrid, queue, type Point } from 'aoc-utils'
+import { parseIntoGrid, queue } from 'aoc-utils'
 
 export default function (blob: string) {
   let grid = parseIntoGrid(blob, Number)
-  let starts: Point[] = []
-  for (let [position, value] of grid) {
-    if (value === 0) {
-      starts.push(position)
-    }
-  }
 
   let total = 0
-  for (let start of starts) {
+  for (let [position, value] of grid) {
+    if (value !== 0) continue
+
     let seen = new Set()
-    let q = queue([start])
+    let q = queue([position])
 
     for (let next of q) {
       if (seen.has(next)) continue
