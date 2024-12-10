@@ -637,3 +637,19 @@ class BinaryHeap<T> {
     }
   }
 }
+
+// Queue
+export function queue<T>(initial: T[] = []) {
+  let data: T[] = initial
+
+  return {
+    push(item: T) {
+      data.push(item)
+    },
+    *[Symbol.iterator]() {
+      while (data.length > 0) {
+        yield data.shift()
+      }
+    },
+  }
+}
