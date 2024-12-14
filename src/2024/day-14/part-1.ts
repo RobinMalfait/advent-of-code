@@ -4,10 +4,8 @@ export default function (blob: string, wide = 101, tall = 103) {
   let robots = parse(blob)
   let bounds = { x: wide, y: tall }
 
-  for (let _ of Array(100)) {
-    for (let robot of robots) {
-      robot.move(bounds)
-    }
+  for (let robot of robots) {
+    robot.move(bounds, 100)
   }
 
   let quadrants: number[] = [0, 0, 0, 0]
@@ -41,10 +39,10 @@ class Robot {
     public velocity: Point
   ) {}
 
-  public move(bounds: { x: number; y: number }) {
+  public move(bounds: { x: number; y: number }, times = 1) {
     this.position = Point.new(
-      (this.position.x + this.velocity.x + bounds.x) % bounds.x,
-      (this.position.y + this.velocity.y + bounds.y) % bounds.y
+      (((this.position.x + this.velocity.x * times) % bounds.x) + bounds.x) % bounds.x,
+      (((this.position.y + this.velocity.y * times) % bounds.y) + bounds.y) % bounds.y
     )
   }
 }
