@@ -490,6 +490,14 @@ export enum Direction {
   West = 1 << 3,
 }
 
+export function parseDirection(str: string): Direction {
+  if (str === '^') return Direction.North
+  if (str === '>') return Direction.East
+  if (str === 'v') return Direction.South
+  if (str === '<') return Direction.West
+  return bail(`Invalid direction: ${JSON.stringify(str)}`)
+}
+
 export function directionToChar(direction: Direction) {
   if (direction === Direction.North) return '↑'
   if (direction === Direction.East) return '→'
