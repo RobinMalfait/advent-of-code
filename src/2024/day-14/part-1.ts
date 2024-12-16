@@ -1,4 +1,4 @@
-import { chunk, Point } from 'aoc-utils'
+import { Point, chunk } from 'aoc-utils'
 
 export default function (blob: string, wide = 101, tall = 103) {
   let robots = parse(blob)

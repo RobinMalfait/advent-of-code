@@ -1,4 +1,4 @@
-import { Direction, parseDirection, parseIntoGrid, type Point } from 'aoc-utils'
+import { Direction, type Point, parseDirection, parseIntoGrid } from 'aoc-utils'
 
 enum Kind {
   Robot = '@',

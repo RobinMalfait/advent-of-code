@@ -1,4 +1,4 @@
-import { parseIntoGrid, queue, type Point } from 'aoc-utils'
+import { type Point, parseIntoGrid, queue } from 'aoc-utils'
 
 export default function (blob: string) {
   let grid = parseIntoGrid(blob)

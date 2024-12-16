@@ -1,4 +1,4 @@
-import { parseIntoGrid, Point, SKIP } from 'aoc-utils'
+import { Point, SKIP, parseIntoGrid } from 'aoc-utils'
 
 export default function (blob: string) {
   let grid = parseIntoGrid(blob, (v) => (v === '.' ? SKIP : v))
