@@ -514,6 +514,28 @@ export function isOppositeDirection(a: Direction, b: Direction) {
   return false
 }
 
+export function rotateDirection(direction: Direction, degrees: 90 | -90 | 180) {
+  if (degrees === 90) {
+    if (direction === Direction.North) return Direction.East
+    if (direction === Direction.East) return Direction.South
+    if (direction === Direction.South) return Direction.West
+    if (direction === Direction.West) return Direction.North
+    direction satisfies never
+  } else if (degrees === -90) {
+    if (direction === Direction.North) return Direction.West
+    if (direction === Direction.West) return Direction.South
+    if (direction === Direction.South) return Direction.East
+    if (direction === Direction.East) return Direction.North
+    direction satisfies never
+  } else if (degrees === 180) {
+    if (direction === Direction.North) return Direction.South
+    if (direction === Direction.South) return Direction.North
+    if (direction === Direction.East) return Direction.West
+    if (direction === Direction.West) return Direction.East
+    direction satisfies never
+  }
+}
+
 // Algorithms
 export function astar<T>({
   start,
@@ -657,6 +679,21 @@ export function queue<T>(initial: T[] = []) {
     *[Symbol.iterator]() {
       while (data.length > 0) {
         yield data.shift()
+      }
+    },
+  }
+}
+
+export function priorityQueue<T>(scoreFn: (item: T) => number, initial: T[] = []) {
+  let heap = new BinaryHeap<T>(scoreFn, initial)
+
+  return {
+    push(item: T) {
+      heap.push(item)
+    },
+    *[Symbol.iterator]() {
+      while (heap.size > 0) {
+        yield heap.pop()
       }
     },
   }
