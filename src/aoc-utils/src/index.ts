@@ -668,6 +668,21 @@ class BinaryHeap<T> {
   }
 }
 
+export function stack<T>(initial: T[] = []) {
+  let data: T[] = initial
+
+  return {
+    push(item: T) {
+      data.push(item)
+    },
+    *[Symbol.iterator]() {
+      while (data.length > 0) {
+        yield data.pop()
+      }
+    },
+  }
+}
+
 // Queue
 export function queue<T>(initial: T[] = []) {
   let data: T[] = initial
