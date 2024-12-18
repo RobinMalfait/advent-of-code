@@ -5,12 +5,19 @@ export default function (blob: string, width = 70, height = 70) {
   let start = Point.new(0, 0)
   let end = Point.new(width, height)
 
-  next: for (let idx of bytes.keys()) {
-    let grid = new Map<Point, string>(bytes.slice(0, idx))
+  let low = 0
+  let high = bytes.length
+  next: while (low < high) {
+    let mid = (low + high) >> 1
+
+    let grid = new Map<Point, string>(bytes.slice(0, mid))
     let q = queue<[point: Point, path: Point[]]>([[start, []]])
     let seen = new Set<Point>()
     for (let [point, path] of q) {
-      if (point === end) continue next
+      if (point === end) {
+        low = mid + 1
+        continue next
+      }
 
       if (seen.has(point)) continue
       seen.add(point)
@@ -31,8 +38,10 @@ export default function (blob: string, width = 70, height = 70) {
       }
     }
 
-    return bytes[idx - 1][0].tuple().join(',')
+    high = mid
   }
+
+  return bytes[low - 1][0].tuple().join(',')
 }
 
 function parse(input: string) {
