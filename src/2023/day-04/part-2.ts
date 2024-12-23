@@ -1,11 +1,11 @@
-import { intersection } from 'aoc-utils'
+import { intersectionArrays } from 'aoc-utils'
 
 export default function (blob: string) {
   let cards = blob
     .trim()
     .split('\n')
     .map((line) => parse(line.trim()))
-    .map((card) => intersection(card.winning, card.hand).size)
+    .map((card) => intersectionArrays(card.winning, card.hand).size)
 
   let counter: number[] = Array(cards.length).fill(1)
 

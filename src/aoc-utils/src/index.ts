@@ -132,7 +132,7 @@ export function* range(start: number, end: number, step = 1) {
 }
 
 // Set
-export function intersection<T>(a: T[], b: T[]) {
+export function intersectionArrays<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
 }
 

@@ -1,11 +1,11 @@
-import { intersection } from 'aoc-utils'
+import { intersectionArrays } from 'aoc-utils'
 
 export default function (blob: string) {
   return blob
     .trim()
     .split('\n')
     .map((line) => parse(line.trim()))
-    .map((card) => intersection(card.winning, card.hand))
+    .map((card) => intersectionArrays(card.winning, card.hand))
     .filter((intersection) => intersection.size > 0)
     .map((intersection) => 2 ** (intersection.size - 1))
     .reduce((total, points) => total + points, 0)
