@@ -136,6 +136,28 @@ export function intersectionArrays<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
 }
 
+export function intersection<T>(a: Set<T>, b: Set<T>) {
+  if (typeof a.intersection === 'function') return a.intersection(b)
+
+  let result = new Set<T>()
+  for (let x of a) {
+    if (b.has(x)) {
+      result.add(x)
+    }
+  }
+  return result
+}
+
+export function union<T>(a: Set<T>, b: Set<T>) {
+  if (typeof a.union === 'function') return a.union(b)
+
+  let result = new Set(a)
+  for (let x of b) {
+    result.add(x)
+  }
+  return result
+}
+
 // Flow control
 export function match<T extends string | number = string, R = unknown>(
   value: T,
