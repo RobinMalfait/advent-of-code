@@ -498,6 +498,24 @@ export function visualizePointMap<T>(
   return grid.map((row) => row.join('')).join('\n')
 }
 
+// Bron-Kerbosch algorithm: for finding all maximal cliques in an undirected
+// graph.
+export function maximalCliques<T>(grid: Map<T, Set<T>>) {
+  return inner(new Set(), new Set(grid.keys()), new Set(), grid)
+
+  function* inner(R: Set<T>, P: Set<T>, X: Set<T>, G: Map<T, Set<T>>) {
+    if (P.size === 0 && X.size === 0) {
+      yield R
+    }
+
+    for (let v of P) {
+      yield* inner(union(R, new Set([v])), intersection(P, G.get(v)), intersection(X, G.get(v)), G)
+      P.delete(v)
+      X.add(v)
+    }
+  }
+}
+
 export enum Direction {
   /** `↑` */
   North = 1 << 0,
