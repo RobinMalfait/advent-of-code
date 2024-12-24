@@ -99,6 +99,8 @@ describe('Part 2', () => {
   })
 
   it('should produce the correct value for the input data', async () => {
-    expect(part2(await data).toString()).toMatchInlineSnapshot(`"cw,dy,ef,iw,ji,jv,ka,ob,qv,ry,ua,wt,xz"`)
+    expect(part2(await data).toString()).toMatchInlineSnapshot(
+      `"cw,dy,ef,iw,ji,jv,ka,ob,qv,ry,ua,wt,xz"`
+    )
   })
 })
