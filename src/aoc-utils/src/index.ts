@@ -398,6 +398,21 @@ export function parseIntoGrid<T = string>(
   return Object.assign(grid, { width, height })
 }
 
+export function parseIntoPoints(input: string, include: (x: string, p: Point) => boolean) {
+  let points = new Set<Point>()
+
+  for (let [y, line] of input.trim().split('\n').entries()) {
+    for (let [x, cell] of line.trim().split('').entries()) {
+      let p = Point.new(x, y)
+      if (include(cell, p)) {
+        points.add(p)
+      }
+    }
+  }
+
+  return points
+}
+
 export function pointsToGrid(it: Iterable<Point>) {
   let minX = Number.POSITIVE_INFINITY
   let minY = Number.POSITIVE_INFINITY
