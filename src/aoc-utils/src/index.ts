@@ -136,23 +136,26 @@ export function intersectionArrays<T>(a: T[], b: T[]) {
   return new Set(a.filter((x) => b.includes(x)))
 }
 
-export function intersection<T>(a: Set<T>, b: Set<T>) {
-  if (typeof a.intersection === 'function') return a.intersection(b)
-
+Set.prototype.intersection ??= function <T>(other: Set<T>) {
   let result = new Set<T>()
-  for (let x of a) {
-    if (b.has(x)) {
+  for (let x of this) {
+    if (other.has(x)) {
       result.add(x)
     }
   }
   return result
 }
 
-export function union<T>(a: Set<T>, b: Set<T>) {
-  if (typeof a.union === 'function') return a.union(b)
+Set.prototype.isDisjointFrom ??= function <T>(other: Set<T>) {
+  for (let x of this) {
+    if (other.has(x)) return false
+  }
+  return true
+}
 
-  let result = new Set(a)
-  for (let x of b) {
+Set.prototype.union ??= function <T>(other: Set<T>) {
+  let result = new Set(this)
+  for (let x of other) {
     result.add(x)
   }
   return result
@@ -509,7 +512,7 @@ export function maximalCliques<T>(grid: Map<T, Set<T>>) {
     }
 
     for (let v of P) {
-      yield* inner(union(R, new Set([v])), intersection(P, G.get(v)), intersection(X, G.get(v)), G)
+      yield* inner(R.union(new Set([v])), P.intersection(G.get(v)), X.intersection(G.get(v)), G)
       P.delete(v)
       X.add(v)
     }
