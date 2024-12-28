@@ -349,6 +349,19 @@ export class Point {
     return [this.up(), this.right(), this.down(), this.left()]
   }
 
+  neighbours8() {
+    return [
+      this.up(),
+      this.up().right(),
+      this.right(),
+      this.down().right(),
+      this.down(),
+      this.down().left(),
+      this.left(),
+      this.up().left(),
+    ]
+  }
+
   manhattanDistanceTo(other: Point) {
     return Math.abs(this.x - other.x) + Math.abs(this.y - other.y)
   }
