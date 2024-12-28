@@ -388,7 +388,7 @@ export function parseIntoGrid<T = string>(
       let p = Point.new(x, y)
       let v = value(cell, p)
       if (v === SKIP) continue
-      grid.set(p, v)
+      grid.set(p, v as Exclude<T, typeof SKIP>)
     }
   }
 
