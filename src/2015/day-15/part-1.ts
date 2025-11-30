@@ -29,7 +29,7 @@ function parse(input: string) {
     rawProperties.split(', ').map((property) => {
       let [name, amount] = property.split(' ')
       return [name, Number(amount)]
-    })
+    }),
   )
 
   return { ingredient, properties }

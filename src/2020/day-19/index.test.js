@@ -65,7 +65,7 @@ describe('Part 1', () => {
         ].join('\n'),
         2,
       ],
-    ].slice(21, 22)
+    ].slice(21, 22),
   )('should produce the correct value for example %#', (input, expected) => {
     expect(part1(input)).toBe(expected)
   })

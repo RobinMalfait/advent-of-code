@@ -10,7 +10,7 @@ export default function (blob: string) {
 
   let totalSleepTime = new DefaultMap<number, number>(() => 0)
   let minuteTracker = new DefaultMap<number, DefaultMap<number, number>>(
-    () => new DefaultMap(() => 0)
+    () => new DefaultMap(() => 0),
   )
 
   let state = {
@@ -41,7 +41,7 @@ export default function (blob: string) {
 
   let chosenMinute = Array.from(minuteTracker.get(chosenGuardId).keys())
     .sort(
-      (a, z) => minuteTracker.get(chosenGuardId).get(a) - minuteTracker.get(chosenGuardId).get(z)
+      (a, z) => minuteTracker.get(chosenGuardId).get(a) - minuteTracker.get(chosenGuardId).get(z),
     )
     .pop()
 

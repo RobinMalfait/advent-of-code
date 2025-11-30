@@ -28,7 +28,7 @@ export default function (blob) {
         let floater = i.toString(2).padStart(xs, '0').split('').map(Number)
         memory.set(
           bits.map((bit) => (bit === 'X' ? floater.shift() : bit)).join(''),
-          instruction.value
+          instruction.value,
         )
       }
     }

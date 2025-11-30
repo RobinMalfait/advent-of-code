@@ -66,7 +66,7 @@ function parse(input: string) {
     instruction,
     reg as 'w' | 'x' | 'y' | 'z',
     ...args.map((arg) =>
-      arg === 'w' || arg === 'x' || arg === 'y' || arg === 'z' ? arg : Number(arg)
+      arg === 'w' || arg === 'x' || arg === 'y' || arg === 'z' ? arg : Number(arg),
     ),
   ] as const
 }

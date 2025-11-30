@@ -19,8 +19,8 @@ describe('Part 1', () => {
           '7 A, 1 D => 1 E',
           '7 A, 1 E => 1 FUEL',
         ].join('\n'),
-        2 // 2 FUEL INSTEAD OF 1
-      )
+        2, // 2 FUEL INSTEAD OF 1
+      ),
     ).toEqual(62)
   })
 

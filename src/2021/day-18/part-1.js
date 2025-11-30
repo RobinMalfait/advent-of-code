@@ -7,7 +7,7 @@ export default function (blob) {
         .trim()
         .split('\n')
         .map((assignment) => parse(assignment.trim()))
-        .reduce((lhs, rhs) => reduce(addition(lhs, rhs)))
-    )
+        .reduce((lhs, rhs) => reduce(addition(lhs, rhs))),
+    ),
   )
 }

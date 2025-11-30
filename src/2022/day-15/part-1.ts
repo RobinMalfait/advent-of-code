@@ -3,7 +3,7 @@ export default function (blob: string, y: number) {
     .trim()
     .split('\n')
     .map((line) =>
-      line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': ')
+      line.trim().replace('Sensor at ', '').replace('closest beacon is at ', '').split(': '),
     )
     .map(([sensor_raw, beacon_raw]) => ({
       sensor: parsePoint(sensor_raw),

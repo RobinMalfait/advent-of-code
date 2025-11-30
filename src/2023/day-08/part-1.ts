@@ -25,7 +25,7 @@ function parse(input: string) {
         .trim()
         .split('\n')
         .map((line) => /(?<label>\w+) = \((?<L>\w+), (?<R>\w*)\)/g.exec(line.trim()).groups)
-        .map(({ label, L, R }) => [label, { L, R }])
+        .map(({ label, L, R }) => [label, { L, R }]),
     ),
   }
 }

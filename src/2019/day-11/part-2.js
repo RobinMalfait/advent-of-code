@@ -2,7 +2,7 @@
 
 import { border, process, render, scale } from '../day-08/part-2'
 import { createIntcodeComputer } from '../intcode/computer'
-import { match, range, table } from '../utils'
+import { match, range } from '../utils'
 
 const COLORS = {
   BLACK: 0,
@@ -101,7 +101,7 @@ function visualize(map) {
       range(width).map((x) => {
         let position = point(x, y)
         return map.has(position) ? map.get(position) : COLORS.BLACK
-      })
+      }),
     )
     .flat(Number.POSITIVE_INFINITY)
     .join('')

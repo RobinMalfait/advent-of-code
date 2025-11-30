@@ -20,7 +20,7 @@ function createValidator(raw) {
       .map(
         ([min, max]) =>
           (value) =>
-            value >= min && value <= max
+            value >= min && value <= max,
       )
 
     return (value) => validators.some((valid) => valid(value))

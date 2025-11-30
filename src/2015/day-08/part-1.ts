@@ -9,7 +9,7 @@ export default function (blob: string) {
         line
           .replace(/\\\\/g, '_')
           .replace(/\\"/g, '_')
-          .replace(/\\x([0-9a-fA-F]{2})/g, '_')
+          .replace(/\\x([0-9a-fA-F]{2})/g, '_'),
       )
       .map((line) => line.length - 2)
       .reduce((total, current) => total + current)

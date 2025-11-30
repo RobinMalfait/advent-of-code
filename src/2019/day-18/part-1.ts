@@ -61,7 +61,7 @@ class State {
 
   private constructor(
     public point: Point,
-    public collected: string
+    public collected: string,
   ) {}
 
   static new(point: Point, collected: string) {

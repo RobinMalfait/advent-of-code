@@ -26,9 +26,9 @@ function parse(input: string): {
           bag
             .split(',')
             .map((cube) => cube.trim().split(' '))
-            .map(([amount, color]) => [color, Number(amount)])
-        )
-      )
+            .map(([amount, color]) => [color, Number(amount)]),
+        ),
+      ),
     ),
   }
 }

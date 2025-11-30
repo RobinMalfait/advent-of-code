@@ -223,7 +223,7 @@ class Tile {
       this.grid
         .map((row) => row[col])
         .slice()
-        .reverse()
+        .reverse(),
     )
     return this
   }

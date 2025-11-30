@@ -5,7 +5,7 @@ export default function (blob: string) {
     blob
       .trim()
       .split('\n')
-      .map((line) => solve(parse(line.trim())))
+      .map((line) => solve(parse(line.trim()))),
   )
 }
 

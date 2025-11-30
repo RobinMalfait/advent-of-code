@@ -75,7 +75,7 @@ export default async function oxygenSystem(program) {
 
     // Prefer "Free" slots over existing paths
     let next_free_spot = neighbours.find((n) =>
-      canMove(state, n.movement, [DRAW.WALL, DRAW.PATH, DRAW.OXYGEN_SYSTEM])
+      canMove(state, n.movement, [DRAW.WALL, DRAW.PATH, DRAW.OXYGEN_SYSTEM]),
     )
     if (next_free_spot !== undefined) {
       computer.input(move(next_free_spot.movement))

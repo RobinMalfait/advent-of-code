@@ -24,7 +24,7 @@ describe('Part 1', () => {
     'An input of %s with settings of %s requires an output of "%s"',
     async (program, settings, output) => {
       expect(await part1(program, settings)).toEqual(output)
-    }
+    },
   )
 
   // Actual test, Part 1
@@ -49,7 +49,7 @@ describe('Part 2', () => {
     'An input of %s with settings of %s requires an output of "%s"',
     async (program, settings, output) => {
       expect(await part2(program, settings)).toEqual(output)
-    }
+    },
   )
 
   // Actual test, Part 2

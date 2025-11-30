@@ -15,7 +15,7 @@ function parse(line: string): [outsides: string[][], insides: string[][]] {
         acc[i % 2 === 0 ? 0 : 1].push(current)
         return acc
       },
-      [[] as string[][], [] as string[][]]
+      [[] as string[][], [] as string[][]],
     )
 }
 

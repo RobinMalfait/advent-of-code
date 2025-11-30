@@ -5,7 +5,7 @@ export default function (blob, steps = 10) {
     pairInsertions
       .split('\n')
       .map((rule) => rule.split(' -> '))
-      .map(([pair, insertion]) => [toId(...pair.split('')), insertion])
+      .map(([pair, insertion]) => [toId(...pair.split('')), insertion]),
   )
 
   //

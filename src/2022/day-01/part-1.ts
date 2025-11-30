@@ -7,7 +7,7 @@ export default function (blob: string) {
         line
           .split('\n')
           .map((value) => Number(value.trim()))
-          .reduce((total, current) => total + current, 0)
-      )
+          .reduce((total, current) => total + current, 0),
+      ),
   )
 }

@@ -9,7 +9,7 @@ export default function (blob: string) {
           [Split.Vertical]: x,
           [Split.Horizontal]: x * 100,
         })
-      })
+      }),
   )
 }
 
@@ -33,7 +33,7 @@ function findSplitPoint(
   pattern: Map<Point, string>,
   width: number,
   height: number,
-  orientation: Split
+  orientation: Split,
 ) {
   next: for (let y = 1; y < height; y++) {
     let r = Math.min(y, height - y)
@@ -77,8 +77,8 @@ function parsePatterns(input: string) {
             height = Math.max(height, y + 1)
 
             return [[Point.new(x, y), char]]
-          })
-      )
+          }),
+      ),
   )
 
   return [points, { width, height }] as const

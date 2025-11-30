@@ -2,7 +2,7 @@ export default function (blob) {
   let boards = blob.trim().split('\n\n')
   let numbers = boards.shift().split(',').map(Number)
   boards = boards.map((board) =>
-    board.split('\n').map((row) => row.trim().split(/\s+/g).map(Number))
+    board.split('\n').map((row) => row.trim().split(/\s+/g).map(Number)),
   )
 
   let state = { winners: [], lastWinningNumber: null }

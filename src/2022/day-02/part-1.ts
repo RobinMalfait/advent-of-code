@@ -55,7 +55,7 @@ export default function (blob: string) {
     .split('\n')
     .map((line) => line.trim().split(' ').map(toShape))
     .map(
-      ([opponent, mine]) => pointsForShape(mine) + pointsForState(stateFromShapes(mine, opponent))
+      ([opponent, mine]) => pointsForShape(mine) + pointsForState(stateFromShapes(mine, opponent)),
     )
     .reduce((total, current) => total + current)
 }

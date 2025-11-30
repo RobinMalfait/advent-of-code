@@ -157,7 +157,7 @@ describe.skip('Part 1', () => {
     [
       [basic, 0],
       [test, 79],
-    ].slice(-1)
+    ].slice(-1),
   )('should produce the correct value for example %#', (input, expected) => {
     expect(part1(input)).toBe(expected)
   })

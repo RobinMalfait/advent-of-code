@@ -20,7 +20,7 @@ async function calculateAmplifierOutput(program, amplifiers) {
   let [a, b, c, d, e] = amplifiers
 
   let [amplifierA, amplifierB, amplifierC, amplifierD, amplifierE] = amplifiers.map(() =>
-    createIntcodeComputer(program)
+    createIntcodeComputer(program),
   )
 
   // Feed some input

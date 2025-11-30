@@ -39,7 +39,7 @@ let checks = new DefaultMap((group) => {
     `^(\\.*${group
       .split(',')
       .map((p) => `[#]{${p}}`)
-      .join('[.]+')}\\.*)$`
+      .join('[.]+')}\\.*)$`,
   )
 })
 

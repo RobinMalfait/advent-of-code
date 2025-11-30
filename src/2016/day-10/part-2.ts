@@ -59,7 +59,7 @@ export default function (blob: string) {
 }
 
 function* parse(
-  input: string
+  input: string,
 ): Generator<
   | { type: 'assign'; value: number; to: number }
   | { type: 'give-low'; from: number; toType: 'output' | 'bot'; toId: number }
@@ -71,7 +71,7 @@ function* parse(
   }
 
   for (let { groups } of input.matchAll(
-    /bot (?<from>\d+) gives low to (?<lowType>output|bot) (?<lowId>\d+) and high to (?<highType>output|bot) (?<highId>\d+)/g
+    /bot (?<from>\d+) gives low to (?<lowType>output|bot) (?<lowId>\d+) and high to (?<highType>output|bot) (?<highId>\d+)/g,
   )) {
     yield {
       type: 'give-low',

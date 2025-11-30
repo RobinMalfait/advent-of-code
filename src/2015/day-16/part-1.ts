@@ -17,7 +17,7 @@ export default function (blob: string) {
       .split('\n')
       .map((line) => line.trim().split(': '))
       .map(([key, amount]) => [key, Number(amount)] as const)
-      .filter(([, amount]) => amount !== null)
+      .filter(([, amount]) => amount !== null),
   )
 
   return blob
@@ -43,7 +43,7 @@ function parse(input: string) {
       .slice(_.length)
       .split(', ')
       .map((raw) => raw.split(': '))
-      .map(([key, value]) => [key.trim(), Number(value.trim())] as const)
+      .map(([key, value]) => [key.trim(), Number(value.trim())] as const),
   )
   return [i, info] as const
 }

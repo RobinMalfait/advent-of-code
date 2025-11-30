@@ -12,7 +12,7 @@ function sumJSONNumbers(input: unknown): number {
   } else if (typeof input === 'object') {
     sum += Object.values(input).reduce(
       (acc: number, item) => acc + sumJSONNumbers(item),
-      0
+      0,
     ) as number
   }
 

@@ -33,7 +33,7 @@ export default function (blob: string) {
   let seen = new Set<State>()
   let q = priorityQueue<[score: number, state: State]>(
     ([score]) => score,
-    [[0, State.new(start, Direction.East)]]
+    [[0, State.new(start, Direction.East)]],
   )
 
   for (let [score, state] of q) {
@@ -58,7 +58,7 @@ class State {
 
   private constructor(
     public position: Point,
-    public direction: Direction
+    public direction: Direction,
   ) {}
 
   static new(position: Point, direction: Direction) {

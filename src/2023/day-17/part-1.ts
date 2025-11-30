@@ -15,14 +15,14 @@ class State {
     (position) =>
       new DefaultMap(
         (direction) =>
-          new DefaultMap((directionCount) => new State(position, direction, directionCount))
-      )
+          new DefaultMap((directionCount) => new State(position, direction, directionCount)),
+      ),
   )
 
   private constructor(
     public readonly position: Point,
     public readonly direction: Direction | null = null,
-    public readonly count: number = 0
+    public readonly count: number = 0,
   ) {}
 
   static new(position: Point, direction: Direction | null = null, directionCount = 1) {
@@ -87,7 +87,7 @@ function parse(input: string) {
         line
           .trim()
           .split('')
-          .map((char, x) => [Point.new(x, y), Number(char)])
-      )
+          .map((char, x) => [Point.new(x, y), Number(char)]),
+      ),
   )
 }

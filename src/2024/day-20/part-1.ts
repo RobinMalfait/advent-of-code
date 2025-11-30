@@ -1,4 +1,4 @@
-import { DefaultMap, type Point, parseIntoGrid, queue } from 'aoc-utils'
+import { type Point, parseIntoGrid, queue } from 'aoc-utils'
 
 enum Kind {
   Track = '.',

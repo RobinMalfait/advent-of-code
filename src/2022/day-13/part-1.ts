@@ -29,6 +29,6 @@ function compare(lhs: number | number[], rhs: number | number[]): number {
 
   return compare(
     [].concat(lhs).filter((x) => x != null),
-    [].concat(rhs).filter((x) => x != null)
+    [].concat(rhs).filter((x) => x != null),
   )
 }

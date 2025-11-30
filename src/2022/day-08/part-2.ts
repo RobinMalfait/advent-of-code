@@ -4,7 +4,7 @@ export default function (blob: string) {
     .split('\n')
     .map((line) => line.trim().split('').map(Number))
     .flatMap((row, rowIdx, grid) =>
-      row.map((_, colIdx) => calculateScenicScore(grid, rowIdx, colIdx))
+      row.map((_, colIdx) => calculateScenicScore(grid, rowIdx, colIdx)),
     )
     .reduce((a, z) => Math.max(a, z))
 }
@@ -20,7 +20,7 @@ function calculateScenicScore(grid: number[][], rowIdx: number, colIdx: number) 
       grid
         .map((row) => row[colIdx])
         .slice(0, rowIdx)
-        .reverse()
+        .reverse(),
     ) *
     countVisibleTrees(value, grid.map((row) => row[colIdx]).slice(rowIdx + 1))
   )

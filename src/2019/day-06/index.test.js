@@ -11,8 +11,8 @@ describe('Part 1', () => {
   it('should calculate the direct and indirect orbits', () => {
     expect(
       part1(
-        ['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L'].join('\n')
-      )
+        ['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L'].join('\n'),
+      ),
     ).toEqual(42)
   })
 
@@ -42,8 +42,8 @@ describe('Part 2', () => {
           'I)SAN',
         ].join('\n'),
         'YOU',
-        'SAN'
-      )
+        'SAN',
+      ),
     ).toEqual(4)
   })
 

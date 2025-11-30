@@ -30,7 +30,7 @@ function generateLevels(minutes, board, width, height) {
     let board = range(height).map((y) =>
       range(width).map((x) => {
         return y === ((width / 2) | 0) && x === ((height / 2) | 0) ? '?' : EMPTY
-      })
+      }),
     )
     levels[level] = board
     return levels

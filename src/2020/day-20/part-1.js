@@ -18,7 +18,7 @@ export default function (blob) {
         neighbours: 0,
         edges: new Set([top, right, bottom, left]),
         flippedEdges: new Set(
-          [top, right, bottom, left].map((edge) => edge.split('').reverse().join(''))
+          [top, right, bottom, left].map((edge) => edge.split('').reverse().join('')),
         ),
       }
     })

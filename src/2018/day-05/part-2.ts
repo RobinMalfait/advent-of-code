@@ -7,7 +7,7 @@ let FULLY_REACTING_REGEX = new RegExp(
     .split('')
     .flatMap((l) => [l + l.toUpperCase(), l.toUpperCase() + l])
     .join('|'),
-  'g'
+  'g',
 )
 
 function collapse(input: string) {

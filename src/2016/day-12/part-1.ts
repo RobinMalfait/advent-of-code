@@ -5,7 +5,7 @@ export default function (
     ['b', 0],
     ['c', 0],
     ['d', 0],
-  ])
+  ]),
 ) {
   let instructions = blob
     .trim()
@@ -46,7 +46,7 @@ export default function (
 }
 
 function parse(
-  input: string
+  input: string,
 ):
   | { type: 'cpy'; src: ReturnType<typeof parseValue>; dst: string }
   | { type: 'inc'; name: string }
@@ -70,7 +70,7 @@ function parse(
 }
 
 function parseValue(
-  input: string
+  input: string,
 ): { type: 'variable'; name: string } | { type: 'literal'; value: number } {
   if (/^[a-z]+$/.test(input)) {
     return { type: 'variable', name: input }

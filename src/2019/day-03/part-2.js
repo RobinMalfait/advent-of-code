@@ -16,7 +16,7 @@ function calculateClosest(...paths) {
     .map((overlap) =>
       simplified_paths
         .map((path) => path.indexOf(overlap) + 1)
-        .reduce((total, current) => total + current, 0)
+        .reduce((total, current) => total + current, 0),
     )
     .sort((a, b) => Math.sign(a - b))
 

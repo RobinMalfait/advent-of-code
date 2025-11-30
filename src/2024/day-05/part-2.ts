@@ -7,7 +7,7 @@ export default function (blob: string) {
     pages
       .filter((page) => !isValidPage(page, rules))
       .map((page) => reOrder(page, rules))
-      .map((page) => page[Math.floor(page.length / 2)])
+      .map((page) => page[Math.floor(page.length / 2)]),
   )
 }
 

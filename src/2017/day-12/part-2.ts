@@ -3,7 +3,7 @@ export default function (blob: string) {
     blob
       .trim()
       .split('\n')
-      .map((line) => parse(line.trim()))
+      .map((line) => parse(line.trim())),
   )
 
   let count = 0

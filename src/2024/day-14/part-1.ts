@@ -36,13 +36,13 @@ function parse(input: string) {
 class Robot {
   public constructor(
     public position: Point,
-    public velocity: Point
+    public velocity: Point,
   ) {}
 
   public move(bounds: { x: number; y: number }, times = 1) {
     this.position = Point.new(
       (((this.position.x + this.velocity.x * times) % bounds.x) + bounds.x) % bounds.x,
-      (((this.position.y + this.velocity.y * times) % bounds.y) + bounds.y) % bounds.y
+      (((this.position.y + this.velocity.y * times) % bounds.y) + bounds.y) % bounds.y,
     )
   }
 }

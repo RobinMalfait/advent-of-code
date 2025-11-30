@@ -46,7 +46,7 @@ function parse(input: string) {
           .flatMap((char, x) => {
             if (char === '.') return []
             return [[Point.new(x, y), char]]
-          })
-      )
+          }),
+      ),
   )
 }

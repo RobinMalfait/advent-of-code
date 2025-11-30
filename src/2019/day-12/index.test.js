@@ -22,7 +22,7 @@ describe('Part 1', () => {
         'pos=<x= 2, y=-10, z=-7>, vel=<x= 0, y= 0, z= 0>',
         'pos=<x= 4, y= -8, z= 8>, vel=<x= 0, y= 0, z= 0>',
         'pos=<x= 3, y=  5, z=-1>, vel=<x= 0, y= 0, z= 0>',
-      ].join('\n')
+      ].join('\n'),
     )
     expect(part1.render(input, 1)).toEqual(
       [
@@ -30,7 +30,7 @@ describe('Part 1', () => {
         'pos=<x= 3, y=-7, z=-4>, vel=<x= 1, y= 3, z= 3>',
         'pos=<x= 1, y=-7, z= 5>, vel=<x=-3, y= 1, z=-3>',
         'pos=<x= 2, y= 2, z= 0>, vel=<x=-1, y=-3, z= 1>',
-      ].join('\n')
+      ].join('\n'),
     )
     expect(part1.render(input, 10)).toEqual(
       [
@@ -38,7 +38,7 @@ describe('Part 1', () => {
         'pos=<x= 1, y=-8, z= 0>, vel=<x=-1, y= 1, z= 3>',
         'pos=<x= 3, y=-6, z= 1>, vel=<x= 3, y= 2, z=-3>',
         'pos=<x= 2, y= 0, z= 4>, vel=<x= 1, y=-1, z=-1>',
-      ].join('\n')
+      ].join('\n'),
     )
     expect(part1.totalEnergy(input, 100))
   })
@@ -71,14 +71,14 @@ describe('Part 2', () => {
     [
       4686774924,
       ['<x=-8, y=-10, z=0>', '<x=5, y=5, z=10>', '<x=2, y=-7, z=3>', '<x=9, y=-8, z=-3>'].join(
-        '\n'
+        '\n',
       ),
     ],
   ])(
     'should produce the total amount of steps (%s) to go back to the initial state',
     (output, input) => {
       expect(part2(input)).toEqual(output)
-    }
+    },
   )
 
   // Actual test, Part 2

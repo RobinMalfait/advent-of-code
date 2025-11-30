@@ -51,8 +51,8 @@ function parseRating(input: string): XMAS {
         .slice(1, -1)
         .split(',')
         .map((pair) => pair.split('='))
-        .map(([key, value]) => [key.trim(), Number(value.trim())])
-    )
+        .map(([key, value]) => [key.trim(), Number(value.trim())]),
+    ),
   )
 }
 

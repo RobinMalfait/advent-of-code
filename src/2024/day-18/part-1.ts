@@ -4,7 +4,7 @@ export default function (blob: string, bytes = 1024, width = 70, height = 70) {
   let grid = new Map<Point, string>(
     parse(blob)
       .slice(0, bytes)
-      .map((point) => [point, '#'])
+      .map((point) => [point, '#']),
   )
   let start = Point.new(0, 0)
   let end = Point.new(width, height)

@@ -6,7 +6,7 @@ export default function (blob) {
       row
         .split(/\s+/g)
         .map(Number)
-        .sort((a, z) => z - a)
+        .sort((a, z) => z - a),
     )
     .map((row) => {
       for (let i = 0; i <= row.length; i++) {

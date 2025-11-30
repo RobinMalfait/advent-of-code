@@ -166,7 +166,7 @@ function parse(input: string) {
               }),
             ] as const
           })
-      })
+      }),
     ),
     start,
   ] as const

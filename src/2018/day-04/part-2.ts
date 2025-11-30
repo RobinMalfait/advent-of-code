@@ -9,7 +9,7 @@ export default function (blob: string) {
     .sort((a, z) => compareAsc(a.date, z.date))
 
   let minuteTracker = new DefaultMap<number, DefaultMap<number, number>>(
-    () => new DefaultMap(() => 0)
+    () => new DefaultMap(() => 0),
   )
 
   let state = {

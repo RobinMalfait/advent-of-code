@@ -29,7 +29,7 @@ export default function (blob: string) {
 
 function locateRange(
   seedRanges: [start: number, end: number][],
-  mapRanges: [dst: number, src: number, len: number][]
+  mapRanges: [dst: number, src: number, len: number][],
 ) {
   let done = []
 

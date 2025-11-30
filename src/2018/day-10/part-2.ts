@@ -42,7 +42,7 @@ class Point {
     public x: number,
     public y: number,
     private velocityX: number,
-    private velocityY: number
+    private velocityY: number,
   ) {}
   tick() {
     this.x += this.velocityX

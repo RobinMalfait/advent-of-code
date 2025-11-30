@@ -65,7 +65,7 @@ output.push([
         }
         return total
       }),
-    Array(data[0].length).fill(0)
+    Array(data[0].length).fill(0),
   ),
 ])
 
@@ -75,7 +75,7 @@ output.push([
   let markdown = `Total stars: **${allStars}**\n\n${output.map((row) => `|${row.join(' | ')}|`).join('\n')}\n\n${data[0]
     .map(
       (year) =>
-        `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`
+        `[link-${year}]: https://github.com/RobinMalfait/advent-of-code/tree/main/src/${year}`,
     )
     .join('\n')}`
 
@@ -86,10 +86,10 @@ output.push([
     await prettier.format(
       contents.replace(
         /<\!-- start -->([\s\S]*)<\!-- end -->/g,
-        `<!-- start -->\n${markdown}\n<!-- end -->`
+        `<!-- start -->\n${markdown}\n<!-- end -->`,
       ),
-      { parser: 'markdown' }
-    )
+      { parser: 'markdown' },
+    ),
   )
 }
 
@@ -116,10 +116,10 @@ output.push([
       await prettier.format(
         contents.replace(
           /<\!-- start -->([\s\S]*)<\!-- end -->/g,
-          `<!-- start -->\n${markdown}\n<!-- end -->`
+          `<!-- start -->\n${markdown}\n<!-- end -->`,
         ),
-        { parser: 'markdown' }
-      )
+        { parser: 'markdown' },
+      ),
     )
   }
 }

@@ -54,7 +54,7 @@ describe('Part 1', () => {
       [test1, 10],
       [test2, 19],
       [test3, 226],
-    ].slice(0, 1)
+    ].slice(0, 1),
   )('should produce the correct value for example %#', (input, expected) => {
     expect(part1(input)).toBe(expected)
   })

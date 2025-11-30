@@ -61,7 +61,7 @@ describe('Part 2', () => {
       Number('101_741_582_076_661'.replace(/_/g, '')), // HACK TO HAVE SOME _'S
 
       // Position
-      2020
+      2020,
     )
 
     expect(card).toMatchSnapshot()

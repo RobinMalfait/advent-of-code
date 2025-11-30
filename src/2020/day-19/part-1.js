@@ -34,8 +34,8 @@ function parseRules(blob) {
           }
 
           return Number(character) // Reference to other rule
-        })
-      )
+        }),
+      ),
     )
   }
 

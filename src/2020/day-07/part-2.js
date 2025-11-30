@@ -1,7 +1,7 @@
 function countBags(lookup, query) {
   return lookup[query].reduce(
     (total, bag) => total + Number(bag.amount) * countBags(lookup, bag.name),
-    1
+    1,
   )
 }
 
@@ -15,7 +15,7 @@ export default function (blob, bag = 'shiny gold') {
       bags
         .split(', ')
         .map((bag) =>
-          bag.includes('no') ? null : /(?<amount>\d+) (?<name>.*) bags?/.exec(bag).groups
+          bag.includes('no') ? null : /(?<amount>\d+) (?<name>.*) bags?/.exec(bag).groups,
         )
         .filter(Boolean),
     ])

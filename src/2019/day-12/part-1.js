@@ -106,7 +106,7 @@ function display(moons) {
         z: Math.max(velocity.z, moon.velocity.z.toString().length),
       },
     }),
-    { position: { x: 2, y: 2, z: 2 }, velocity: { x: 2, y: 2, z: 2 } }
+    { position: { x: 2, y: 2, z: 2 }, velocity: { x: 2, y: 2, z: 2 } },
   )
 
   let map = {

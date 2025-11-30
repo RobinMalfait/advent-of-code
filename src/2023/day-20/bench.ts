@@ -1,6 +1,6 @@
 import { resolve } from 'node:path'
 
-import { bench, group, run } from 'mitata'
+import { bench, run } from 'mitata'
 
 import part1 from './part-1'
 import part2 from './part-2'

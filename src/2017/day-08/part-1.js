@@ -5,8 +5,8 @@ export default function (blob) {
     .map(
       (instruction) =>
         /(?<register>[^ ]+) (?<action>[^ ]+) (?<amount>[^ ]+) if (?<arg1>[^ ]+) (?<operator>[^ ]+) (?<arg2>[^ ]+)/g.exec(
-          instruction
-        ).groups
+          instruction,
+        ).groups,
     )
     .map(({ arg2, amount, ...rest }) => ({ ...rest, arg2: Number(arg2), amount: Number(amount) }))
 

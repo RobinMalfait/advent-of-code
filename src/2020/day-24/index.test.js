@@ -13,7 +13,7 @@ describe('Part 1', () => {
     'should produce the correct value for example %#',
     async (input, expected) => {
       expect(part1(await input)).toBe(expected)
-    }
+    },
   )
 
   it('should produce the correct value for the input data', async () => {

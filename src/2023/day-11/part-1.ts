@@ -9,7 +9,7 @@ export default function (blob: string, expansion = 2) {
 
     return Point.new(
       location.x + colFactor * (expansion - 1),
-      location.y + rowFactor * (expansion - 1)
+      location.y + rowFactor * (expansion - 1),
     )
   })
 
@@ -25,12 +25,12 @@ function parse(input: string) {
 
   let rows = grid.flatMap((row, index) => (row.every((char) => char === Type.Empty) ? [index] : []))
   let cols = transpose(grid).flatMap((row, index) =>
-    row.every((char) => char === Type.Empty) ? [index] : []
+    row.every((char) => char === Type.Empty) ? [index] : [],
   )
 
   return [
     grid.flatMap((cols, row) =>
-      cols.flatMap((char, col) => (char === Type.Galaxy ? [Point.new(col, row)] : []))
+      cols.flatMap((char, col) => (char === Type.Galaxy ? [Point.new(col, row)] : [])),
     ),
     { rows, cols },
   ] as const

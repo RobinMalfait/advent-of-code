@@ -72,7 +72,7 @@ export default function (blob: string) {
     .map(([opponent, state]) => [toShape(opponent), toState(state)] as [Shape, State])
     .map(([opponent, state]) => [opponent, shapeFromState(state, opponent)])
     .map(
-      ([opponent, mine]) => pointsForShape(mine) + pointsForState(stateFromShapes(mine, opponent))
+      ([opponent, mine]) => pointsForShape(mine) + pointsForState(stateFromShapes(mine, opponent)),
     )
     .reduce((total, current) => total + current)
 }

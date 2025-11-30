@@ -19,8 +19,8 @@ function type(cards: string[]) {
         acc[card] += 1
         return acc
       },
-      {} as Record<string, number>
-    )
+      {} as Record<string, number>,
+    ),
   ).sort((a, z) => z - a)
 
   // Five of a kind

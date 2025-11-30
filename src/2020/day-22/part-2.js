@@ -7,7 +7,7 @@ export default function (blob) {
 
   return game(players)[1].reduce(
     (total, current, i, list) => total + current * (list.length - i),
-    0
+    0,
   )
 
   function game(players) {

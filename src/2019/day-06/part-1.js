@@ -15,7 +15,7 @@ export default function calculateOrbits(input) {
 
   return Object.values(calculateTransitiveDependencies(nodes)).reduce(
     (total, deps) => total + deps.length,
-    0
+    0,
   )
 }
 
@@ -36,7 +36,7 @@ class Node {
         `You have a circular dependency! ${seen
           .concat(this)
           .map((s) => `"${s.name}"`)
-          .join(' -> ')}`
+          .join(' -> ')}`,
       )
     }
 
@@ -71,12 +71,12 @@ function generateGraph(definition = {}) {
 
         if (dependency === undefined) {
           throw new Error(
-            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`
+            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`,
           )
         }
 
         return dependency
-      })
+      }),
     )
   }
 

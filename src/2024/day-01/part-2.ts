@@ -5,7 +5,7 @@ export default function (blob: string) {
     blob
       .trim()
       .split('\n')
-      .map((line) => parse(line.trim()))
+      .map((line) => parse(line.trim())),
   )
 
   let counts = new DefaultMap<number, number>(() => 0)

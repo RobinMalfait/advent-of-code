@@ -5,7 +5,7 @@ export default function (blob: string) {
       .split('\n')
       .map((line) => line.trim())
       .map((line) => new Set(line.split(''))),
-    3
+    3,
   )
     .map((sets) => Array.from(sets.pop()).find((value) => sets.every((set) => set.has(value))))
     .map((letter = '') => (letter.charCodeAt(0) & 31) + 26 * Number(/[A-Z]/.test(letter)))

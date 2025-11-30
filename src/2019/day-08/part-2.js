@@ -25,7 +25,7 @@ export function flatten() {
           .map((value, index) => (value === TRANSPARENT ? layer[index] : value))
           .join('')
       },
-      TRANSPARENT.repeat(width * height)
+      TRANSPARENT.repeat(width * height),
     )
 
     return { data: flattened, width, height }

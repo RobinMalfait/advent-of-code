@@ -18,7 +18,7 @@ function type(cards: string[]) {
       acc[card] += 1
       return acc
     },
-    {} as Record<string, number>
+    {} as Record<string, number>,
   )
 
   // Move joker counts to the highest card

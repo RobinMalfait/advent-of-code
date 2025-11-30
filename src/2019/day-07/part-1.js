@@ -23,7 +23,7 @@ async function calculateAmplifierOutput(program, amplifiers) {
       computer.input(setting, await previous_result)
       return computer.run()
     },
-    [0]
+    [0],
   )
 
   if (result.length !== 1) {

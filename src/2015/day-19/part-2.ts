@@ -3,7 +3,7 @@ import { DefaultMap } from 'aoc-utils'
 export default function (blob: string) {
   let { replacements, molecule } = parse(blob)
   let state = new DefaultMap(
-    (current) => new DefaultMap((steps: number) => [current, steps] as const)
+    (current) => new DefaultMap((steps: number) => [current, steps] as const),
   )
   let q = new Set([state.get('e').get(1)])
 

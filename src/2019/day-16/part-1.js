@@ -12,7 +12,7 @@ export default function fft(input, phases = 1) {
           let new_base = calculateBase(index + 1)
 
           return lastDigit(
-            sum(parts.map((value, index) => value * new_base[(index + 1) % new_base.length]))
+            sum(parts.map((value, index) => value * new_base[(index + 1) % new_base.length])),
           )
         }, [])
         .join('')

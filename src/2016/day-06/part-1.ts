@@ -3,7 +3,7 @@ export default function (blob: string) {
     blob
       .trim()
       .split('\n')
-      .map((line) => line.trim().split(''))
+      .map((line) => line.trim().split('')),
   )
     .map((characters) =>
       characters
@@ -12,7 +12,7 @@ export default function (blob: string) {
         .match(/(.)\1*/g)
         .sort((a, z) => z.length - a.length)
         .at(0)
-        .at(0)
+        .at(0),
     )
     .join('')
 }

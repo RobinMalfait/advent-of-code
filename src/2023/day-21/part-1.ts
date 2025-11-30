@@ -37,7 +37,7 @@ function parse(input: string) {
         line
           .trim()
           .split('')
-          .map((char, x) => [Point.new(x, y), char] as const)
-      )
+          .map((char, x) => [Point.new(x, y), char] as const),
+      ),
   )
 }

@@ -1,6 +1,6 @@
 // Day 24: Planet of Discord
 
-import { sum, table } from '../utils'
+import { sum } from '../utils'
 
 const BUG = '#'
 const EMPTY = '.'
@@ -28,7 +28,7 @@ export default async (input) => {
     flat
       .map((tile, i) => ({ tile, i }))
       .filter((thing) => thing.tile === BUG)
-      .map(({ i }) => 2 ** i)
+      .map(({ i }) => 2 ** i),
   )
 }
 

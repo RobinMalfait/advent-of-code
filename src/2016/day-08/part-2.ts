@@ -39,7 +39,7 @@ export default function (blob: string, width = 50, height = 6) {
 }
 
 function parse(
-  input: string
+  input: string,
 ):
   | { type: 'rect'; width: number; height: number }
   | { type: 'rotate'; direction: 'row' | 'column'; idx: number; amount: number } {

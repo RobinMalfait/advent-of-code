@@ -44,7 +44,7 @@ function print(points: Point[]) {
     let row = []
     for (let x = minX; x <= maxX; x++) {
       row.push(
-        points.some((point) => point.x === x && point.y === y) ? Pixels.filled : Pixels.empty
+        points.some((point) => point.x === x && point.y === y) ? Pixels.filled : Pixels.empty,
       )
     }
     grid.push(row.join(''))
@@ -63,7 +63,7 @@ class Point {
     public x: number,
     public y: number,
     private velocityX: number,
-    private velocityY: number
+    private velocityY: number,
   ) {}
   tick() {
     this.x += this.velocityX

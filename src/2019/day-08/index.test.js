@@ -12,7 +12,7 @@ describe('Part 1', () => {
     'An input of %s with width=%s and height=%s results in a value of "%s"',
     (image, width, height, output) => {
       expect(part1(image, width, height)).toEqual(output)
-    }
+    },
   )
 
   // Actual test, Part 1
@@ -26,7 +26,7 @@ describe('Part 2', () => {
     'An input of %s with width=%s and height=%s results in a value of "%s"',
     async (image, width, height, output) => {
       expect(await process(image, width, height).then(flatten()).then(raw())).toEqual(output)
-    }
+    },
   )
 
   // Actual test, Part 2
@@ -36,7 +36,7 @@ describe('Part 2', () => {
         .then(flatten())
         .then(border(2))
         .then(scale(2, 1))
-        .then(render())
+        .then(render()),
     ).toMatchSnapshot()
   })
 })

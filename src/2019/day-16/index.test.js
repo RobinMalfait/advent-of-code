@@ -36,7 +36,7 @@ describe('Part 2', () => {
         phases,
         repeat: 10000,
         offset_end_position: 7,
-      })
+      }),
     ).toEqual(output)
   })
 
@@ -48,7 +48,7 @@ describe('Part 2', () => {
         repeat: 10000,
         offset_end_position: 7,
         phases: 100,
-      })
+      }),
     ).toMatchSnapshot()
   })
 })

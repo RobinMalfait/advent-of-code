@@ -17,7 +17,7 @@ function parseStacks(input: string): string[][] {
       .split('\n')
       .reverse()
       .slice(1)
-      .map((line) => line.split('').filter((_, i) => (i - 1) % 4 === 0))
+      .map((line) => line.split('').filter((_, i) => (i - 1) % 4 === 0)),
   ).map((row) => row.filter((x) => Boolean(x.trim())))
 }
 

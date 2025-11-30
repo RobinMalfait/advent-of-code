@@ -1,6 +1,6 @@
+import Table from 'cli-table'
 import fs from 'node:fs'
 import { resolve } from 'node:path'
-import Table from 'cli-table'
 
 export async function read(base, path) {
   return fs.promises.readFile(resolve(base, path), 'utf8')
@@ -15,7 +15,7 @@ export function match(value, patterns, ...args) {
       throw new Error(
         `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${available_keys
           .map((key) => `"${key}"`)
-          .join(', ')}.`
+          .join(', ')}.`,
       )
     }
 
@@ -48,7 +48,7 @@ function intersectBetween(a, b) {
   return left.filter(
     can_use_hash_hack
       ? (element) => right_hash[element] !== undefined
-      : (element) => right.includes(element)
+      : (element) => right.includes(element),
   )
 }
 
@@ -84,9 +84,9 @@ export function permutations(input) {
   return input.reduce(
     (rows, value, i) =>
       rows.concat(
-        permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x])
+        permutations([...input.slice(0, i), ...input.slice(i + 1)]).map((x) => [value, ...x]),
       ),
-    []
+    [],
   )
 }
 

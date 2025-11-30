@@ -1,7 +1,6 @@
 // Day 19: Tractor Beam
 
 import { createIntcodeComputer } from '../intcode/computer'
-import { abort, asyncBinarySearch } from '../utils'
 
 let scanned = 0
 

@@ -47,7 +47,7 @@ async function exec(year, day) {
     process.stdout.write(
       `[${year}] Day ${day} Part ${idx + 1} - ${ms(timeTotal / config.runs / 1e6, {
         formatSubMilliseconds: true,
-      })}\n`
+      })}\n`,
     )
     output.push(ms(timeTotal / config.runs / 1e6, { formatSubMilliseconds: true }))
   }
@@ -84,11 +84,11 @@ if (config.day !== null) {
       r,
       `<!-- BENCH TABLE -->\n\n${output
         .map((row) => `| ${row.join(' | ')} |`)
-        .join('\n')}\n\n<!-- /BENCH TABLE -->`
+        .join('\n')}\n\n<!-- /BENCH TABLE -->`,
     )
     await promises.writeFile(
       `./src/${config.year}/README.md`,
-      await prettier.format(readmeContents, { parser: 'markdown' })
+      await prettier.format(readmeContents, { parser: 'markdown' }),
     )
   }
 }

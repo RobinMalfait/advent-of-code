@@ -41,7 +41,7 @@ export default function (blob: string) {
   }
 
   return sum(
-    accepted.map((rating) => rating.x.size * rating.m.size * rating.a.size * rating.s.size)
+    accepted.map((rating) => rating.x.size * rating.m.size * rating.a.size * rating.s.size),
   )
 }
 

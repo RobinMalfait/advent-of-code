@@ -174,10 +174,10 @@ export function match<T extends string | number = string, R = unknown>(
 
   let error = new Error(
     `Tried to handle "${value}" but there is no handler defined. Only defined handlers are: ${Object.keys(
-      lookup
+      lookup,
     )
       .map((key) => `"${key}"`)
-      .join(', ')}.`
+      .join(', ')}.`,
   )
   if (Error.captureStackTrace) Error.captureStackTrace(error, match)
   throw error
@@ -229,7 +229,7 @@ function defaultCacheKey(...args: unknown[]) {
 // Performance
 export function memoize<T extends (...args: unknown[]) => R, R>(
   fn: T,
-  cacheKey: (...args: Parameters<T>) => string = defaultCacheKey
+  cacheKey: (...args: Parameters<T>) => string = defaultCacheKey,
 ): T {
   let cache = new Map<string, R>()
 
@@ -252,7 +252,7 @@ export class Range {
     /** Inclusive */
     public readonly start: number,
     /** Exclusive */
-    public readonly end: number
+    public readonly end: number,
   ) {}
 
   get size() {
@@ -270,12 +270,12 @@ export class Range {
 
 export class Point {
   private static points = new DefaultMap<number, DefaultMap<number, Point>>(
-    (x) => new DefaultMap((y) => new Point(x, y))
+    (x) => new DefaultMap((y) => new Point(x, y)),
   )
 
   private constructor(
     public readonly x: number = 0,
-    public readonly y: number = 0
+    public readonly y: number = 0,
   ) {}
 
   static new(x: number, y: number) {
@@ -382,7 +382,7 @@ export class Point {
 export const SKIP: unique symbol = Symbol('SKIP')
 export function parseIntoGrid<T = string>(
   input: string,
-  value: (x: string, p: Point) => T = (x) => x as T
+  value: (x: string, p: Point) => T = (x) => x as T,
 ) {
   let grid = new Map<Point, Exclude<T, typeof SKIP>>()
 
@@ -511,7 +511,7 @@ export function polygonArea(vertices: Point[]) {
 
 export function visualizePointMap<T>(
   map: Map<Point, T>,
-  valueFn: (value: T, point: Point) => string = (x) => x?.toString() ?? ' '
+  valueFn: (value: T, point: Point) => string = (x) => x?.toString() ?? ' ',
 ) {
   let { width, height } = pointsToSize(map)
   let grid: string[][] = []
@@ -662,7 +662,7 @@ export function astar<T>({
 class BinaryHeap<T> {
   constructor(
     private score: (item: T) => number,
-    private data: T[] = []
+    private data: T[] = [],
   ) {}
 
   push(item: T) {

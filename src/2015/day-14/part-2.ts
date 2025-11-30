@@ -37,7 +37,7 @@ class Reindeer {
     public name: string,
     public speed: number,
     public fly_duration: number,
-    public rest_duration: number
+    public rest_duration: number,
   ) {}
 
   tick() {

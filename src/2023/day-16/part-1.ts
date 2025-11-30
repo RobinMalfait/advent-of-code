@@ -75,7 +75,7 @@ export function parse(input: string) {
               '|': Contraption.SplitterVertical,
               '-': Contraption.SplitterHorizontal,
             }),
-          ])
-      )
+          ]),
+      ),
   )
 }

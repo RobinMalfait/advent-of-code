@@ -101,6 +101,6 @@ function parse(input: string) {
             { type: 'conjunction', input: new DefaultMap<string, Pulse>(() => Pulse.Low), output },
           ] as const
         }
-      })
+      }),
   )
 }

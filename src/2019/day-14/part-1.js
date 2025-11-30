@@ -27,15 +27,15 @@ export default function fuelproducer(input, fuel) {
       // ORE is the only resource we actually have that doesn't require other
       // resources.
       [CHEMICALS.ORE]: [],
-    }
+    },
   )
   let graph = generateGraph(definition)
   let order = Object.keys(
     Object.fromEntries(
       Object.entries(calculateTransitiveDependencies(graph)).sort(([, a], [, b]) =>
-        Math.sign(b.length - a.length)
-      )
-    )
+        Math.sign(b.length - a.length),
+      ),
+    ),
   )
 
   let counts = order.reduce((map, chemical) => {
@@ -60,7 +60,7 @@ export default function fuelproducer(input, fuel) {
   }, new Map())
 
   let only_require_ore = Object.entries(reactions).filter(
-    ([, { requires }]) => requires[CHEMICALS.ORE] !== undefined
+    ([, { requires }]) => requires[CHEMICALS.ORE] !== undefined,
   )
 
   // console.log("counts:", counts);
@@ -68,7 +68,7 @@ export default function fuelproducer(input, fuel) {
     only_require_ore.map(([chemical, { amount, requires }]) => {
       let amounts_of_ore = requires[CHEMICALS.ORE]
       return amounts_of_ore * Math.ceil(counts.get(chemical) / amount)
-    })
+    }),
   )
 }
 
@@ -86,7 +86,7 @@ function parseReactions(input) {
           requires: Object.fromEntries(required_chemicals.split(', ').map(parseChemical)),
         },
       }
-    })
+    }),
   )
 }
 
@@ -112,7 +112,7 @@ class Node {
         `You have a circular dependency! ${seen
           .concat(this)
           .map((s) => `"${s.name}"`)
-          .join(' -> ')}`
+          .join(' -> ')}`,
       )
     }
 
@@ -147,12 +147,12 @@ function generateGraph(definition = {}) {
 
         if (dependency === undefined) {
           throw new Error(
-            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`
+            `The generator with name "${node.name}" depends on "${id}" but it does not exist.`,
           )
         }
 
         return dependency
-      })
+      }),
     )
   }
 

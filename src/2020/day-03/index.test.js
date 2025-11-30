@@ -72,7 +72,7 @@ describe('Part 2', () => {
         [5, 1],
         [7, 1],
         [1, 2],
-      ])
+      ]),
     ).toMatchInlineSnapshot('9354744432')
   })
 })

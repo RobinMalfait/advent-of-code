@@ -13,7 +13,7 @@ describe('Part 1', () => {
     // Example one
     [
       ['b inc 5 if a > 1', 'a inc 1 if b < 5', 'c dec -10 if a >= 1', 'c inc -20 if c == 10'].join(
-        '\n'
+        '\n',
       ),
       1,
     ],
@@ -33,7 +33,7 @@ describe('Part 2', () => {
     // Example one
     [
       ['b inc 5 if a > 1', 'a inc 1 if b < 5', 'c dec -10 if a >= 1', 'c inc -20 if c == 10'].join(
-        '\n'
+        '\n',
       ),
       10,
     ],

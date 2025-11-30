@@ -34,7 +34,7 @@ function parseInput(blob: string): [Map<string, Tile>, number] {
         .split(' -> ')
         .map((raw_points) => raw_points.split(',').map(Number))
         .map((_, i, all) => all.slice(i, i + 2))
-        .slice(0, -1)
+        .slice(0, -1),
     )
 
   let bottom = 0

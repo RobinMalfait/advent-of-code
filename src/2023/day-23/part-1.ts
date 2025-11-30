@@ -98,7 +98,7 @@ function dfs(
   graph: DefaultMap<Point, DefaultMap<Point, number>>,
   start: Point,
   end: Point,
-  seen = new Set<Point>()
+  seen = new Set<Point>(),
 ) {
   if (start === end) {
     return 0
@@ -135,7 +135,7 @@ function parse(input: string) {
               v: { type: Tile.Slopes, dir: Direction.South },
               '<': { type: Tile.Slopes, dir: Direction.West },
             }),
-          ])
-      )
+          ]),
+      ),
   )
 }

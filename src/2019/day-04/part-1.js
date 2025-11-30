@@ -20,7 +20,7 @@ function countValidPasswordsBetween(start, end) {
 
   return range(_end - _start).reduce(
     (total, current) => total + (isValidPassword(_start + current) ? 1 : 0),
-    0
+    0,
   )
 }
 

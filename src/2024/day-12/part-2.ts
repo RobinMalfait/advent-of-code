@@ -59,7 +59,7 @@ export default function (blob: string) {
     //            7
 
     let pair: DefaultMap<Point, DefaultMap<Point, [Point, Point]>> = new DefaultMap(
-      (point) => new DefaultMap((other) => [point, other])
+      (point) => new DefaultMap((other) => [point, other]),
     )
 
     // Track all the points on the edge of the plot. In addition to the current

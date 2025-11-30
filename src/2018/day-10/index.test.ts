@@ -42,7 +42,7 @@ describe('Part 1', () => {
         position=< 5,  9> velocity=< 1, -2>
         position=<14,  7> velocity=<-2,  0>
         position=<-3,  6> velocity=< 2, -1>
-      `)
+      `),
     ).toMatchInlineSnapshot(`
       "
       █░░░█░░███
