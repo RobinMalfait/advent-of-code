@@ -69,6 +69,9 @@ importers:
 
   src/2019:
     dependencies:
+      aoc-utils:
+        specifier: workspace:*
+        version: link:../aoc-utils
       lodash:
         specifier: ^4.17.21
         version: 4.17.21

@@ -10,6 +10,7 @@
     "bench": "node ../../bench.js"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "aoc-utils": "workspace:*"
   }
 }
