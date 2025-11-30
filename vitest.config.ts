@@ -7,8 +7,5 @@ export default defineConfig({
     //
     // If you are reading this from the future, I'm sorry for the inconvenience.
     projects: ['src/2*'],
-
-    // 5 minutes
-    testTimeout: 5 * 60 * 1000,
   },
 })
