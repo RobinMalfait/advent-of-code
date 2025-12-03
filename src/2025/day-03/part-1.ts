@@ -1,4 +1,4 @@
-import { DefaultMap } from '../../aoc-utils/src'
+import { DefaultMap } from 'aoc-utils'
 
 export default function (blob: string, digits = 2) {
   let banks = blob

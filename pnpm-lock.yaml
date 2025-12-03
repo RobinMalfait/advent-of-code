@@ -94,6 +94,12 @@ importers:
         specifier: workspace:*
         version: link:../aoc-utils
 
+  src/2025:
+    dependencies:
+      aoc-utils:
+        specifier: workspace:*
+        version: link:../aoc-utils
+
   src/aoc-utils: {}
 
 packages:
