@@ -1,3 +1,5 @@
+import util from 'node:util'
+
 // Class
 export class DefaultMap<K = string, V = unknown> extends Map<K, V> {
   constructor(private factory: (key: K) => V) {
@@ -259,8 +261,59 @@ export class Range {
     return this.end - this.start + 1
   }
 
+  static fromString(input: string) {
+    let [start, end] = input.split('-').map(Number)
+    return new Range(start, end)
+  }
+
+  static mergeOverlapping(ranges: Range[]) {
+    if (ranges.length === 0) return []
+
+    ranges.sort((a, b) => a.start - b.start || b.end - a.end)
+
+    let merged: Range[] = []
+    let current = ranges[0]
+
+    for (let i = 1; i < ranges.length; i++) {
+      let next = ranges[i]
+
+      // Fits within current
+      if (current.end >= next.end) {
+        // Already merged, no need to create a new range
+      }
+
+      // Overlapping, combine ranges
+      else if (current.end >= next.start - 1) {
+        current = new Range(current.start, next.end)
+      }
+
+      // No touchy, next range
+      else {
+        merged.push(current)
+        current = next
+      }
+    }
+
+    // Track the last range
+    merged.push(current)
+
+    return merged
+  }
+
+  contains(value: number) {
+    return this.start <= value && value <= this.end
+  }
+
   split(value: number) {
     return [new Range(this.start, value - 1), new Range(value, this.end)]
+  }
+
+  overlaps(other: Range) {
+    return this.start <= other.end && other.start <= this.end
+  }
+
+  [util.inspect.custom]() {
+    return this.toString()
   }
 
   toString() {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { factorial, gcd, lcm } from '.'
+import { factorial, gcd, lcm, Range } from '.'
 
 describe('factorial', () => {
   it.each([
@@ -44,5 +44,43 @@ describe('math', () => {
     [10000, 100000, 10000],
   ])('should compute the gcd(%d, %d) = %d', (a, b, expected) => {
     expect(gcd(a, b)).toEqual(expected)
+  })
+})
+
+describe('Range', () => {
+  describe('Range.mergeOverlapping', () => {
+    it.each([
+      // […][…]
+      [['1-5', '6-10'], ['1-10']],
+
+      // […|…]
+      [['1-5', '5-10'], ['1-10']],
+
+      // […][…][…]
+      [['1-2', '3-4', '5-10'], ['1-10']],
+
+      // […] […]
+      [
+        ['1-5', '7-10'],
+        ['1-5', '7-10'],
+      ],
+
+      // [……………]
+      //   […]
+      [['1-10', '2-3'], ['1-10']],
+
+      // [……] [……]
+      //   [………]
+      [['1-3', '2-4', '3-7'], ['1-7']],
+
+      // Out of order
+      [['1-10', '15-20', '17-25', '8-16'], ['1-25']],
+
+      [['1-2', '1-3', '1-4', '1-5'], ['1-5']],
+    ])('should merge overlapping ranges %s → %s', (ranges, result) => {
+      expect(Range.mergeOverlapping(ranges.map(Range.fromString))).toEqual(
+        result.map(Range.fromString),
+      )
+    })
   })
 })

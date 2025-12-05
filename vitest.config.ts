@@ -6,6 +6,6 @@ export default defineConfig({
     // will start with 2.
     //
     // If you are reading this from the future, I'm sorry for the inconvenience.
-    projects: ['src/2*'],
+    projects: ['src/2*', 'src/aoc-utils'],
   },
 })
