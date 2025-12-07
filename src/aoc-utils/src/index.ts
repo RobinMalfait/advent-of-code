@@ -823,6 +823,28 @@ export function queue<T>(initial: T[] = []) {
   }
 }
 
+export function uniqueQueue<T>(initial: T[] = []) {
+  let data: T[] = initial
+  let seen = new Set<T>()
+
+  return {
+    push(item: T) {
+      if (seen.has(item)) return
+      data.push(item)
+    },
+    *[Symbol.iterator]() {
+      while (data.length > 0) {
+        let next = data.shift()
+
+        if (seen.has(next)) continue
+        seen.add(next)
+
+        yield next
+      }
+    },
+  }
+}
+
 export function priorityQueue<T>(scoreFn: (item: T) => number, initial: T[] = []) {
   let heap = new BinaryHeap<T>(scoreFn, initial)
 
