@@ -1,4 +1,11 @@
+import { AsyncLocalStorage } from 'async_hooks'
 import util from 'node:util'
+
+// See: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#:~:text=Symbol.dispose,-??=%20Symbol(%22Symbol.dispose
+// @ts-expect-error — Ensure Symbol.dispose exists
+Symbol.dispose ??= Symbol('Symbol.dispose')
+// @ts-expect-error — Ensure Symbol.asyncDispose exists
+Symbol.asyncDispose ??= Symbol('Symbol.asyncDispose')
 
 // Class
 export class DefaultMap<K = string, V = unknown> extends Map<K, V> {
@@ -858,4 +865,179 @@ export function priorityQueue<T>(scoreFn: (item: T) => number, initial: T[] = []
       }
     },
   }
+}
+
+// Instrumentation
+interface Span {
+  id: string
+  label: string
+  namespace: string
+  value: bigint
+  parent: Span | null
+  spans: Span[]
+}
+
+export class Instrumentation implements Disposable {
+  #hits = new DefaultMap(() => ({ value: 0 }))
+  #timers = new DefaultMap(() => ({ value: 0n }))
+  #timerStack: { id: string; label: string; namespace: string; value: bigint }[] = []
+  defaultFlush: (message: string) => void
+
+  #storage = new AsyncLocalStorage<Span>()
+
+  constructor(defaultFlush = (message: string) => void process.stderr.write(`${message}\n`)) {
+    this.defaultFlush = defaultFlush
+  }
+
+  hit(label: string) {
+    this.#hits.get(label).value++
+  }
+
+  getNamespace() {
+    let parent = this.#storage.getStore() || null
+    if (parent === null) return []
+
+    let namespace: string[] = []
+    while (parent) {
+      namespace.unshift(parent.label)
+      parent = parent.parent
+    }
+    return namespace
+  }
+
+  #start(label: string) {
+    let parent = this.#storage.getStore() || null
+    let namespace = this.getNamespace().join('//')
+    let id = `${namespace}${namespace.length === 0 ? '' : '//'}${label}`
+
+    this.#hits.get(id).value++
+
+    // Create the timer if it doesn't exist yet
+    this.#timers.get(id)
+
+    let span = {
+      id,
+      label,
+      namespace,
+      value: process.hrtime.bigint(),
+      spans: [],
+      parent,
+    } satisfies Span
+
+    if (parent) {
+      parent.spans.push(span)
+    }
+
+    return span
+  }
+
+  #end(span: Span) {
+    let end = process.hrtime.bigint()
+    let elapsed = end - span.value
+    this.#timers.get(span.id).value += elapsed
+  }
+
+  span<T>(label: string, fn: () => T): T {
+    let tree = this.#start(label)
+
+    return this.#storage.run(tree, () => {
+      let isPromise = false
+      try {
+        let result = fn()
+
+        isPromise = result && typeof (result as any).then === 'function'
+
+        // @ts-expect-error — TS can't infer that result is a Promise here
+        return isPromise ? result.finally(() => this.#end(tree)) : result
+      } finally {
+        if (!isPromise) this.#end(tree)
+      }
+    })
+  }
+
+  reset() {
+    this.#hits.clear()
+    this.#timers.clear()
+    this.#timerStack.splice(0)
+  }
+
+  report(flush = this.defaultFlush) {
+    let output: string[] = []
+
+    // Compute times and find max width
+    let computed = new Map<string, string>()
+    let max = 0
+    for (let [label, { value }] of this.#timers) {
+      let x = `${(Number(value) / 1e6).toFixed(2)}ms`
+      computed.set(label, x)
+      max = Math.max(max, x.length)
+    }
+
+    // Build tree structure
+    interface Node {
+      label: string
+      full: string
+      children: Node[]
+    }
+    let roots: Node[] = []
+    let nodes = new Map<string, Node>()
+
+    for (let label of this.#timers.keys()) {
+      let parts = label.split('//')
+      let node: Node = nodes.get(label) ?? { label: parts.at(-1)!, full: label, children: [] }
+      nodes.set(label, node)
+
+      if (parts.length === 1) {
+        roots.push(node)
+      } else {
+        let parentKey = parts.slice(0, -1).join('//')
+        let parent = nodes.get(parentKey)
+        if (!parent) {
+          parent = { label: parts.at(-2)!, full: parentKey, children: [] }
+          nodes.set(parentKey, parent)
+          roots.push(parent)
+        }
+        parent.children.push(node)
+      }
+    }
+
+    // Preserve original insertion order for siblings
+    function sortChildren(node: Node) {
+      let keys = Array.from(computed.keys())
+      node.children.sort((a, b) => keys.indexOf(a.full) - keys.indexOf(b.full))
+      node.children.forEach(sortChildren)
+    }
+    roots.forEach(sortChildren)
+
+    let hits = this.#hits
+    function print(node: Node, depth = 0) {
+      let time = computed.get(node.full) ?? ''
+      let count = hits.get(node.full)?.value ?? 1
+      let line = `${dim(`[${time.padStart(max, ' ')}]`)}${'  '.repeat(depth)}${
+        depth === 0 ? ' ' : dim(' ↳ ')
+      }${node.label}${count === 1 ? '' : ` ${dim(blue(`× ${count}`))}`}`
+      output.push(line.trimEnd())
+
+      for (let child of node.children) print(child, depth + 1)
+    }
+
+    for (let root of roots) print(root)
+
+    flush(`\n${output.join('\n')}\n`)
+    this.reset()
+  }
+
+  [Symbol.dispose]() {
+    process.env.DEBUG === '1' && this.report()
+  }
+}
+
+export const I = new Instrumentation()
+
+function dim(text: string) {
+  return `\x1b[2m${text}\x1b[0m`
+}
+
+function blue(text: string) {
+  return `\x1b[34m${text}\x1b[0m`
 }
