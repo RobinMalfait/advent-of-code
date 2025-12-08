@@ -6,7 +6,7 @@ export default function (blob: string, connections = 1000) {
     .split('\n')
     .map((line) => Point3D.fromString(line.trim()))
 
-  let circuits = new Set<Set<Point3D>>(junction_boxes.map((box) => new Set([box])))
+  let circuits = new Set(junction_boxes.map((box) => new Set([box])))
 
   let paired_boxes = Array.from(pairs(junction_boxes))
     .map(([boxA, boxB]) => [boxA.distance(boxB), boxA, boxB] as const)
