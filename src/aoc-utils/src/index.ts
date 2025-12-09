@@ -802,44 +802,54 @@ class BinaryHeap<T> {
 export function stack<T>(initial: T[] = []) {
   let data: T[] = initial
 
-  return {
+  let api = {
     push(item: T) {
       data.push(item)
     },
-    *[Symbol.iterator]() {
+    *iter() {
       while (data.length > 0) {
         yield data.pop()
       }
     },
+    *[Symbol.iterator]() {
+      yield* api.iter()
+    },
   }
+
+  return api
 }
 
 // Queue
 export function queue<T>(initial: T[] = []) {
   let data: T[] = initial
 
-  return {
+  let api = {
     push(item: T) {
       data.push(item)
     },
-    *[Symbol.iterator]() {
+    *iter() {
       while (data.length > 0) {
         yield data.shift()
       }
     },
+    *[Symbol.iterator]() {
+      yield* api.iter()
+    },
   }
+
+  return api
 }
 
 export function uniqueQueue<T>(initial: T[] = []) {
   let data: T[] = initial
   let seen = new Set<T>()
 
-  return {
+  let api = {
     push(item: T) {
       if (seen.has(item)) return
       data.push(item)
     },
-    *[Symbol.iterator]() {
+    *iter() {
       while (data.length > 0) {
         let next = data.shift()
 
@@ -849,22 +859,31 @@ export function uniqueQueue<T>(initial: T[] = []) {
         yield next
       }
     },
+    *[Symbol.iterator]() {
+      yield* api.iter()
+    },
   }
+
+  return api
 }
 
 export function priorityQueue<T>(scoreFn: (item: T) => number, initial: T[] = []) {
   let heap = new BinaryHeap<T>(scoreFn, initial)
 
-  return {
+  let api = {
     push(item: T) {
       heap.push(item)
     },
-    *[Symbol.iterator]() {
+    *iter() {
       while (heap.size > 0) {
         yield heap.pop()
       }
     },
+    *[Symbol.iterator]() {
+      yield* api.iter()
+    },
   }
+  return api
 }
 
 // Instrumentation
