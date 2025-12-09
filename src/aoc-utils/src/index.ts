@@ -86,6 +86,26 @@ export function product(numbers: number[]) {
   return total
 }
 
+export function min(iterable: Iterable<number>): number {
+  let min = Number.POSITIVE_INFINITY
+  for (let x of iterable) {
+    if (x < min) {
+      min = x
+    }
+  }
+  return min
+}
+
+export function max(iterable: Iterable<number>): number {
+  let max = Number.NEGATIVE_INFINITY
+  for (let x of iterable) {
+    if (x > max) {
+      max = x
+    }
+  }
+  return max
+}
+
 // Array / collection
 export function* windows<T>(input: Iterable<T>, size: number): Generator<T[]> {
   // Array optimization
@@ -347,6 +367,36 @@ export class Point {
     return Point.points.get(x).get(y)
   }
 
+  // Returns a positive value if `this` is to the left of line AB, a negative
+  // value if `this` is to the right of line AB, and zero if `this` is collinear
+  // with line AB.
+  orientation(a: Point, b: Point): number {
+    return (b.x - a.x) * (this.y - a.y) - (b.y - a.y) * (this.x - a.x)
+  }
+
+  // Returns true if the horizontal ray to the right of `this` intersects
+  // line AB.
+  intersects(a: Point, b: Point): boolean {
+    return (
+      a.y > this.y !== b.y > this.y && this.x < ((b.x - a.x) * (this.y - a.y)) / (b.y - a.y) + a.x
+    )
+  }
+
+  // Returns true if `this` lies on line segment AB.
+  isBetween(a: Point, b: Point): boolean {
+    // Check for collinearity
+    if (this.orientation(a, b) !== 0) {
+      return false
+    }
+
+    return (
+      this.x >= Math.min(a.x, b.x) &&
+      this.x <= Math.max(a.x, b.x) &&
+      this.y >= Math.min(a.y, b.y) &&
+      this.y <= Math.max(a.y, b.y)
+    )
+  }
+
   add(other: Point) {
     return Point.new(this.x + other.x, this.y + other.y)
   }
@@ -436,6 +486,97 @@ export class Point {
 
   toString() {
     return `Point(${this.x}, ${this.y})`
+  }
+}
+
+export class Polygon {
+  private constructor(public vertices: Point[]) {}
+
+  static fromVertices(points: Point[]) {
+    return new Polygon(points)
+  }
+
+  static fromCorners(a: Point, b: Point) {
+    let minX = Math.min(a.x, b.x)
+    let maxX = Math.max(a.x, b.x)
+    let minY = Math.min(a.y, b.y)
+    let maxY = Math.max(a.y, b.y)
+
+    return Polygon.fromVertices([
+      Point.new(minX, minY),
+      Point.new(maxX, minY),
+      Point.new(maxX, maxY),
+      Point.new(minX, maxY),
+    ])
+  }
+
+  static #areaCache = new DefaultMap((polygon: Polygon) => polygonArea(polygon.vertices))
+  area() {
+    return Polygon.#areaCache.get(this)
+  }
+
+  static #containsPointCache = new DefaultMap((polygon: Polygon) => {
+    return new DefaultMap((point: Point) => {
+      let inside = false
+
+      for (let i = 0, j = polygon.vertices.length - 1; i < polygon.vertices.length; j = i++) {
+        let a = polygon.vertices[j]
+        let b = polygon.vertices[i]
+
+        // Boundary itself is considered inside.
+        // TODO: Make this configurable?
+        if (point.isBetween(a, b)) {
+          return true
+        }
+
+        if (point.intersects(a, b)) {
+          inside = !inside
+        }
+      }
+
+      return inside
+    })
+  })
+
+  containsPoint(p: Point): boolean {
+    return Polygon.#containsPointCache.get(this).get(p)
+  }
+
+  containsPolygon(other: Polygon): boolean {
+    let A = other.vertices
+    let B = this.vertices
+
+    // 1. All A vertices must be inside or on boundary of B (this)
+    for (let point of A) {
+      if (!this.containsPoint(point)) {
+        return false
+      }
+    }
+
+    // 2. Edges of A must not properly cross edges of B
+    for (let i = 0, j = A.length - 1; i < A.length; j = i++) {
+      let a1 = A[i]
+      let a2 = A[j]
+
+      for (let i = 0, j = B.length - 1; i < B.length; j = i++) {
+        let b1 = B[i]
+        let b2 = B[j]
+
+        // Orientations
+        if (a1.orientation(b1, b2) * a2.orientation(b1, b2) >= 0) continue
+        if (b1.orientation(a1, a2) * b2.orientation(a1, a2) >= 0) continue
+
+        // Proper intersection
+        return false
+      }
+    }
+
+    return true
+  }
+
+  [Symbol.dispose]() {
+    Polygon.#areaCache.delete(this)
+    Polygon.#containsPointCache.delete(this)
   }
 }
 
