@@ -178,7 +178,7 @@ export function match<T extends string | number = string, R = unknown>(
 ): R {
   if (value in lookup) {
     let returnValue = lookup[value]
-    return typeof returnValue === 'function' ? returnValue(...args) : returnValue
+    return typeof returnValue === 'function' ? returnValue(...args) : (returnValue as R)
   }
 
   let error = new Error(
