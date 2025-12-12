@@ -7,7 +7,7 @@ import part2 from './part-2'
 
 let data = promises.readFile(resolve(__dirname, '../../../data/2025-10.txt'), 'utf8')
 
-describe('Part 1', () => {
+describe.sequential('Part 1', () => {
   it.each([
     [
       `
@@ -32,7 +32,7 @@ describe('Part 1', () => {
   })
 })
 
-describe('Part 2', () => {
+describe.sequential('Part 2', () => {
   it.each([
     [
       `
@@ -48,11 +48,11 @@ describe('Part 2', () => {
       `,
       10 + 12 + 11,
     ],
-  ])('should produce the correct value for example %#', (input, expected) => {
-    expect(part2(input)).toBe(expected)
+  ])('should produce the correct value for example %#', async (input, expected) => {
+    expect(await part2(input)).toBe(expected)
   })
 
   it.skip('should produce the correct value for the input data', async () => {
-    expect(part2(await data).toString()).toMatchInlineSnapshot()
+    expect((await part2(await data)).toString()).toMatchInlineSnapshot(`"17214"`)
   })
 })

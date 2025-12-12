@@ -36,7 +36,8 @@
     "vitest": "^4.0.14"
   },
   "dependencies": {
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.1.0",
+    "z3-solver": "^4.15.4"
   },
   "packageManager": "pnpm@9.15.0"
 }
